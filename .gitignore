@@ -1,0 +1,20 @@
+# Node modules (if using npm utilities)
+node_modules/
+package-lock.json
+
+# User-specific local settings
+.claude/*.local.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.log

@@ -1,0 +1,19 @@
+{
+  "name": "adaptive-workflow",
+  "version": "0.1.0",
+  "description": "Adaptive AI Development Workflow - A meta-workflow orchestration plugin for Claude Code implementing systematic development with compounding knowledge capture",
+  "author": {
+    "name": "Adaptive Workflow Contributors",
+    "email": "contributors@adaptive-workflow.dev"
+  },
+  "keywords": [
+    "workflow",
+    "tdd",
+    "orchestration",
+    "knowledge-management",
+    "compound-engineering",
+    "git-worktrees",
+    "systematic-development"
+  ],
+  "license": "MIT"
+}
