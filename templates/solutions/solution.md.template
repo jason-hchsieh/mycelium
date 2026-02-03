@@ -1,0 +1,44 @@
+---
+date: {{DATE}}
+problem_type: {{PROBLEM_TYPE}}
+component: {{COMPONENT}}
+root_cause: {{ROOT_CAUSE}}
+severity: {{SEVERITY}}
+symptoms:
+  - "{{SYMPTOM_1}}"
+  - "{{SYMPTOM_2}}"
+tags: [{{TAG_1}}, {{TAG_2}}, {{TAG_3}}]
+module: {{MODULE_NAME}}
+related_files:
+  - {{FILE_1}}
+  - {{FILE_2}}
+related_issues: []
+promoted_to_pattern: false
+---
+
+# {{SOLUTION_TITLE}}
+
+## Problem
+{{WHAT_WENT_WRONG}}
+
+## Root Cause
+{{WHY_IT_HAPPENED}}
+
+## Solution
+{{WHAT_FIXED_IT}}
+
+## Code Example
+```{{LANGUAGE}}
+# Before (broken)
+{{BROKEN_CODE}}
+
+# After (fixed)
+{{FIXED_CODE}}
+```
+
+## Prevention
+{{HOW_TO_AVOID_IN_FUTURE}}
+
+## References
+- {{REFERENCE_1}}
+- {{REFERENCE_2}}

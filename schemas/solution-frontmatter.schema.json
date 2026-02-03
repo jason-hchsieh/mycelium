@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://adaptive-workflow.local/schemas/solution-frontmatter.schema.json",
+  "title": "Solution Frontmatter Schema",
+  "description": "YAML frontmatter validation for solution files in .workflow/solutions/",
+  "type": "object",
+  "required": ["date", "problem_type", "component", "root_cause", "severity", "symptoms", "tags"],
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the solution was captured (YYYY-MM-DD)"
+    },
+    "problem_type": {
+      "$ref": "enums.json#/definitions/ProblemType",
+      "description": "Category of problem encountered"
+    },
+    "component": {
+      "$ref": "enums.json#/definitions/ComponentType",
+      "description": "Component where problem occurred"
+    },
+    "root_cause": {
+      "$ref": "enums.json#/definitions/RootCause",
+      "description": "Root cause of the problem"
+    },
+    "severity": {
+      "$ref": "enums.json#/definitions/Severity",
+      "description": "Severity level of the issue"
+    },
+    "symptoms": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Observable symptoms that led to discovery"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Searchable keywords for finding similar issues"
+    },
+    "module": {
+      "type": "string",
+      "description": "Affected module, class, or system name"
+    },
+    "related_files": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Files involved in the solution"
+    },
+    "related_issues": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Links to other solution files or external issues"
+    },
+    "promoted_to_pattern": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this was promoted to critical-patterns.md"
+    }
+  }
+}

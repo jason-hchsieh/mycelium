@@ -1,0 +1,32 @@
+# {{PROJECT_NAME}}
+
+## Quick Context
+{{PROJECT_DESCRIPTION}}
+
+## Tech Stack
+- Language: {{PRIMARY_LANGUAGE}}
+- Framework: {{FRAMEWORK}}
+- Database: {{DATABASE}}
+
+## Development Practices
+- TDD: {{TDD_STRICTNESS}}
+- Coverage target: {{COVERAGE_TARGET}}%
+- Commit style: {{COMMIT_STYLE}}
+
+## Key Commands
+```bash
+# Run tests
+{{TEST_COMMAND}}
+
+# Start development
+{{DEV_COMMAND}}
+
+# Build
+{{BUILD_COMMAND}}
+```
+
+## Project Structure
+See .workflow/context/ for detailed context files.
+
+## Critical Patterns
+See .workflow/solutions/patterns/critical-patterns.md

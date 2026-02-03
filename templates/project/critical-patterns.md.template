@@ -1,0 +1,34 @@
+---
+last_updated: {{LAST_UPDATED}}
+pattern_count: 0
+---
+
+# Critical Patterns
+
+Patterns that MUST be followed. Promoted from .workflow/solutions/ when 3+ similar issues occur.
+
+---
+
+## Pattern: {{PATTERN_NAME}}
+**Severity:** Critical
+**Occurrences:** {{OCCURRENCE_COUNT}}
+**Pattern ID:** PAT-001
+
+### Problem
+{{WHAT_GOES_WRONG}}
+
+### Solution
+{{WHAT_TO_DO_INSTEAD}}
+
+### Example
+```{{LANGUAGE}}
+// DON'T
+{{BAD_CODE_EXAMPLE}}
+
+// DO
+{{GOOD_CODE_EXAMPLE}}
+```
+
+### References
+- .workflow/solutions/{{CATEGORY}}/{{FILE_1}}.md
+- .workflow/solutions/{{CATEGORY}}/{{FILE_2}}.md

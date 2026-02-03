@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://adaptive-workflow.local/schemas/setup-state.schema.json",
+  "title": "Setup State Schema",
+  "description": "Schema for .workflow/state/setup_state.json - tracks bootstrap progress",
+  "type": "object",
+  "required": ["status", "project_type", "started_at", "last_updated"],
+  "properties": {
+    "status": {
+      "enum": ["not_started", "in_progress", "completed"],
+      "description": "Current setup status"
+    },
+    "project_type": {
+      "enum": ["greenfield", "brownfield"],
+      "description": "Detected or specified project type"
+    },
+    "current_section": {
+      "$ref": "enums.json#/definitions/SetupSection",
+      "description": "Current setup section being completed"
+    },
+    "current_question": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Question number within current section"
+    },
+    "completed_sections": {
+      "type": "array",
+      "items": {
+        "$ref": "enums.json#/definitions/SetupSection"
+      },
+      "description": "Sections that have been completed"
+    },
+    "answers": {
+      "type": "object",
+      "description": "Collected answers from setup questions",
+      "properties": {
+        "product_name": { "type": "string" },
+        "product_description": { "type": "string" },
+        "problem_statement": { "type": "string" },
+        "target_users": { "type": "string" },
+        "key_goals": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "primary_language": { "type": "string" },
+        "secondary_languages": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "framework": { "type": "string" },
+        "database_type": {
+          "enum": ["sql", "nosql", "none", "other"]
+        },
+        "database_system": { "type": "string" },
+        "infrastructure": { "type": "string" },
+        "tdd_strictness": {
+          "$ref": "enums.json#/definitions/TddStrictness"
+        },
+        "commit_style": {
+          "$ref": "enums.json#/definitions/CommitStyle"
+        },
+        "coverage_target": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "default": 80
+        },
+        "review_required": { "type": "boolean" }
+      }
+    },
+    "files_created": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Paths of files created during setup"
+    },
+    "detected_from_existing": {
+      "type": "object",
+      "description": "Values auto-detected from existing files (brownfield)",
+      "additionalProperties": true
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

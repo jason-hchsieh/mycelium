@@ -1,0 +1,72 @@
+---
+track_id: {{TRACK_ID}}
+track_type: {{TRACK_TYPE}}
+size: {{SIZE}}
+created: {{CREATED_TIMESTAMP}}
+status: in_progress
+total_tasks: {{TOTAL_TASKS}}
+completed_tasks: 0
+---
+
+# {{TRACK_TITLE}}
+
+## Overview
+{{TRACK_OVERVIEW}}
+
+## Success Criteria
+- [ ] {{CRITERION_1}}
+- [ ] {{CRITERION_2}}
+- [ ] {{CRITERION_3}}
+
+## Phase 1: {{PHASE_1_NAME}}
+
+### Task 1.1: {{TASK_1_1_TITLE}}
+**File:** `{{FILE_PATH}}`
+**Status:** [ ]
+**blockedBy:** []
+**blocks:** []
+**agent:** general-purpose
+**skills:** [tdd]
+**model:** sonnet
+
+{{TASK_1_1_DESCRIPTION}}
+
+### Task 1.2: {{TASK_1_2_TITLE}}
+**File:** `{{FILE_PATH}}`
+**Status:** [ ]
+**blockedBy:** [1.1]
+**blocks:** []
+**agent:** general-purpose
+**skills:** [tdd]
+**model:** sonnet
+
+{{TASK_1_2_DESCRIPTION}}
+
+---
+**Phase 1 Verification:**
+- [ ] All tests pass
+- [ ] Coverage ≥ {{COVERAGE_TARGET}}%
+- [ ] User approval
+
+**Checkpoint:** _pending_
+
+## Phase 2: {{PHASE_2_NAME}}
+
+### Task 2.1: {{TASK_2_1_TITLE}}
+**Status:** [ ]
+**blockedBy:** [1.1, 1.2]
+**blocks:** []
+
+{{TASK_2_1_DESCRIPTION}}
+
+## Deviations Log
+
+| Task | Deviation | Reason | Impact |
+|------|-----------|--------|--------|
+| _none yet_ | | | |
+
+## Final Checklist
+- [ ] All tasks complete
+- [ ] All tests pass
+- [ ] Code review passed
+- [ ] Documentation updated

@@ -1,0 +1,36 @@
+---
+primary_language: {{PRIMARY_LANGUAGE}}
+framework: {{FRAMEWORK}}
+database: {{DATABASE}}
+last_updated: {{LAST_UPDATED}}
+---
+
+# Technology Stack
+
+## Languages
+- Primary: {{PRIMARY_LANGUAGE}} {{LANGUAGE_VERSION}}
+- Secondary: {{SECONDARY_LANGUAGES}}
+
+## Frameworks
+- {{FRAMEWORK}}: {{FRAMEWORK_VERSION}} - {{FRAMEWORK_PURPOSE}}
+
+## Database
+- Type: {{DATABASE_TYPE}}
+- System: {{DATABASE_SYSTEM}}
+
+## Infrastructure
+- Hosting: {{HOSTING_PLATFORM}}
+- CI/CD: {{CI_CD_PLATFORM}}
+
+## Key Dependencies
+| Package | Purpose | Version |
+|---------|---------|---------|
+| {{PACKAGE_1}} | {{PURPOSE_1}} | {{VERSION_1}} |
+| {{PACKAGE_2}} | {{PURPOSE_2}} | {{VERSION_2}} |
+| {{PACKAGE_3}} | {{PURPOSE_3}} | {{VERSION_3}} |
+
+## Development Tools
+- Editor: {{RECOMMENDED_EDITOR}}
+- Linter: {{LINTER_TOOL}}
+- Formatter: {{FORMATTER_TOOL}}
+- Test Framework: {{TEST_FRAMEWORK}}

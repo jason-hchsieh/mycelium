@@ -1,0 +1,35 @@
+---
+name: {{PROJECT_NAME}}
+version: {{VERSION}}
+last_updated: {{LAST_UPDATED}}
+---
+
+# Product Context
+
+## Vision
+{{PRODUCT_VISION}}
+
+## Problem Statement
+{{PROBLEM_STATEMENT}}
+
+## Target Users
+{{TARGET_USERS}}
+
+## Key Goals
+1. {{GOAL_1}}
+2. {{GOAL_2}}
+3. {{GOAL_3}}
+
+## Success Metrics
+- {{METRIC_1}}
+- {{METRIC_2}}
+
+## Scope
+
+### In Scope
+- {{IN_SCOPE_1}}
+- {{IN_SCOPE_2}}
+
+### Out of Scope
+- {{OUT_OF_SCOPE_1}}
+- {{OUT_OF_SCOPE_2}}

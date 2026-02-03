@@ -1,0 +1,415 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://adaptive-workflow.local/schemas/session-state.schema.json",
+  "title": "Session State Schema",
+  "description": "Schema for .workflow/state/session_state.json",
+  "type": "object",
+  "required": ["status", "started_at", "last_updated"],
+  "properties": {
+    "status": {
+      "$ref": "enums.json#/definitions/SessionStatus"
+    },
+    "current_phase": {
+      "type": "integer",
+      "minimum": -1,
+      "maximum": 6,
+      "description": "-1=bootstrap, 0=context, 1=clarify, 2=discover, 3=plan, 4=implement, 5=review, 6=learn"
+    },
+    "current_track": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+_\\d{8}$",
+          "description": "Format: {shortname}_{YYYYMMDD}"
+        },
+        "type": {
+          "$ref": "enums.json#/definitions/TrackType"
+        },
+        "plan_file": {
+          "type": "string",
+          "description": "Path to plan file"
+        }
+      }
+    },
+    "current_task": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+$",
+          "description": "Format: {phase}.{task} e.g., 2.3"
+        },
+        "status": {
+          "$ref": "enums.json#/definitions/TaskStatus"
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "tasks_summary": {
+      "type": "object",
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 },
+        "completed": { "type": "integer", "minimum": 0 },
+        "in_progress": { "type": "integer", "minimum": 0 },
+        "pending": { "type": "integer", "minimum": 0 },
+        "skipped": { "type": "integer", "minimum": 0 },
+        "blocked": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "checkpoints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["phase", "sha", "timestamp"],
+        "properties": {
+          "phase": { "type": "integer" },
+          "sha": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{7,40}$",
+            "description": "Git commit SHA"
+          },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "deviations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["task_id", "reason", "timestamp"],
+        "properties": {
+          "task_id": { "type": "string" },
+          "reason": { "type": "string" },
+          "impact": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "worktrees": {
+      "type": "array",
+      "description": "Active git worktrees for parallel execution",
+      "items": {
+        "type": "object",
+        "required": ["track_id", "path", "branch", "status"],
+        "properties": {
+          "track_id": { "type": "string" },
+          "path": { "type": "string" },
+          "branch": { "type": "string" },
+          "status": {
+            "enum": ["active", "merging", "merged", "abandoned"]
+          },
+          "agent_id": { "type": "string" },
+          "created_at": { "type": "string", "format": "date-time" },
+          "merged_at": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "parallel_execution": {
+      "type": "object",
+      "description": "Task scheduling and parallel execution state",
+      "properties": {
+        "enabled": { "type": "boolean", "default": true },
+        "max_concurrent": { "type": "integer", "minimum": 1, "default": 3 },
+        "active_tasks": {
+          "type": "array",
+          "description": "Currently running tasks",
+          "items": {
+            "type": "object",
+            "properties": {
+              "task_id": { "type": "string" },
+              "agent_id": { "type": "string" },
+              "worktree": { "type": "string" },
+              "started_at": { "type": "string", "format": "date-time" }
+            }
+          }
+        },
+        "queued_tasks": {
+          "type": "array",
+          "description": "Tasks waiting for slot",
+          "items": { "type": "string" }
+        },
+        "blocked_tasks": {
+          "type": "array",
+          "description": "Tasks waiting on dependencies",
+          "items": {
+            "type": "object",
+            "properties": {
+              "task_id": { "type": "string" },
+              "blocked_by": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        },
+        "completed_tasks": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "git": {
+      "type": "object",
+      "description": "Git repository state",
+      "properties": {
+        "main_branch": { "type": "string", "default": "main" },
+        "current_branch": { "type": "string" },
+        "remote": { "type": "string" },
+        "last_push": { "type": "string", "format": "date-time" },
+        "stashes": {
+          "type": "array",
+          "description": "Tracked stashes for this session",
+          "items": {
+            "type": "object",
+            "properties": {
+              "index": { "type": "integer" },
+              "message": { "type": "string" },
+              "track_id": { "type": "string" },
+              "task_id": { "type": "string" },
+              "created_at": { "type": "string", "format": "date-time" }
+            }
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags created during this session",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "type": { "enum": ["checkpoint", "task", "release"] },
+              "sha": { "type": "string" },
+              "created_at": { "type": "string", "format": "date-time" }
+            }
+          }
+        },
+        "notes": {
+          "type": "array",
+          "description": "Git notes added during session",
+          "items": {
+            "type": "object",
+            "properties": {
+              "sha": { "type": "string" },
+              "type": { "enum": ["decision", "rationale", "review", "context"] },
+              "summary": { "type": "string" },
+              "created_at": { "type": "string", "format": "date-time" }
+            }
+          }
+        },
+        "hooks_installed": { "type": "boolean", "default": false }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "description": "Session metrics for workflow effectiveness tracking",
+      "properties": {
+        "tasks_completed": { "type": "integer", "minimum": 0 },
+        "tasks_failed": { "type": "integer", "minimum": 0 },
+        "tasks_skipped": { "type": "integer", "minimum": 0 },
+        "context_resets": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Times agent was spawned fresh due to context exhaustion"
+        },
+        "human_interventions": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Times human decision was required"
+        },
+        "rework_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Tasks marked complete then reopened"
+        },
+        "pattern_matches": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Times .workflow/solutions/ knowledge was used"
+        },
+        "recovery_actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "trigger": { "type": "string" },
+              "action": {
+                "$ref": "enums.json#/definitions/RecoveryAction"
+              },
+              "task_id": { "type": "string" },
+              "timestamp": { "type": "string", "format": "date-time" }
+            }
+          }
+        }
+      }
+    },
+    "context_state": {
+      "type": "object",
+      "description": "Track context window usage for long sessions",
+      "properties": {
+        "estimated_usage_percent": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "last_checkpoint": { "type": "string", "format": "date-time" },
+        "progress_file": {
+          "type": "string",
+          "description": "Path to progress.md for context bridging"
+        }
+      }
+    },
+    "discovered_capabilities": {
+      "type": "object",
+      "description": "Cached discovery results, updated on session start",
+      "properties": {
+        "last_updated": { "type": "string", "format": "date-time" },
+        "scopes_scanned": {
+          "type": "array",
+          "description": "Plugin scopes that were scanned",
+          "items": {
+            "enum": ["local", "project", "user", "global"]
+          }
+        },
+        "agents": {
+          "type": "array",
+          "description": "Available agents (built-in + all plugin scopes)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "qualified_name": {
+                "type": "string",
+                "description": "plugin:agent-name"
+              },
+              "source": {
+                "type": "string",
+                "description": "built-in | plugin-name"
+              },
+              "scope": {
+                "enum": ["local", "project", "user", "global", "built-in"]
+              },
+              "description": { "type": "string" },
+              "tools": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        },
+        "skills": {
+          "type": "array",
+          "description": "Available skills from all plugin scopes",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "source": {
+                "type": "string",
+                "description": "plugin-name"
+              },
+              "scope": {
+                "enum": ["local", "project", "user", "global"]
+              },
+              "description": { "type": "string" },
+              "triggers": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        },
+        "mcp_servers": {
+          "type": "array",
+          "description": "Available MCP servers from all plugin scopes",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "source": {
+                "type": "string",
+                "description": "plugin-name"
+              },
+              "scope": {
+                "enum": ["local", "project", "user", "global"]
+              },
+              "tools": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "status": {
+                "enum": ["available", "connected", "error"]
+              }
+            }
+          }
+        },
+        "commands": {
+          "type": "array",
+          "description": "Available slash commands from all plugin scopes",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "qualified_name": {
+                "type": "string",
+                "description": "/plugin:command"
+              },
+              "source": { "type": "string" },
+              "scope": {
+                "enum": ["local", "project", "user", "global"]
+              },
+              "description": { "type": "string" }
+            }
+          }
+        },
+        "plugins": {
+          "type": "array",
+          "description": "All discovered plugins by scope",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "scope": {
+                "enum": ["local", "project", "user", "global"]
+              },
+              "path": { "type": "string" },
+              "provides": {
+                "type": "object",
+                "properties": {
+                  "agents": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "skills": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "commands": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "mcp_servers": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

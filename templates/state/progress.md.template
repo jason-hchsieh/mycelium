@@ -1,0 +1,29 @@
+# Progress Report
+
+**Generated:** {{TIMESTAMP}}
+**Track:** {{TRACK_ID}}
+**Phase:** {{CURRENT_PHASE}}
+**Task:** {{CURRENT_TASK}}
+
+## Current State
+Currently working on: {{CURRENT_WORK_DESCRIPTION}}
+
+## Completed
+- [x] Task {{TASK_ID_1}}: {{TASK_SUMMARY_1}}
+- [x] Task {{TASK_ID_2}}: {{TASK_SUMMARY_2}}
+- [x] Task {{TASK_ID_3}}: {{TASK_SUMMARY_3}}
+
+## Key Decisions
+- **Decision 1:** {{DECISION_WHAT}} because {{DECISION_WHY}}
+- **Decision 2:** {{DECISION_WHAT}} because {{DECISION_WHY}}
+
+## Next Up
+- [ ] Task {{NEXT_TASK_ID}}: {{NEXT_TASK_DESCRIPTION}}
+- [ ] Task {{NEXT_TASK_ID_2}}: {{NEXT_TASK_DESCRIPTION_2}}
+
+## Known Issues
+- {{ISSUE_DESCRIPTION_1}}
+- {{ISSUE_DESCRIPTION_2}}
+
+## Context Notes
+{{ADDITIONAL_CONTEXT}}

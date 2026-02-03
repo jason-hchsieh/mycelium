@@ -1,0 +1,35 @@
+---
+tdd_strictness: {{TDD_STRICTNESS}}
+commit_style: {{COMMIT_STYLE}}
+coverage_target: {{COVERAGE_TARGET}}
+review_required: {{REVIEW_REQUIRED}}
+last_updated: {{LAST_UPDATED}}
+---
+
+# Development Workflow
+
+## TDD Policy
+- Strictness: {{TDD_STRICTNESS}}
+- Coverage target: {{COVERAGE_TARGET}}%
+- Test framework: {{TEST_FRAMEWORK}}
+
+## Git Conventions
+- Branch naming: {{BRANCH_NAMING_PATTERN}}
+- Commit style: {{COMMIT_STYLE}}
+- PR requirements: {{PR_REQUIREMENTS}}
+
+## Code Review
+- Required reviewers: {{REVIEWER_COUNT}}
+- Auto-merge: {{AUTO_MERGE}}
+- Review checklist: {{REVIEW_CHECKLIST}}
+
+## Quality Gates
+- [ ] All tests pass
+- [ ] Coverage ≥ {{COVERAGE_TARGET}}%
+- [ ] No linting errors
+- [ ] Type checks pass
+- [ ] Security scan clean
+
+## Deployment
+- Staging: {{STAGING_STRATEGY}}
+- Production: {{PRODUCTION_STRATEGY}}

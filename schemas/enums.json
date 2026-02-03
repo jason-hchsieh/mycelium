@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://adaptive-workflow.local/schemas/enums.json",
+  "title": "Adaptive Workflow Enums",
+  "description": "Shared enumeration definitions for the adaptive workflow system",
+  "definitions": {
+    "TaskSize": {
+      "enum": ["trivial", "small", "medium", "large"],
+      "description": "Task complexity classification"
+    },
+    "TrackType": {
+      "enum": ["feature", "bug", "chore", "refactor"],
+      "description": "Type of work being performed"
+    },
+    "TaskStatus": {
+      "enum": ["pending", "in_progress", "completed", "skipped", "blocked"],
+      "description": "Current status of a task"
+    },
+    "ProblemType": {
+      "enum": [
+        "performance_issue",
+        "database_issue",
+        "security_issue",
+        "ui_bug",
+        "integration_issue",
+        "configuration_issue",
+        "dependency_issue",
+        "logic_error",
+        "race_condition",
+        "memory_issue"
+      ],
+      "description": "Category of problem encountered"
+    },
+    "ComponentType": {
+      "enum": [
+        "frontend",
+        "backend",
+        "database",
+        "api",
+        "auth",
+        "infrastructure",
+        "cli",
+        "library",
+        "config",
+        "test"
+      ],
+      "description": "Component where problem occurred"
+    },
+    "RootCause": {
+      "enum": [
+        "missing_validation",
+        "missing_error_handling",
+        "missing_null_check",
+        "missing_await",
+        "missing_index",
+        "missing_include",
+        "wrong_query",
+        "wrong_logic",
+        "wrong_type",
+        "race_condition",
+        "stale_cache",
+        "config_mismatch",
+        "dependency_conflict",
+        "api_deprecation",
+        "schema_mismatch"
+      ],
+      "description": "Root cause of the problem"
+    },
+    "Severity": {
+      "enum": ["critical", "high", "medium", "low"],
+      "description": "Severity level of issue"
+    },
+    "TddStrictness": {
+      "enum": ["strict", "flexible", "none"],
+      "description": "Level of TDD enforcement"
+    },
+    "CommitStyle": {
+      "enum": ["conventional", "descriptive", "atomic"],
+      "description": "Git commit message style"
+    },
+    "SessionStatus": {
+      "enum": ["not_started", "in_progress", "paused", "completed", "failed"],
+      "description": "Current session status"
+    },
+    "SetupSection": {
+      "enum": ["product", "tech_stack", "workflow", "style_guides"],
+      "description": "Bootstrap setup sections"
+    },
+    "RemoteProvider": {
+      "enum": ["github", "gitlab", "gitea", "bitbucket", "azure", "none"],
+      "description": "Git hosting provider"
+    },
+    "RemoteToolType": {
+      "enum": ["mcp", "cli", "api"],
+      "description": "Type of tool used for remote operations"
+    },
+    "ModelTier": {
+      "enum": ["opus", "sonnet", "haiku"],
+      "description": "Claude model tier selection"
+    },
+    "ConfidenceLevel": {
+      "enum": ["high", "medium", "low", "needs_verification"],
+      "description": "Confidence in decision or analysis"
+    },
+    "BlockerType": {
+      "enum": ["technical", "clarification", "external_dependency", "resource", "approval"],
+      "description": "Type of blocker preventing progress"
+    },
+    "RecoveryAction": {
+      "enum": ["retry", "escalate", "pivot", "rollback", "abandon"],
+      "description": "Action taken to recover from failure"
+    },
+    "ProjectMaturity": {
+      "enum": ["prototype", "development", "production", "regulated"],
+      "description": "Project maturity level"
+    },
+    "VerificationMethod": {
+      "enum": [
+        "unit_test",
+        "integration_test",
+        "e2e_test",
+        "snapshot_test",
+        "visual_regression",
+        "benchmark",
+        "manual_checklist",
+        "dry_run",
+        "schema_validation"
+      ],
+      "description": "Method used to verify correctness"
+    }
+  }
+}
