@@ -354,59 +354,80 @@ Captures:
 
 ## Commands Reference
 
-### Core Workflow
+### Primary Commands
 
-| Command | Phase | Description |
-|---------|-------|-------------|
-| `/workflow:setup` | -1 | Initialize project with .workflow/ structure |
-| `/workflow:plan` | 1-3 | Create implementation plan with task breakdown |
-| `/workflow:work` | 4 | Execute tasks with TDD and parallel execution |
-| `/workflow:review` | 5 | Two-stage comprehensive review |
-| `/workflow:compound` | 6 | Capture knowledge with feedback loops |
-| `/workflow:status` | - | Show session state and progress |
-| `/workflow:resume` | - | Resume interrupted session |
+| Command | Description | Interaction |
+|---------|-------------|-------------|
+| **`/workflow:go [task] [--interactive]`** | **🚀 Full autonomous workflow** (plan → work → review → capture) | Minimal (autonomous) or phase approvals (interactive) |
+| `/workflow:setup [--resume]` | Bootstrap project with mycelium structure | Interactive setup questions |
+| `/workflow:plan [description]` | Create implementation plan with TDD task breakdown | Clarifying questions |
+| `/workflow:work [task_id\|all]` | Execute tasks with strict TDD enforcement | Autonomous with progress updates |
+| `/workflow:review [--stage=1\|2\|all]` | Two-stage review (spec compliance + quality) | Report with decision point |
+| `/workflow:capture [track_id]` | Extract learnings and grow knowledge layer | Autonomous knowledge capture |
 
-### Context Management
-
-| Command | Description |
-|---------|-------------|
-| `/workflow:context-sync` | Sync context, spawn fresh agent if needed |
-| `/workflow:metrics` | Display session effectiveness metrics |
-
-### Learning & Feedback
+### Utility Commands
 
 | Command | Description |
 |---------|-------------|
-| `/workflow:create-skill` | Generate skill from detected patterns |
-| `/workflow:list-skills` | List all discovered skills |
+| `/workflow:status [--verbose]` | Display current progress and state |
+| `/workflow:resume` | Resume interrupted work from checkpoint |
 
-### Git Worktrees
+### Usage Patterns
 
-| Command | Description |
-|---------|-------------|
-| `/workflow:worktree-create` | Create isolated worktree for task |
-| `/workflow:worktree-merge` | Merge completed worktree |
-| `/workflow:worktree-cleanup` | Remove completed worktrees |
+**🚀 Quick Start (Autonomous)**
+```bash
+/workflow:go "Add user authentication with JWT"
+# Runs full workflow with minimal interaction
+```
 
-### Pull Requests
+**🎯 Controlled (Interactive)**
+```bash
+/workflow:go "Add user login" --interactive
+# Asks for approval after each phase
+```
 
-| Command | Description |
-|---------|-------------|
-| `/workflow:pr-create` | Create PR (uses MCP or CLI fallback) |
-| `/workflow:pr-review` | Automated PR review |
+**🔧 Manual (Step-by-Step)**
+```bash
+/workflow:plan "Add user login"
+/workflow:work all
+/workflow:review
+/workflow:capture
+# Full control over each phase
+```
+
+### Command Evolution
+
+All commands have been simplified to **thin wrappers** (~20-60 lines each) that delegate to specialized skills:
+- **Before**: ~290 lines average (embedded workflow logic)
+- **After**: ~57 lines average (orchestration only)
+- **Reduction**: 80% fewer lines per command
+
+Other operations (worktrees, PR creation, context sync) are now **handled automatically** by the plugin when needed.
 
 ## Skills
 
-The plugin provides 6 workflow-specific skills:
+The plugin provides workflow-specific skills that contain detailed guidance:
 
-| Skill | Purpose | Triggers |
-|-------|---------|----------|
-| **Iron Law TDD** | Enforce test-first development | "implement feature", "write code", "fix bug" |
-| **Task Planning** | Break down work systematically | "create a plan", "estimate complexity" |
-| **Verification** | Evidence-based testing | "verify this works", "test the implementation" |
-| **Solution Capture** | Document learnings | "capture this solution", "document the fix" |
-| **Context Management** | Manage context windows | "context sync", "fresh agent" |
-| **Recovery** | Handle stuck states | "stuck", "debugging failed", "try different approach" |
+### Core Workflow Skills
+
+| Skill | Purpose | Used By |
+|-------|---------|---------|
+| **setup** | Project initialization (greenfield/brownfield detection, interactive config, directory structure) | `/workflow:setup` |
+| **planning** | Requirements clarification, smart research gate, task breakdown with TDD | `/workflow:plan` |
+| **tdd** | Iron Law TDD - RED → GREEN → REFACTOR enforcement | `/workflow:work`, `/workflow:go` |
+| **verification** | Evidence-based validation (show actual test output, no "should work") | `/workflow:work`, `/workflow:go` |
+| **review** | Two-stage review (spec compliance + parallel quality assessment) | `/workflow:review`, `/workflow:go` |
+| **solution-capture** | Knowledge extraction, pattern detection, learning documentation | `/workflow:capture`, `/workflow:go` |
+| **orchestration** | Autonomous workflow execution with decision gates | `/workflow:go` |
+| **context** | Project context loading and management | All commands |
+| **recovery** | Handle blockers and stuck states | As needed |
+
+### Skill Architecture
+
+Commands are **thin wrappers** that delegate to skills:
+- **Commands** (~20-60 lines): Parse args, load skills, provide context
+- **Skills** (detailed guides): Contain all workflow logic and best practices
+- **Benefit**: Update workflow once (in skill), affects all commands using it
 
 ## Agents
 
