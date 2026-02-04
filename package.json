@@ -1,7 +1,7 @@
 {
-  "name": "adaptive-workflow-lib",
+  "name": "mycelium",
   "version": "0.1.0",
-  "description": "Adaptive workflow utilities for Claude Code plugin development",
+  "description": "Mycelium - The intelligent substrate for Claude Code development with compounding knowledge",
   "main": "index.js",
   "type": "module",
   "scripts": {

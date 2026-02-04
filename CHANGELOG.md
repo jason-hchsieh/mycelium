@@ -102,4 +102,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Code complexity analysis
 - Dependency vulnerability scanning
 
-[0.1.0]: https://github.com/yourusername/adaptive-workflow/releases/tag/v0.1.0
+[0.1.0]: https://github.com/yourusername/mycelium/releases/tag/v0.1.0

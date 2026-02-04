@@ -1,6 +1,6 @@
 # Adaptive Workflow JSON Schemas
 
-This directory contains JSON Schema definitions (Draft 7) for all structured data used by the adaptive-workflow plugin.
+This directory contains JSON Schema definitions (Draft 7) for all structured data used by Mycelium.
 
 ## Schema Files
 

@@ -1,10 +1,20 @@
-# Adaptive AI Development Workflow
+# Mycelium
 
-A meta-workflow orchestration plugin for Claude Code that implements systematic development with compounding knowledge capture. Inspired by Conductor, Superpowers, and Compound Engineering principles.
+*The intelligent substrate beneath your code*
+
+A meta-workflow orchestration plugin for Claude Code that implements systematic development with compounding knowledge capture. Like a mycelium network that learns, adapts, and grows stronger with each connection, this workflow creates an intelligent knowledge layer that makes every development session more capable than the last.
+
+Inspired by Conductor, Superpowers, and Compound Engineering principles.
 
 ## Core Philosophy
 
 > Each unit of work should make subsequent units easier through compounding knowledge and systematic processes.
+
+Like the mycelium network in nature that connects and nourishes an entire forest, this workflow creates an underground intelligence layer that:
+- 🍄 **Learns** from patterns across sessions
+- 🌐 **Connects** knowledge into a growing network
+- 📈 **Compounds** capability with each use
+- 🔄 **Adapts** to your development style
 
 ## Workflow Overview
 
@@ -247,17 +257,17 @@ git worktree remove .worktrees/feature-oauth
 
 ```bash
 # Test locally
-claude-code --plugin-dir /path/to/adaptive-workflow
+claude-code --plugin-dir /path/to/mycelium
 
 # Or symlink to project plugins
-ln -s /path/to/adaptive-workflow /path/to/project/.claude/plugins/adaptive-workflow
+ln -s /path/to/mycelium /path/to/project/.claude/plugins/mycelium
 ```
 
 ### From Git Repository
 
 ```bash
 # Clone to user plugins directory
-git clone https://github.com/yourusername/adaptive-workflow ~/.claude/plugins/adaptive-workflow
+git clone https://github.com/yourusername/mycelium ~/.claude/plugins/mycelium
 ```
 
 ## Quick Start
@@ -493,7 +503,7 @@ Works with these external plugins (optional):
 ## Directory Structure
 
 ```
-adaptive-workflow/
+mycelium/
 ├── .claude-plugin/
 │   └── plugin.json           # Plugin manifest
 ├── agents/
@@ -650,8 +660,8 @@ Built for **Claude Code** by Anthropic.
 
 ## Support
 
-- Issues: [GitHub Issues](https://github.com/yourusername/adaptive-workflow/issues)
-- Discussions: [GitHub Discussions](https://github.com/yourusername/adaptive-workflow/discussions)
+- Issues: [GitHub Issues](https://github.com/yourusername/mycelium/issues)
+- Discussions: [GitHub Discussions](https://github.com/yourusername/mycelium/discussions)
 - Documentation: This README and inline documentation
 
 ## Version

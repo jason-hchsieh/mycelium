@@ -1,6 +1,6 @@
-# Adaptive Workflow Library - Utilities
+# Mycelium Library - Utilities
 
-Comprehensive utility library for the adaptive-workflow Claude Code plugin. Provides core functionality for schema validation, template rendering, state management, task scheduling, and capability discovery.
+Comprehensive utility library for Mycelium, the intelligent substrate for Claude Code development. Provides core functionality for schema validation, template rendering, state management, task scheduling, and capability discovery.
 
 ## Overview
 
@@ -552,4 +552,4 @@ See `/examples` directory for working demonstrations:
 
 ## Support
 
-For issues or questions, see the main [adaptive-workflow](../) documentation.
+For issues or questions, see the main [Mycelium](../) documentation.
