@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://adaptive-workflow.local/schemas/session-state.schema.json",
+  "title": "Session State Schema",
+  "description": "Schema for .workflow/state/session_state.json",
+  "type": "object",
+  "required": ["session_id", "project_root", "workflow_root"],
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "description": "Unique session identifier"
+    },
+    "project_root": {
+      "type": "string",
+      "description": "Project root directory"
+    },
+    "workflow_root": {
+      "type": "string",
+      "description": "Workflow root directory"
+    },
+    "active_workflow": {
+      "type": "string",
+      "description": "Active workflow name"
+    },
+    "current_phase": {
+      "type": "string",
+      "description": "Current workflow phase"
+    },
+    "discovered_capabilities": {
+      "type": "object",
+      "properties": {
+        "skills": {
+          "type": "array"
+        },
+        "agents": {
+          "type": "array"
+        },
+        "mcps": {
+          "type": "array"
+        }
+      }
+    },
+    "worktrees": {
+      "type": "array"
+    },
+    "metadata": {
+      "type": "object"
+    }
+  }
+}

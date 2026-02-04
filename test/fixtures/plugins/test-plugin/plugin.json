@@ -1,0 +1,9 @@
+{
+  "name": "test-plugin",
+  "version": "1.0.0",
+  "description": "Test plugin for capability scanning",
+  "author": "Test Author",
+  "skills": ["test-skill"],
+  "agents": ["test-agent"],
+  "commands": ["test-command"]
+}

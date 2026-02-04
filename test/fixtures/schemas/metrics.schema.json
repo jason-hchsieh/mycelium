@@ -1,0 +1,176 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://adaptive-workflow.local/schemas/metrics.schema.json",
+  "title": "Workflow Metrics Schema",
+  "description": "Schema for tracking workflow effectiveness metrics",
+  "type": "object",
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "description": "Unique session identifier"
+    },
+    "track_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+_\\d{8}$",
+      "description": "Associated track identifier"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ended_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "duration_seconds": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "tasks": {
+      "type": "object",
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 },
+        "completed": { "type": "integer", "minimum": 0 },
+        "failed": { "type": "integer", "minimum": 0 },
+        "skipped": { "type": "integer", "minimum": 0 },
+        "blocked": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "context_management": {
+      "type": "object",
+      "properties": {
+        "resets": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of context resets due to exhaustion"
+        },
+        "checkpoints": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of progress checkpoints created"
+        },
+        "handoffs": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of agent handoffs"
+        }
+      }
+    },
+    "human_interaction": {
+      "type": "object",
+      "properties": {
+        "interventions": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Times human decision was required"
+        },
+        "clarifications": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Clarification questions asked"
+        },
+        "approvals": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Times user approval was requested"
+        }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "properties": {
+        "rework_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Tasks that needed rework"
+        },
+        "test_failures": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Test failures encountered"
+        },
+        "code_reviews": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Code reviews performed"
+        },
+        "issues_found": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Issues found in review"
+        }
+      }
+    },
+    "knowledge_reuse": {
+      "type": "object",
+      "properties": {
+        "pattern_matches": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Times existing solutions were applied"
+        },
+        "new_solutions": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "New solutions captured"
+        },
+        "patterns_promoted": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Solutions promoted to critical patterns"
+        }
+      }
+    },
+    "parallel_execution": {
+      "type": "object",
+      "properties": {
+        "tasks_parallelized": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Tasks executed in parallel"
+        },
+        "max_concurrent": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum concurrent tasks"
+        },
+        "worktrees_created": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of worktrees created"
+        },
+        "merge_conflicts": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of merge conflicts"
+        }
+      }
+    },
+    "recovery_actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["action", "trigger", "timestamp"],
+        "properties": {
+          "action": {
+            "$ref": "enums.json#/definitions/RecoveryAction"
+          },
+          "trigger": { "type": "string" },
+          "task_id": { "type": "string" },
+          "successful": { "type": "boolean" },
+          "timestamp": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "git_operations": {
+      "type": "object",
+      "properties": {
+        "commits": { "type": "integer", "minimum": 0 },
+        "branches": { "type": "integer", "minimum": 0 },
+        "merges": { "type": "integer", "minimum": 0 },
+        "tags": { "type": "integer", "minimum": 0 },
+        "stashes": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://adaptive-workflow.local/schemas/progress-state.schema.json",
+  "title": "Progress State Schema",
+  "description": "Schema for progress checkpoint structure used for context bridging",
+  "type": "object",
+  "required": ["track_id", "current_phase", "timestamp"],
+  "properties": {
+    "track_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+_\\d{8}$",
+      "description": "Current track identifier"
+    },
+    "current_phase": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 6,
+      "description": "Current workflow phase"
+    },
+    "current_task": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$",
+      "description": "Current task ID (format: {phase}.{task})"
+    },
+    "current_work": {
+      "type": "string",
+      "description": "Brief description of current work"
+    },
+    "completed_tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["task_id", "summary"],
+        "properties": {
+          "task_id": { "type": "string" },
+          "summary": { "type": "string" },
+          "sha": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{7,40}$"
+          }
+        }
+      },
+      "description": "List of completed tasks with summaries"
+    },
+    "key_decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["decision", "rationale"],
+        "properties": {
+          "decision": { "type": "string" },
+          "rationale": { "type": "string" },
+          "alternatives_considered": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      },
+      "description": "Important decisions made during work"
+    },
+    "next_tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["task_id", "description"],
+        "properties": {
+          "task_id": { "type": "string" },
+          "description": { "type": "string" },
+          "blocked_by": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      },
+      "description": "Upcoming tasks to be worked on"
+    },
+    "known_issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["description"],
+        "properties": {
+          "description": { "type": "string" },
+          "severity": {
+            "$ref": "enums.json#/definitions/Severity"
+          },
+          "blocker": { "type": "boolean" }
+        }
+      },
+      "description": "Known issues or blockers"
+    },
+    "context_notes": {
+      "type": "string",
+      "description": "Additional context for agent handoff"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this progress snapshot was created"
+    }
+  }
+}

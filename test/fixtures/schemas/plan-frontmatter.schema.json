@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://adaptive-workflow.local/schemas/plan-frontmatter.schema.json",
+  "title": "Plan Frontmatter Schema",
+  "description": "YAML frontmatter validation for plan files in .workflow/plans/",
+  "type": "object",
+  "required": ["track_id", "track_type", "size", "created", "status", "total_tasks", "completed_tasks"],
+  "properties": {
+    "track_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+_\\d{8}$",
+      "description": "Unique track identifier (format: {shortname}_{YYYYMMDD})"
+    },
+    "track_type": {
+      "$ref": "enums.json#/definitions/TrackType",
+      "description": "Type of work being performed"
+    },
+    "size": {
+      "$ref": "enums.json#/definitions/TaskSize",
+      "description": "Overall complexity of the track"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when plan was created"
+    },
+    "status": {
+      "$ref": "enums.json#/definitions/SessionStatus",
+      "description": "Current status of the track"
+    },
+    "total_tasks": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total number of tasks in the plan"
+    },
+    "completed_tasks": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of completed tasks"
+    },
+    "model_tier": {
+      "$ref": "enums.json#/definitions/ModelTier",
+      "description": "Default model tier for tasks in this track"
+    },
+    "parallel_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether parallel execution is enabled"
+    }
+  }
+}

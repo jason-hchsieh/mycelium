@@ -1,0 +1,9 @@
+{
+  "name": "test-plugin-alt",
+  "version": "1.5.0",
+  "description": "Alternative plugin structure test",
+  "author": "Test Author Alt",
+  "skills": ["alt-skill"],
+  "agents": ["alt-agent"],
+  "commands": []
+}

@@ -1,0 +1,19 @@
+export default {
+  testEnvironment: 'node',
+  testMatch: ['**/test/**/*.test.js'],
+  collectCoverageFrom: [
+    'lib/**/*.js',
+    '!lib/**/*.test.js'
+  ],
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80
+    }
+  },
+  transform: {},
+  moduleFileExtensions: ['js', 'json'],
+  verbose: true
+};

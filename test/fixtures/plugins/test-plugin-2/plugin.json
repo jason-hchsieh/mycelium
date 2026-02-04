@@ -1,0 +1,9 @@
+{
+  "name": "test-plugin-2",
+  "version": "2.0.0",
+  "description": "Second test plugin with more capabilities",
+  "author": "Test Author 2",
+  "skills": ["test-skill-2", "advanced-skill"],
+  "agents": ["test-agent-2"],
+  "commands": ["test-command-2"]
+}
