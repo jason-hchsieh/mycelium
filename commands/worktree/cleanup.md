@@ -1,6 +1,5 @@
 ---
 name: worktree-cleanup
-command: /workflow:worktree-cleanup
 description: Remove completed or abandoned worktrees, prune stale branches, and clean up workspace. Reclaims disk space and maintains repository hygiene.
 category: worktree
 version: 0.1.0

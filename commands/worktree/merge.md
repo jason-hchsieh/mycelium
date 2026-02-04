@@ -1,6 +1,5 @@
 ---
 name: worktree-merge
-command: /workflow:worktree-merge
 description: Merge completed worktree branch back to main track. Handles conflict resolution, verification, and state updates.
 category: worktree
 version: 0.1.0

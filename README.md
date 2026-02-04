@@ -520,12 +520,24 @@ adaptive-workflow/
 │   └── scripts/
 │       ├── session-start.sh
 │       └── save-state.sh
-├── templates/                # 12 templates
-│   ├── project/
+├── templates/                # 12 template files
+│   ├── project/              # Project setup templates (5 files)
+│   │   ├── product.md.template
+│   │   ├── tech-stack.md.template
+│   │   ├── workflow.md.template
+│   │   ├── CLAUDE.md.template
+│   │   └── critical-patterns.md.template
 │   ├── plans/
+│   │   └── plan.md.template
 │   ├── solutions/
+│   │   └── solution.md.template
 │   ├── state/
-│   └── gitignore/
+│   │   └── progress.md.template
+│   └── gitignore/            # Language-specific .gitignore (4 files)
+│       ├── node.gitignore
+│       ├── python.gitignore
+│       ├── go.gitignore
+│       └── rust.gitignore
 ├── schemas/                  # 7 JSON schemas
 │   ├── session-state.schema.json
 │   ├── solution-frontmatter.schema.json

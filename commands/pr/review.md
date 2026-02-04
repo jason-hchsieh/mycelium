@@ -1,6 +1,5 @@
 ---
 name: pr-review
-command: /workflow:pr-review
 description: Review pull request and provide feedback. Uses external MCPs (GitHub, GitLab, Gitea) when available, falls back to CLI tools for PR review.
 category: pr
 version: 0.1.0

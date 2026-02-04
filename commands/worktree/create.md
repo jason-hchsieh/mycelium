@@ -1,6 +1,5 @@
 ---
 name: worktree-create
-command: /workflow:worktree-create
 description: Create git worktree for parallel task execution. Enables isolated workspace for a track with its own branch, dependencies, and environment.
 category: worktree
 version: 0.1.0

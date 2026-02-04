@@ -1,6 +1,5 @@
 ---
 name: pr-create
-command: /workflow:pr-create
 description: Create pull request from track branch. Uses external MCPs (GitHub, GitLab, Gitea) when available, falls back to CLI tools (gh, glab, tea).
 category: pr
 version: 0.1.0
