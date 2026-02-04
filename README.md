@@ -267,7 +267,7 @@ ln -s /path/to/mycelium /path/to/project/.claude/plugins/mycelium
 
 ```bash
 # Clone to user plugins directory
-git clone https://github.com/yourusername/mycelium ~/.claude/plugins/mycelium
+git clone https://github.com/jason-hchsieh/mycelium ~/.claude/plugins/mycelium
 ```
 
 ## Quick Start
@@ -660,8 +660,8 @@ Built for **Claude Code** by Anthropic.
 
 ## Support
 
-- Issues: [GitHub Issues](https://github.com/yourusername/mycelium/issues)
-- Discussions: [GitHub Discussions](https://github.com/yourusername/mycelium/discussions)
+- Issues: [GitHub Issues](https://github.com/jason-hchsieh/mycelium/issues)
+- Discussions: [GitHub Discussions](https://github.com/jason-hchsieh/mycelium/discussions)
 - Documentation: This README and inline documentation
 
 ## Version
