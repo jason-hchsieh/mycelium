@@ -41,9 +41,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Infrastructure
 - Hooks: SessionStart (load context), Stop (save state)
-- Templates: 12 templates for bootstrap, plans, solutions, gitignore
+- Templates: 13 templates for bootstrap, plans, solutions, gitignore
 - Schemas: 7 JSON schemas with strict validation
-- Lib utilities: 23 module stubs with documented interfaces
+- Lib utilities: 13 utility modules (refactored from 23) with documented interfaces
 
 #### Knowledge Systems
 - Solutions library with pattern promotion (3+ → critical-patterns.md)

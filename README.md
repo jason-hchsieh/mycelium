@@ -520,7 +520,7 @@ adaptive-workflow/
 │   └── scripts/
 │       ├── session-start.sh
 │       └── save-state.sh
-├── templates/                # 12 template files
+├── templates/                # 13 template files
 │   ├── project/              # Project setup templates (5 files)
 │   │   ├── product.md.template
 │   │   ├── tech-stack.md.template
