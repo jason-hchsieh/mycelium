@@ -15,20 +15,40 @@ Transform the user's request into a structured, executable plan.
 
 ### Phase 1: Clarify Requirements
 
+⚠️ **CRITICAL: Use AskUserQuestion for structured clarification**
+
 1. **Understand Intent:**
    - What is the user asking for?
    - What are the success criteria?
    - What are the scope boundaries?
 
 2. **Identify Ambiguities:**
-   - Ask clarifying questions ONE at a time
-   - Define acceptance criteria
-   - Classify task size: T (trivial) / S (small) / M (medium) / L (large)
-   - Assign track type: feature / bug / chore / refactor
+   If ANY of these are unclear, use AskUserQuestion:
 
-3. **Loop Until Clear:**
-   - Do not proceed until requirements are unambiguous
-   - Confirm your understanding with the user
+   ```
+   AskUserQuestion with:
+   - Question: "What specific [aspect] should this [feature] include?"
+   - Options: Provide 2-4 concrete choices
+   - Header: Short label (e.g., "Scope", "Approach", "Priority")
+   ```
+
+   Ask about:
+   - Unclear requirements or edge cases
+   - Multiple valid implementation approaches
+   - Missing acceptance criteria
+   - Scope boundaries (what's in/out)
+   - Priority or ordering of features
+
+   **Ask ONE question at a time** - wait for answer before next question
+
+3. **Classify After Clarification:**
+   Once requirements are clear:
+   - Task size: T (trivial) / S (small) / M (medium) / L (large)
+   - Track type: feature / bug / chore / refactor
+   - Risk level: low / medium / high (affects research gate)
+
+4. **Confirm Understanding:**
+   Summarize your understanding and get explicit confirmation before proceeding
 
 ### Phase 1.5: Smart Research Gate
 
