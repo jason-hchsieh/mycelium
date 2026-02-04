@@ -35,28 +35,24 @@ flowchart TD
     Research -->|No| Phase2
     Phase15 --> Phase2[2: Planning & Assignment]
     Phase2 --> LoadCachedCaps[Load Cached Capabilities<br/>from session_state.json<br/>discovered in Phase 0E]
-    LoadCachedCaps --> CreatePlan[Create Implementation Plan<br/>Task Breakdown + Dependencies]
-    CreatePlan --> AssignCaps[Assign to Each Task:<br/>• Best-fit agent from cache<br/>• Relevant skills from cache<br/>• Model tier haiku/sonnet/opus]
+    LoadCachedCaps --> DecomposeRequest[Decompose User Request<br/>into Features]
+    DecomposeRequest --> DecomposeFeatures[Decompose Each Feature<br/>into 2-5 min Tasks]
+    DecomposeFeatures --> DefineGitStrategy[Define Git Strategy:<br/>• Feature = git branch<br/>• Multiple features = worktrees]
+    DefineGitStrategy --> AssignCaps[Assign to Each Task:<br/>• Best-fit agent from cache<br/>• Relevant skills from cache<br/>• Model tier haiku/sonnet/opus]
     AssignCaps --> VerifyAssign[Verify Assignments Valid<br/>All exist in cached capabilities]
-    VerifyAssign --> CheckTasks{Multiple<br/>Tasks?}
+    VerifyAssign --> CheckFeatures{Multiple<br/>Features?}
 
-    %% Phase 4: Implementation - Parallel First
-    CheckTasks -->|Yes| Parallel[4: Parallel Execution<br/>Git Worktrees DEFAULT]
-    Parallel --> TaskScheduler[Task Scheduler<br/>Resolve DAG Dependencies]
-    TaskScheduler --> SpawnAgents[Spawn Agent Per Task<br/>with Fresh Context]
-    SpawnAgents --> ParallelTDD[Each Agent: Iron Law TDD]
-    ParallelTDD --> Phase45
+    %% Phase 3: Implementation - Feature Level
+    CheckFeatures -->|Yes| ParallelFeatures[3: Parallel Feature Development<br/>Git Worktrees]
+    ParallelFeatures --> CreateWorktrees[Create Worktree Per Feature<br/>.worktrees/feature-name/<br/>branch: feature/name]
+    CreateWorktrees --> SpawnFeatureAgents[Spawn Agent Per Feature<br/>Fresh Context Per Worktree]
+    SpawnFeatureAgents --> FeatureTasks[Each Agent: Execute Tasks<br/>2-5 min units with TDD]
+    FeatureTasks --> Phase45
 
-    CheckTasks -->|No| Phase4Single[4: Single Task Implementation]
-    Phase4Single --> TDD[Iron Law TDD]
-    TDD --> RED[1. Write Test FIRST]
-    RED --> VerifyRed[2. Verify Test FAILS]
-    VerifyRed --> GREEN[3. Implement Minimum Code]
-    GREEN --> VerifyGreen[4. Verify Test PASSES]
-    VerifyGreen --> EdgeCases[5. Add Edge Case Tests]
-    EdgeCases --> HandleEdges[6. Handle Edge Cases]
-    HandleEdges --> AllTests[7. Run Full Test Suite]
-    AllTests --> Phase45
+    CheckFeatures -->|No| SingleFeature[3: Single Feature Development<br/>Git Branch Only]
+    SingleFeature --> CreateBranch[Create Feature Branch<br/>git checkout -b feature/name]
+    CreateBranch --> ExecuteTasks[Execute Tasks Sequentially<br/>2-5 min units with TDD]
+    ExecuteTasks --> Phase45
 
     %% Phase 4.5: Verification
     Phase45[4.5: Verification] --> EvidenceCheck[Evidence-Based Check<br/>NO 'should work']
@@ -131,12 +127,12 @@ flowchart TD
 
     class Bootstrap,Interactive,CreateStructure,GitInit bootstrap
     class Phase0,LoadContext,LoadKnowledge,DiscoverCaps context
-    class Phase1,Analyze,Phase15,Phase2,CreatePlan,Phase3,VerifyCaps planning
-    class Phase4,TDD,RED,VerifyRed,GREEN,VerifyGreen,EdgeCases,HandleEdges,AllTests,Parallel,TaskScheduler,SpawnAgents implementation
+    class Phase1,Analyze,Phase15,Phase2,LoadCachedCaps,DecomposeRequest,DecomposeFeatures,DefineGitStrategy,CreatePlan,AssignCaps,VerifyAssign planning
+    class ParallelFeatures,CreateWorktrees,SpawnFeatureAgents,FeatureTasks,SingleFeature,CreateBranch,ExecuteTasks implementation
     class Phase45,EvidenceCheck,RunTests,Coverage,Lint,Build,Phase45B,Summarize,UpdateProgress,SpawnFresh verification
     class Phase5,Stage1,Stage2,Security,Performance,Architecture,CombineReview,FixSpec,FixIssues review
     class Phase6,Commit,CreatePR,Phase6E,DetectPatterns,UpdateCritical,GenSkill,Phase6F,CaptureSolution,CaptureDecision,CaptureConvention,UpdatePrefs,TrackAntiPattern,RecordPrompt,UpdateMetrics finalization
-    class CheckProject,Research,Phase4C,ContextCheck,SpecCheck,CriticalIssues,PromotePattern,Phase6ESkill decision
+    class CheckProject,Research,CheckFeatures,ContextCheck,SpecCheck,CriticalIssues,PromotePattern,Phase6ESkill decision
 ```
 
 **Key Features:**
@@ -152,12 +148,35 @@ flowchart TD
 ### 🎯 Comprehensive Workflow Phases
 
 - **Phase -1: Project Bootstrap** - Initialize projects with .workflow/ structure
-- **Phase 0: Context Loading** - Load institutional knowledge and capabilities
-- **Phases 1-2: Understanding & Planning** - Break down work into parallelizable tasks
-- **Phase 4: Implementation** - Iron Law TDD with parallel worktree execution
+- **Phase 0: Context Loading** - Load institutional knowledge + discover capabilities (cached)
+- **Phase 1: Clarify Request** - Ask clarifying questions, define scope
+- **Phase 2: Planning & Assignment** - Decompose request → features → 2-5 min tasks, assign capabilities
+- **Phase 3: Feature Development** - Parallel features via worktrees OR single feature via branch
 - **Phase 4.5: Verification** - Evidence-based testing (no "should work" claims)
 - **Phase 5: Review** - Two-stage review (spec compliance + code quality)
 - **Phase 6: Finalization** - Knowledge capture with feedback loops
+
+### 🌳 Hierarchical Decomposition
+
+**Request → Features → Tasks**
+
+```
+User Request: "Add user authentication"
+  ↓
+Features (user-facing capabilities):
+  • Feature 1: OAuth Integration → branch: feature/oauth-integration
+  • Feature 2: Login UI → branch: feature/login-ui
+  • Feature 3: Session Management → branch: feature/session-mgmt
+  ↓
+Tasks (2-5 min atomic units):
+  Feature 1 tasks: [1.1 Google OAuth, 1.2 GitHub OAuth, 1.3 Token storage]
+  Feature 2 tasks: [2.1 Login form, 2.2 Logout button, 2.3 User profile]
+  Feature 3 tasks: [3.1 Session storage, 3.2 Token refresh, 3.3 Logout]
+```
+
+**Git Strategy:**
+- **One feature** → `git checkout -b feature/name`
+- **Multiple features** → Git worktrees (`.worktrees/feature-name/`)
 
 ### 📚 Knowledge Compounding System
 
