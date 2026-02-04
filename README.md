@@ -532,11 +532,28 @@ adaptive-workflow/
 │   ├── plan-frontmatter.schema.json
 │   ├── enums.json
 │   └── ...
-└── lib/                      # 23 utility modules (stubs)
-    ├── discovery/
-    ├── learning/
-    ├── scheduler/
-    └── agents/
+└── lib/                      # 13 utility modules
+    ├── schema-validator.js   # Core infrastructure
+    ├── state-manager.js
+    ├── template-renderer.js
+    ├── pattern-detector.js
+    ├── discovery/            # Capability discovery (5 utilities)
+    │   ├── capability-scanner.js
+    │   ├── agent-discovery.js
+    │   ├── skill-discovery.js
+    │   ├── mcp-discovery.js
+    │   └── cache-manager.js
+    └── scheduler/            # Scheduling algorithms (4 utilities)
+        ├── task-scheduler.js
+        ├── dependency-graph.js
+        ├── worktree-tracker.js    # State tracking only
+        └── merge-analyzer.js       # Conflict analysis only
+
+**Note:** The lib/ utilities follow "infrastructure-only" principle:
+- **Removed**: Learning operations (now AI-powered via learning-agent)
+- **Removed**: Agent spawning (now uses Task tool natively)
+- **Kept**: Programmatic infrastructure (validation, discovery, scheduling algorithms)
+- **Philosophy**: lib/ provides data structures/algorithms, not orchestration
 ```
 
 ## Best Practices
