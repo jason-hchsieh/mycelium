@@ -1,6 +1,10 @@
-# Mycelium
+<div align="center">
+  <img src="logo.png" alt="Mycelium Logo" width="200"/>
 
-*The intelligent substrate beneath your code*
+  # Mycelium
+
+  *The intelligent substrate beneath your code*
+</div>
 
 A meta-workflow orchestration plugin for Claude Code that implements systematic development with compounding knowledge capture. Like a mycelium network that learns, adapts, and grows stronger with each connection, this workflow creates an intelligent knowledge layer that makes every development session more capable than the last.
 
