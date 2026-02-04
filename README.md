@@ -26,16 +26,20 @@ flowchart TD
     LoadKnowledge --> DiscoverCaps[Discover Capabilities<br/>All Plugin Scopes]
     DiscoverCaps --> Phase1
 
-    %% Phase 1-3: Understanding & Planning
-    Phase1[1: Understanding] --> Analyze[Analyze Requirements<br/>Estimate Complexity]
+    %% Phase 1: Clarify, Phase 2: Discover, Phase 3: Plan & Assign
+    Phase1[1: Clarify Request] --> Analyze[Analyze Requirements<br/>Estimate Complexity]
     Analyze --> Research{Need External<br/>Research?}
     Research -->|Yes| Phase15[1.5: Research]
     Research -->|No| Phase2
-    Phase15 --> Phase2[2: Design & Planning]
-    Phase2 --> CreatePlan[Create Implementation Plan<br/>Task Breakdown + Dependencies]
-    CreatePlan --> Phase3[3: Capability Discovery]
-    Phase3 --> VerifyCaps[Verify Agents/Skills/MCPs<br/>Available]
-    VerifyCaps --> CheckTasks{Multiple<br/>Tasks?}
+    Phase15 --> Phase2[2: Discover Capabilities]
+    Phase2 --> DiscoverSkills[Discover Skills<br/>All Plugin Scopes]
+    DiscoverSkills --> DiscoverAgents[Discover Agents<br/>Built-in + External]
+    DiscoverAgents --> DiscoverMCP[Discover MCPs<br/>All Configured]
+    DiscoverMCP --> Phase3[3: Planning & Assignment]
+    Phase3 --> CreatePlan[Create Implementation Plan<br/>Task Breakdown + Dependencies]
+    CreatePlan --> AssignCaps[Assign to Each Task:<br/>• Best-fit agent<br/>• Relevant skills<br/>• Model tier haiku/sonnet/opus]
+    AssignCaps --> VerifyAssign[Verify All Assignments<br/>Have Discovered Capabilities]
+    VerifyAssign --> CheckTasks{Multiple<br/>Tasks?}
 
     %% Phase 4: Implementation - Parallel First
     CheckTasks -->|Yes| Parallel[4: Parallel Execution<br/>Git Worktrees DEFAULT]
