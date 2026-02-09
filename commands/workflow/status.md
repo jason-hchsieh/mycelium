@@ -40,7 +40,7 @@ Display current workflow state and progress dashboard.
    - Plan exists, tasks pending → `/workflow:work`
    - All tasks complete → `/workflow:review`
    - Review complete → `/workflow:capture`
-   - Blockers detected → Address blockers or use `/workflow:resume`
+   - Blockers detected → Address blockers or use `/workflow:continue`
 
 4. **Verbose mode** (`--verbose`):
    - Detailed task breakdown by phase

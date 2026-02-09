@@ -11,19 +11,21 @@ Comprehensive two-stage code review: spec compliance → quality assessment.
 
 ## Your Task
 
-1. **Load the review skill** - Use Skill tool to load `workflow/review`
+1. **Update session state** - Write `invocation_mode: "single"` to `.workflow/state/session_state.json`
 
-2. **Parse arguments**:
+2. **Load the review skill** - Use Skill tool to load `workflow/review`
+
+3. **Parse arguments**:
    - `--stage=1`: Spec compliance only (blocking gate)
    - `--stage=2`: Quality review only
    - `--stage=all` or default: Both stages
 
-3. **Load review context**:
+4. **Load review context**:
    - Active plan from `.workflow/plans/`
    - Git diff of changes
    - Project context files
 
-4. **Execute review** - Follow review skill which handles:
+5. **Execute review** - Follow review skill which handles:
    - **Stage 1** (blocking): Spec compliance check
      - Verify all acceptance criteria met
      - Check test coverage meets target
@@ -34,11 +36,11 @@ Comprehensive two-stage code review: spec compliance → quality assessment.
      - Parallel agent execution for speed
      - Aggregate and prioritize issues (P1/P2/P3)
 
-5. **Generate reports**:
+6. **Generate reports**:
    - `.workflow/state/review_stage1_report.md`
    - `.workflow/state/review_stage2_report.md`
 
-6. **Next step**:
+7. **Next step**:
    - If approved: Suggest `/workflow:capture`
    - If P1 issues: Must fix before merge
    - If P2/P3 only: Optional fixes

@@ -14,6 +14,36 @@ This skill guides autonomous execution of the complete mycelium workflow: plan �
 - For end-to-end autonomous development
 - When user wants minimal interaction
 - For routine/clear tasks with established patterns
+- When resuming via `/workflow:continue` in full mode
+
+## Continue Mode
+
+When invoked from `/workflow:continue`, the orchestration skill resumes from a saved checkpoint rather than starting fresh.
+
+### Phase Mapping
+
+Map `current_phase` in `session_state.json` to named phases:
+
+| `current_phase` value | Phase name | Phase number |
+|-----------------------|------------|-------------|
+| `planning` | Plan | 1 |
+| `implementation` | Work | 2 |
+| `review` | Review | 3 |
+| `capture` | Capture | 4 |
+
+### Start-From Logic
+
+1. Read `current_phase` and `checkpoints` from `session_state.json`
+2. Skip any phase already marked complete in checkpoints (e.g., `planning_complete` timestamp exists → skip Plan)
+3. Begin at the current phase, resuming from its checkpoint (e.g., `last_task_completed: "1.2"` → start at task 1.3)
+4. Chain through all remaining phases to completion
+
+### Mid-Phase Resumption
+
+- Read `.workflow/state/progress.md` for completed work summary
+- Check plan markers (`[x]` = done, `[~]` = in progress, `[ ]` = pending)
+- Resume the `[~]` or next `[ ]` task within the current phase
+- Verify test baseline passes before continuing work
 
 ## Overview
 
@@ -579,7 +609,7 @@ Throughout execution, maintain state in `session_state.json`:
 - On error/blocker
 
 **Resume support**:
-If interrupted, can resume from last checkpoint using `/workflow:resume`.
+If interrupted, can resume from last checkpoint using `/workflow:continue`. Use `/workflow:continue --full` to force full orchestration mode regardless of how the workflow was originally started.
 
 ---
 
@@ -628,7 +658,7 @@ Completed: 5/8 tasks
 Blocked on: Task 1.6 (missing API key)
 
 Saving state...
-Resume with: /workflow:resume
+Resume with: /workflow:continue
 ```
 
 **Review finds P1 issues**:

@@ -11,20 +11,22 @@ Execute implementation tasks following strict TDD methodology.
 
 ## Your Task
 
-1. **Load execution skills**:
+1. **Update session state** - Write `invocation_mode: "single"` to `.workflow/state/session_state.json`
+
+2. **Load execution skills**:
    - Use Skill tool to load `workflow/tdd` (mandatory)
    - Use Skill tool to load `workflow/verification` (mandatory)
 
-2. **Parse arguments**:
+3. **Parse arguments**:
    - `task_id`: Specific task (e.g., "1.1")
    - `all`: Execute all unblocked tasks (parallel)
    - Default: Next available task
 
-3. **Load active plan**:
+4. **Load active plan**:
    - Find latest plan in `.workflow/plans/`
    - Read `session_state.json` for progress
 
-4. **Execute tasks** - Follow TDD and verification skills which handle:
+5. **Execute tasks** - Follow TDD and verification skills which handle:
    - **TDD cycle**: RED → GREEN → REFACTOR (mandatory)
    - **Evidence-based verification**: Show actual test output
    - **Incremental commits**: After each task completion
@@ -32,7 +34,7 @@ Execute implementation tasks following strict TDD methodology.
    - **Parallel execution**: Worktrees for independent tasks (automatic)
    - **Solution capture**: For novel problems (as needed)
 
-5. **After completion**: Suggest `/workflow:review` for code review
+6. **After completion**: Suggest `/workflow:review` for code review
 
 ## Skills Used
 

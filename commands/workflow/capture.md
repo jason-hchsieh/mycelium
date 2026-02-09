@@ -11,25 +11,27 @@ Extract and preserve learnings from completed work to grow the mycelium knowledg
 
 ## Your Task
 
-1. **Load the solution-capture skill** - Use Skill tool to load `workflow/solution-capture`
+1. **Update session state** - Write `invocation_mode: "single"` to `.workflow/state/session_state.json`
 
-2. **Parse arguments**:
+2. **Load the solution-capture skill** - Use Skill tool to load `workflow/solution-capture`
+
+3. **Parse arguments**:
    - `track_id`: Specific completed track
    - Default: Most recently completed track
 
-3. **Load track context**:
+4. **Load track context**:
    - Completed plan from `.workflow/plans/`
    - Commits and changes
    - Session state
 
-4. **Execute knowledge capture** - Follow solution-capture skill which handles:
+5. **Execute knowledge capture** - Follow solution-capture skill which handles:
    - Problem categorization (solutions/decisions/conventions/preferences/anti-patterns)
    - Pattern extraction and documentation
    - Solution documentation with YAML validation
    - Critical pattern updates (if 3+ similar solutions found)
    - Knowledge structuring and promotion
 
-5. **Save learnings** to appropriate locations:
+6. **Save learnings** to appropriate locations:
    - `.workflow/solutions/{category}/` - Problem solutions
    - `.workflow/learned/decisions/` - Architectural decisions
    - `.workflow/learned/conventions/` - Code conventions
@@ -37,7 +39,7 @@ Extract and preserve learnings from completed work to grow the mycelium knowledg
    - `.workflow/learned/anti-patterns/` - What not to do
    - `.workflow/solutions/patterns/critical-patterns.md` - Recurring patterns
 
-6. **Update session capabilities** with new patterns discovered
+7. **Update session capabilities** with new patterns discovered
 
 ## Skills Used
 

@@ -370,7 +370,7 @@ Captures:
 | Command | Description |
 |---------|-------------|
 | `/workflow:status [--verbose]` | Display current progress and state |
-| `/workflow:resume` | Resume interrupted work from checkpoint |
+| `/workflow:continue [--full]` | Resume interrupted work from checkpoint |
 
 ### Usage Patterns
 

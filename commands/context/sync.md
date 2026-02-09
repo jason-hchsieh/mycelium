@@ -353,7 +353,7 @@ Always prepare fresh agent handoff regardless of context usage.
 
 - `/workflow:metrics` - View session metrics including sync stats
 - `/workflow:status` - Check current workflow state
-- `/workflow:resume` - Resume work from progress file after fresh spawn
+- `/workflow:continue` - Resume work from progress file after fresh spawn
 
 ## Exit Conditions
 

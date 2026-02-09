@@ -15,9 +15,11 @@ Execute the complete mycelium workflow autonomously from planning to knowledge c
    - `task description`: What to build/fix/optimize
    - `--interactive`: Enable human approval at each phase (default: autonomous)
 
-2. **Load the orchestration skill** - Use Skill tool to load `workflow/orchestration`
+2. **Update session state** - Write `invocation_mode: "full"` to `.workflow/state/session_state.json`
 
-3. **Execute full workflow** - Follow orchestration skill which handles:
+3. **Load the orchestration skill** - Use Skill tool to load `workflow/orchestration`
+
+4. **Execute full workflow** - Follow orchestration skill which handles:
 
    **Phase 1: Plan**
    - Load `planning` skill
@@ -42,7 +44,7 @@ Execute the complete mycelium workflow autonomously from planning to knowledge c
    - Update knowledge base
    - Autonomous: Auto-capture and report | Interactive: Show captured knowledge
 
-4. **Final report**: Summarize completed work, test results, captured learnings
+5. **Final report**: Summarize completed work, test results, captured learnings
 
 ## Skills Used
 
@@ -112,3 +114,5 @@ Execute the complete mycelium workflow autonomously from planning to knowledge c
 - **TDD mandatory** - No code without tests first
 - **Stops on P1** - Critical issues block completion
 - **Captures knowledge** - Builds compounding intelligence
+- **Resume with `/workflow:continue`** - If interrupted, `/workflow:continue` resumes all remaining phases automatically (since `/workflow:go` sets `invocation_mode: "full"`)
+- **`--full` flag** - When resuming a single-phase command (e.g., `/workflow:work`), use `/workflow:continue --full` to run all remaining phases instead of just finishing the current one
