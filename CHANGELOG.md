@@ -5,6 +5,14 @@ All notable changes to the Mycelium plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2026-02-09
+
+### Fixed
+- Corrected hooks.json format to use matcher/hooks nesting per Claude Code docs
+- Added missing YAML frontmatter to review, setup, and orchestration skills
+- Replaced hardcoded absolute paths with portable `${CLAUDE_PLUGIN_ROOT}` references
+- Updated branding from "Adaptive Workflow" to "Mycelium" in LICENSE and CHANGELOG
+
 ## [0.1.0] - 2024-02-03
 
 ### Added
