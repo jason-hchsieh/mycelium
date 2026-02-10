@@ -1,6 +1,6 @@
 {
   "name": "mycelium",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Mycelium - The intelligent substrate beneath your code. A meta-workflow orchestration plugin for Claude Code that creates a learning knowledge layer with compounding capability",
   "author": {
     "name": "Jason Hsieh",

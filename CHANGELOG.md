@@ -5,6 +5,18 @@ All notable changes to the Mycelium plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-02-10
+
+### Added
+- `/workflow:continue` command — context-aware resume that detects whether to finish a single phase or chain through all remaining phases
+- `--full` flag on `/workflow:continue` to override to full orchestration mode
+- `invocation_mode` tracking (`"full"` / `"single"`) in all phase commands
+- Continue Mode section in orchestration skill with phase mapping and start-from logic
+
+### Changed
+- Removed non-workflow commands: context/metrics, context/sync, learning/create-skill, learning/list-skills, pr/create, pr/review, worktree/create, worktree/merge, worktree/cleanup (handled automatically by skills)
+- Replaced `/workflow:resume` with `/workflow:continue`
+
 ## [0.1.2] - 2026-02-09
 
 ### Fixed
@@ -111,4 +123,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Code complexity analysis
 - Dependency vulnerability scanning
 
+[0.2.0]: https://github.com/jason-hchsieh/mycelium/releases/tag/v0.2.0
+[0.1.2]: https://github.com/jason-hchsieh/mycelium/releases/tag/v0.1.2
+[0.1.1]: https://github.com/jason-hchsieh/mycelium/releases/tag/v0.1.1
 [0.1.0]: https://github.com/jason-hchsieh/mycelium/releases/tag/v0.1.0
