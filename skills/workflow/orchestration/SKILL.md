@@ -1,6 +1,7 @@
 ---
 name: Autonomous Workflow Orchestration
 description: This skill should be used when the user asks to "run the full workflow", "execute autonomously", "workflow go", or wants end-to-end autonomous development. Guides autonomous execution of the complete mycelium workflow: plan → work → review → capture.
+user-invocable: false
 version: 0.1.0
 ---
 
@@ -360,7 +361,7 @@ Please provide API key and resume.
 
 ### Invoke Review Skill
 
-**Load**: `workflow/review` skill
+**Load**: `workflow/review-process` skill
 
 **Execute two-stage review**:
 

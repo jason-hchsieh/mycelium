@@ -1,6 +1,7 @@
 ---
 name: Solution Capture and Learning
 description: This skill should be used during Phase 6 (Compound Learning) when the user says "that worked", "problem solved", "it's fixed", or after successfully resolving an issue. Captures solutions systematically for future reference and enables compound learning across sessions.
+user-invocable: false
 version: 0.1.0
 ---
 

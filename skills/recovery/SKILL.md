@@ -1,6 +1,7 @@
 ---
 name: Recovery and Escalation Protocols
 description: This skill should be used when encountering blockers, repeated failures, stuck states, or error conditions during any workflow phase. Provides systematic recovery procedures, escalation paths, and rollback protocols to handle failures gracefully.
+user-invocable: false
 version: 0.1.0
 ---
 

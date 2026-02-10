@@ -352,23 +352,23 @@ Captures:
 - Patterns (promotes to critical-patterns.md after 3+)
 - Generates skills from recurring patterns
 
-## Commands Reference
+## Skill Reference
 
-### Primary Commands
+### Primary Skills
 
-| Command | Description | Interaction |
-|---------|-------------|-------------|
-| **`/workflow:go [task] [--interactive]`** | **🚀 Full autonomous workflow** (plan → work → review → capture) | Minimal (autonomous) or phase approvals (interactive) |
+| Skill | Description | Interaction |
+|-------|-------------|-------------|
+| **`/workflow:go [task] [--interactive]`** | **Full autonomous workflow** (plan → work → review → capture) | Minimal (autonomous) or phase approvals (interactive) |
 | `/workflow:setup [--resume]` | Bootstrap project with mycelium structure | Interactive setup questions |
 | `/workflow:plan [description]` | Create implementation plan with TDD task breakdown | Clarifying questions |
 | `/workflow:work [task_id\|all]` | Execute tasks with strict TDD enforcement | Autonomous with progress updates |
 | `/workflow:review [--stage=1\|2\|all]` | Two-stage review (spec compliance + quality) | Report with decision point |
 | `/workflow:capture [track_id]` | Extract learnings and grow knowledge layer | Autonomous knowledge capture |
 
-### Utility Commands
+### Utility Skills
 
-| Command | Description |
-|---------|-------------|
+| Skill | Description |
+|-------|-------------|
 | `/workflow:status [--verbose]` | Display current progress and state |
 | `/workflow:continue [--full]` | Resume interrupted work from checkpoint |
 
@@ -395,31 +395,39 @@ Captures:
 # Full control over each phase
 ```
 
-### Command Evolution
+### Architecture
 
-All commands have been simplified to **thin wrappers** (~20-60 lines each) that delegate to specialized skills:
-- **Before**: ~290 lines average (embedded workflow logic)
-- **After**: ~57 lines average (orchestration only)
-- **Reduction**: 80% fewer lines per command
-
-Other operations (worktrees, PR creation, context sync) are **handled automatically** by skills when needed — no separate commands required.
+All user-facing skills are **thin wrappers** (~20-60 lines each) that delegate to internal implementation skills. Other operations (worktrees, PR creation, context sync) are **handled automatically** by skills when needed.
 
 ## Skills
 
-The plugin provides workflow-specific skills that contain detailed guidance:
+All plugin functionality is implemented as skills (following the [Agent Skills standard](https://agentskills.io)):
 
-### Core Workflow Skills
+### User-Facing Skills (slash commands)
+
+| Skill | Purpose |
+|-------|---------|
+| **go** | Full autonomous workflow (plan → work → review → capture) |
+| **plan** | Create implementation plan with TDD task breakdown |
+| **work** | Execute tasks with strict TDD enforcement |
+| **review** | Two-stage review (spec compliance + quality) |
+| **capture** | Extract learnings and grow knowledge layer |
+| **continue** | Resume interrupted workflow from checkpoint |
+| **status** | Display current progress and state |
+| **setup** | Bootstrap project with mycelium structure |
+
+### Internal Skills (Claude-only, `user-invocable: false`)
 
 | Skill | Purpose | Used By |
 |-------|---------|---------|
-| **setup** | Project initialization (greenfield/brownfield detection, interactive config, directory structure) | `/workflow:setup` |
-| **planning** | Requirements clarification, smart research gate, task breakdown with TDD | `/workflow:plan` |
-| **tdd** | Iron Law TDD - RED → GREEN → REFACTOR enforcement | `/workflow:work`, `/workflow:go` |
-| **verification** | Evidence-based validation (show actual test output, no "should work") | `/workflow:work`, `/workflow:go` |
-| **review** | Two-stage review (spec compliance + parallel quality assessment) | `/workflow:review`, `/workflow:go` |
-| **solution-capture** | Knowledge extraction, pattern detection, learning documentation | `/workflow:capture`, `/workflow:go` |
-| **orchestration** | Autonomous workflow execution with decision gates | `/workflow:go` |
-| **context** | Project context loading and management | All commands |
+| **setup-guide** | Project initialization (greenfield/brownfield detection, interactive config) | `workflow:setup` |
+| **planning** | Requirements clarification, smart research gate, task breakdown | `workflow:plan` |
+| **tdd** | Iron Law TDD - RED → GREEN → REFACTOR enforcement | `workflow:work`, `workflow:go` |
+| **verification** | Evidence-based validation (show actual test output) | `workflow:work`, `workflow:go` |
+| **review-process** | Two-stage review (spec compliance + parallel quality assessment) | `workflow:review`, `workflow:go` |
+| **solution-capture** | Knowledge extraction, pattern detection, learning documentation | `workflow:capture`, `workflow:go` |
+| **orchestration** | Autonomous workflow execution with decision gates | `workflow:go`, `workflow:continue` |
+| **context** | Project context loading and management | All skills |
 | **recovery** | Handle blockers and stuck states | As needed |
 
 ### Skill Architecture
@@ -536,20 +544,25 @@ mycelium/
 │   │   ├── spec-compliance.md
 │   │   └── code-quality.md
 │   └── learning-agent.md
-├── commands/
-│   ├── workflow/             # Core workflow (7 commands)
-│   ├── context/              # Context management (2 commands)
-│   ├── learning/             # Learning & feedback (2 commands)
-│   ├── worktree/             # Git worktrees (3 commands)
-│   └── pr/                   # Pull requests (2 commands)
 ├── skills/
 │   ├── workflow/
-│   │   ├── tdd/
-│   │   ├── planning/
-│   │   ├── verification/
-│   │   └── solution-capture/
-│   ├── context/
-│   └── recovery/
+│   │   ├── go/               # User-facing: full autonomous workflow
+│   │   ├── plan/             # User-facing: create implementation plan
+│   │   ├── work/             # User-facing: execute tasks with TDD
+│   │   ├── review/           # User-facing: two-stage code review
+│   │   ├── capture/          # User-facing: extract learnings
+│   │   ├── continue/         # User-facing: resume interrupted workflow
+│   │   ├── status/           # User-facing: display progress
+│   │   ├── setup/            # User-facing: bootstrap project
+│   │   ├── orchestration/    # Internal: autonomous execution engine
+│   │   ├── planning/         # Internal: task breakdown guidance
+│   │   ├── tdd/              # Internal: TDD enforcement
+│   │   ├── verification/     # Internal: evidence-based validation
+│   │   ├── review-process/   # Internal: review workflow guidance
+│   │   ├── solution-capture/ # Internal: knowledge extraction
+│   │   └── setup-guide/      # Internal: setup workflow guidance
+│   ├── context/              # Internal: context window management
+│   └── recovery/             # Internal: recovery protocols
 ├── hooks/
 │   ├── hooks.json
 │   └── scripts/

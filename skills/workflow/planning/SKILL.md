@@ -1,6 +1,7 @@
 ---
 name: Task Planning and Breakdown
 description: This skill should be used when the user asks to "create a plan", "break down this task", "plan the implementation", "estimate complexity", or during Phase 2 of the workflow. Provides guidance for creating detailed implementation plans with proper task decomposition and dependency management.
+user-invocable: false
 version: 0.1.0
 ---
 

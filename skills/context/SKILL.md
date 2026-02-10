@@ -1,6 +1,7 @@
 ---
 name: Context Window Management
 description: This skill should be used during Phase 4.5B (Context Sync) when context window usage exceeds 50%, after each task completion in long sessions, or when spawning fresh agents. Manages context window efficiently to prevent information loss and enable seamless handoffs between agent instances.
+user-invocable: false
 version: 0.1.0
 ---
 

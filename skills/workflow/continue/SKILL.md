@@ -44,7 +44,7 @@ Resume interrupted work with context-aware scope detection.
    - Map `current_phase` to skill:
      - `planning` → Load `workflow/planning` skill
      - `implementation` → Load `workflow/tdd` + `workflow/verification` skills
-     - `review` → Load `workflow/review` skill
+     - `review` → Load `workflow/review-process` skill
      - `capture` → Load `workflow/solution-capture` skill
    - Resume from checkpoint within that phase
    - Stop after phase completion
@@ -61,7 +61,7 @@ Varies based on continuation scope:
 **Single mode** (one of):
 - **planning**: If interrupted during plan phase
 - **tdd** + **verification**: If interrupted during work phase
-- **review**: If interrupted during review phase
+- **review-process**: If interrupted during review phase
 - **solution-capture**: If interrupted during capture phase
 
 ## Quick Examples

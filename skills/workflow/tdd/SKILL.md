@@ -1,6 +1,7 @@
 ---
 name: Iron Law TDD
 description: This skill should be used when the user asks to "implement a feature", "write code", "add functionality", "fix a bug", or during any code implementation phase. Enforces the Iron Law of TDD - tests must be written first and all tests must pass before implementation is considered complete.
+user-invocable: false
 version: 0.1.0
 ---
 

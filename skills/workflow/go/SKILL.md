@@ -34,7 +34,7 @@ Execute the complete mycelium workflow autonomously from planning to knowledge c
    - Autonomous: Auto-continue unless blocked | Interactive: Show progress, ask to continue
 
    **Phase 3: Review**
-   - Load `review` skill
+   - Load `review-process` skill
    - Run two-stage review (spec + quality)
    - Autonomous: Accept P2/P3, stop on P1 | Interactive: Ask whether to fix or accept
 
@@ -52,7 +52,7 @@ Execute the complete mycelium workflow autonomously from planning to knowledge c
 - **planning**: Requirements → tasks
 - **tdd**: RED → GREEN → REFACTOR enforcement
 - **verification**: Evidence-based validation
-- **review**: Two-stage quality check
+- **review-process**: Two-stage quality check
 - **solution-capture**: Knowledge extraction
 
 ## Quick Examples

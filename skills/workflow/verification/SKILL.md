@@ -1,6 +1,7 @@
 ---
 name: Evidence-Based Verification
 description: This skill should be used during Phase 4.5 (Verification) when the user requests "verify this", "check if it works", "run tests", or after implementation completion. Enforces evidence-based validation - no "should work" claims, requires actual test execution and proof of correctness.
+user-invocable: false
 version: 0.1.0
 ---
 
