@@ -1,5 +1,5 @@
 ---
-name: workflow-continue
+name: mycelium-continue
 description: Resume interrupted workflow from last checkpoint
 argument-hint: "[--full]"
 allowed-tools: ["Skill", "Read", "Write", "Edit", "Bash", "Glob", "Grep", "Task", "AskUserQuestion"]
@@ -17,7 +17,7 @@ Resume interrupted work with context-aware scope detection.
 2. **Load session state**:
    - Read `.workflow/state/session_state.json`
    - Identify `current_phase`, checkpoints, and `invocation_mode`
-   - If no state found → error: "No workflow state found. Start with `/workflow-go` or `/workflow-plan`."
+   - If no state found → error: "No workflow state found. Start with `/mycelium-go` or `/mycelium-plan`."
 
 3. **Restore mid-phase context**:
    - Read `.workflow/state/progress.md` for completed work summary
@@ -29,7 +29,7 @@ Resume interrupted work with context-aware scope detection.
    | Condition | Behavior |
    |-----------|----------|
    | `--full` flag provided | Load orchestration skill, resume current phase, chain through ALL remaining phases to end |
-   | `invocation_mode == "full"` (started via `/workflow-go`) | Load orchestration skill, resume current phase, chain through ALL remaining phases to end |
+   | `invocation_mode == "full"` (started via `/mycelium-go`) | Load orchestration skill, resume current phase, chain through ALL remaining phases to end |
    | `invocation_mode == "single"` (started via `/workflow-[phase]`) | Load appropriate phase skill, finish current phase ONLY |
    | No `invocation_mode` in state | Treat as `"single"` — finish current phase only |
 
@@ -68,21 +68,21 @@ Varies based on continuation scope:
 
 ```bash
 # Resume with context-aware scope (finishes what was originally started)
-/workflow-continue
+/mycelium-continue
 
 # Override to full mode — run all remaining phases regardless
-/workflow-continue --full
+/mycelium-continue --full
 ```
 
 ## Behavior Summary
 
-| Original skill | `/workflow-continue` | `/workflow-continue --full` |
+| Original skill | `/mycelium-continue` | `/mycelium-continue --full` |
 |---------------|---------------------|---------------------------|
-| `/workflow-go` | Resume → finish all remaining phases | Same |
-| `/workflow-plan` | Resume → finish plan phase only | Resume → finish all remaining phases |
-| `/workflow-work` | Resume → finish work phase only | Resume → finish all remaining phases |
-| `/workflow-review` | Resume → finish review phase only | Resume → finish all remaining phases |
-| `/workflow-capture` | Resume → finish capture phase only | Resume → finish all remaining phases |
+| `/mycelium-go` | Resume → finish all remaining phases | Same |
+| `/mycelium-plan` | Resume → finish plan phase only | Resume → finish all remaining phases |
+| `/mycelium-work` | Resume → finish work phase only | Resume → finish all remaining phases |
+| `/mycelium-review` | Resume → finish review phase only | Resume → finish all remaining phases |
+| `/mycelium-capture` | Resume → finish capture phase only | Resume → finish all remaining phases |
 
 ## Important
 

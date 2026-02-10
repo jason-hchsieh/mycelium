@@ -34,7 +34,7 @@ ls .workflow/state/setup_state.json
 
 **If exists and status is "completed"**:
 - Inform user setup is already complete
-- Suggest `/workflow-plan` for next steps
+- Suggest `/mycelium-plan` for next steps
 - EXIT
 
 **If exists and status is "in_progress"**:
@@ -269,10 +269,10 @@ See `.workflow/context/` for detailed project information.
 
 ## Workflow
 
-- `/workflow-plan` - Plan new work
-- `/workflow-work` - Execute tasks
-- `/workflow-review` - Review code
-- `/workflow-capture` - Capture learnings
+- `/mycelium-plan` - Plan new work
+- `/mycelium-work` - Execute tasks
+- `/mycelium-review` - Review code
+- `/mycelium-capture` - Capture learnings
 ```
 
 **.workflow/context/product.md**:
@@ -532,8 +532,8 @@ Configuration:
 
 Next steps:
   1. Review CLAUDE.md and .workflow/context/
-  2. When you have a task: /workflow-plan [description]
-  3. Or for full automation: /workflow-go [description]
+  2. When you have a task: /mycelium-plan [description]
+  3. Or for full automation: /mycelium-go [description]
 ```
 
 ---
@@ -642,5 +642,5 @@ When resuming (user passes `--resume` or state shows "in_progress"):
 1. **Review** created files (CLAUDE.md, .workflow/context/)
 2. **Customize** if needed (edit context files)
 3. **Start work**:
-   - Manual: `/workflow-plan [task]`
-   - Autonomous: `/workflow-go [task]`
+   - Manual: `/mycelium-plan [task]`
+   - Autonomous: `/mycelium-go [task]`

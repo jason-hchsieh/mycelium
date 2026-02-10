@@ -11,15 +11,15 @@ This skill guides autonomous execution of the complete mycelium workflow: plan â
 
 ## When to Use This Skill
 
-- When executing `/workflow-go [task]`
+- When executing `/mycelium-go [task]`
 - For end-to-end autonomous development
 - When user wants minimal interaction
 - For routine/clear tasks with established patterns
-- When resuming via `/workflow-continue` in full mode
+- When resuming via `/mycelium-continue` in full mode
 
 ## Continue Mode
 
-When invoked from `/workflow-continue`, the orchestration skill resumes from a saved checkpoint rather than starting fresh.
+When invoked from `/mycelium-continue`, the orchestration skill resumes from a saved checkpoint rather than starting fresh.
 
 ### Phase Mapping
 
@@ -572,7 +572,7 @@ Next: Deploy or continue with next feature?
 - Merge to main (if on feature branch)
 - Create PR (if using pull requests)
 - Deploy (if ready)
-- Start next task: `/workflow-go [next-task]`
+- Start next task: `/mycelium-go [next-task]`
 
 ---
 
@@ -610,7 +610,7 @@ Throughout execution, maintain state in `session_state.json`:
 - On error/blocker
 
 **Resume support**:
-If interrupted, can resume from last checkpoint using `/workflow-continue`. Use `/workflow-continue --full` to force full orchestration mode regardless of how the workflow was originally started.
+If interrupted, can resume from last checkpoint using `/mycelium-continue`. Use `/mycelium-continue --full` to force full orchestration mode regardless of how the workflow was originally started.
 
 ---
 
@@ -659,7 +659,7 @@ Completed: 5/8 tasks
 Blocked on: Task 1.6 (missing API key)
 
 Saving state...
-Resume with: /workflow-continue
+Resume with: /mycelium-continue
 ```
 
 **Review finds P1 issues**:
@@ -682,7 +682,7 @@ Stopping for fixes.
 Work is complete but learnings not captured.
 
 Options:
-1. Retry capture: /workflow-capture
+1. Retry capture: /mycelium-capture
 2. Continue anyway (learnings lost)
 ```
 

@@ -6,7 +6,7 @@ set -e
 
 # Check if .workflow directory exists
 if [ ! -d ".workflow" ]; then
-  echo "⚠️  No .workflow directory found. Run /workflow-setup to initialize." >&2
+  echo "⚠️  No .workflow directory found. Run /mycelium-setup to initialize." >&2
   exit 0
 fi
 

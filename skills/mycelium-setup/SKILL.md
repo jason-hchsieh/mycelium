@@ -1,5 +1,5 @@
 ---
-name: workflow-setup
+name: mycelium-setup
 description: Initialize project with mycelium structure
 argument-hint: "[--resume]"
 allowed-tools: ["Skill", "Read", "Write", "Edit", "Bash", "Glob", "Grep", "AskUserQuestion"]
@@ -24,7 +24,7 @@ Bootstrap a new or existing project with the mycelium workflow structure.
    - Git initialization (mandatory)
    - State persistence (enables resume)
 
-4. **Next step**: Suggest `/workflow-plan` when user has a task
+4. **Next step**: Suggest `/mycelium-plan` when user has a task
 
 ## Skills Used
 
@@ -34,8 +34,8 @@ Bootstrap a new or existing project with the mycelium workflow structure.
 ## Quick Example
 
 ```bash
-/workflow-setup          # New setup
-/workflow-setup --resume # Continue interrupted setup
+/mycelium-setup          # New setup
+/mycelium-setup --resume # Continue interrupted setup
 ```
 
 ## Important

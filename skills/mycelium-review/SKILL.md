@@ -1,5 +1,5 @@
 ---
-name: workflow-review
+name: mycelium-review
 description: Two-stage review (spec compliance + quality)
 argument-hint: "[--stage=1|2|all]"
 allowed-tools: ["Skill", "Read", "Write", "Bash", "Task"]
@@ -41,7 +41,7 @@ Comprehensive two-stage code review: spec compliance → quality assessment.
    - `.workflow/state/review_stage2_report.md`
 
 7. **Next step**:
-   - If approved: Suggest `/workflow-capture`
+   - If approved: Suggest `/mycelium-capture`
    - If P1 issues: Must fix before merge
    - If P2/P3 only: Optional fixes
 
@@ -53,9 +53,9 @@ Comprehensive two-stage code review: spec compliance → quality assessment.
 ## Quick Example
 
 ```bash
-/workflow-review              # Full review (both stages)
-/workflow-review --stage=1    # Spec compliance only
-/workflow-review --stage=2    # Quality review only
+/mycelium-review              # Full review (both stages)
+/mycelium-review --stage=1    # Spec compliance only
+/mycelium-review --stage=2    # Quality review only
 ```
 
 ## Important

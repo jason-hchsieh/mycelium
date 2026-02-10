@@ -1,5 +1,5 @@
 ---
-name: workflow-work
+name: mycelium-work
 description: Execute implementation tasks with TDD enforcement
 argument-hint: "[task_id or 'all']"
 allowed-tools: ["Skill", "Read", "Write", "Edit", "Bash", "Glob", "Grep", "Task"]
@@ -34,7 +34,7 @@ Execute implementation tasks following strict TDD methodology.
    - **Parallel execution**: Worktrees for independent tasks (automatic)
    - **Solution capture**: For novel problems (as needed)
 
-6. **After completion**: Suggest `/workflow-review` for code review
+6. **After completion**: Suggest `/mycelium-review` for code review
 
 ## Skills Used
 
@@ -45,9 +45,9 @@ Execute implementation tasks following strict TDD methodology.
 ## Quick Example
 
 ```bash
-/workflow-work          # Execute next task
-/workflow-work 1.1      # Execute specific task
-/workflow-work all      # Execute all tasks (parallel)
+/mycelium-work          # Execute next task
+/mycelium-work 1.1      # Execute specific task
+/mycelium-work all      # Execute all tasks (parallel)
 ```
 
 ## Critical Rules

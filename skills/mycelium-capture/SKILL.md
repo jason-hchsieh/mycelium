@@ -1,5 +1,5 @@
 ---
-name: workflow-capture
+name: mycelium-capture
 description: Capture learnings and patterns from completed work
 argument-hint: "[track_id]"
 allowed-tools: ["Skill", "Read", "Write", "Edit", "Glob", "Grep"]
@@ -49,8 +49,8 @@ Extract and preserve learnings from completed work to grow the mycelium knowledg
 ## Quick Example
 
 ```bash
-/workflow-capture                    # Capture from latest track
-/workflow-capture auth_20260204      # Capture from specific track
+/mycelium-capture                    # Capture from latest track
+/mycelium-capture auth_20260204      # Capture from specific track
 ```
 
 ## Important

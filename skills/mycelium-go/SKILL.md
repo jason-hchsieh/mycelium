@@ -1,5 +1,5 @@
 ---
-name: workflow-go
+name: mycelium-go
 description: Execute full workflow autonomously (plan → work → review → capture)
 argument-hint: "[task description] [--interactive]"
 allowed-tools: ["Skill", "Read", "Write", "Edit", "Bash", "Glob", "Grep", "Task", "AskUserQuestion"]
@@ -59,13 +59,13 @@ Execute the complete mycelium workflow autonomously from planning to knowledge c
 
 ```bash
 # Autonomous mode (minimal interaction)
-/workflow-go "Add user authentication"
+/mycelium-go "Add user authentication"
 
 # Interactive mode (approval at each phase)
-/workflow-go "Optimize database queries" --interactive
+/mycelium-go "Optimize database queries" --interactive
 
 # Detailed description
-/workflow-go "Add pagination to user list API with page size limits"
+/mycelium-go "Add pagination to user list API with page size limits"
 ```
 
 ## Decision Gates
@@ -114,5 +114,5 @@ Execute the complete mycelium workflow autonomously from planning to knowledge c
 - **TDD mandatory** - No code without tests first
 - **Stops on P1** - Critical issues block completion
 - **Captures knowledge** - Builds compounding intelligence
-- **Resume with `/workflow-continue`** - If interrupted, `/workflow-continue` resumes all remaining phases automatically (since `/workflow-go` sets `invocation_mode: "full"`)
-- **`--full` flag** - When resuming a single-phase skill (e.g., `/workflow-work`), use `/workflow-continue --full` to run all remaining phases instead of just finishing the current one
+- **Resume with `/mycelium-continue`** - If interrupted, `/mycelium-continue` resumes all remaining phases automatically (since `/mycelium-go` sets `invocation_mode: "full"`)
+- **`--full` flag** - When resuming a single-phase skill (e.g., `/mycelium-work`), use `/mycelium-continue --full` to run all remaining phases instead of just finishing the current one

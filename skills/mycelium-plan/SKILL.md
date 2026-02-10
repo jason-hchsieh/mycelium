@@ -1,5 +1,5 @@
 ---
-name: workflow-plan
+name: mycelium-plan
 description: Create implementation plan with task breakdown
 argument-hint: "[task description]"
 allowed-tools: ["Skill", "Read", "Write", "Edit", "Glob", "Grep", "AskUserQuestion"]
@@ -34,7 +34,7 @@ Transform user request into structured, executable plan with TDD task breakdown.
 
 7. **Update session state** with track information
 
-8. **Next step**: Suggest `/workflow-work` to execute the plan
+8. **Next step**: Suggest `/mycelium-work` to execute the plan
 
 ## Skills Used
 
@@ -45,10 +45,10 @@ Transform user request into structured, executable plan with TDD task breakdown.
 ## Quick Example
 
 ```bash
-/workflow-plan "Add user authentication"
+/mycelium-plan "Add user authentication"
 # Creates plan with TDD tasks, dependencies, test strategy
 
-/workflow-plan "Optimize database queries"
+/mycelium-plan "Optimize database queries"
 # Analyzes existing code, creates performance-focused plan
 ```
 

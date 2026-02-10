@@ -13,8 +13,8 @@ This skill guides you through comprehensive code review with two sequential stag
 
 - After completing implementation tasks
 - Before merging changes
-- When requested via `/workflow-review`
-- As part of autonomous workflow (`/workflow-go`)
+- When requested via `/mycelium-review`
+- As part of autonomous workflow (`/mycelium-go`)
 
 ## Overview
 
@@ -276,7 +276,7 @@ Required fixes:
 STOP - Do not proceed to Stage 2
 User must address issues and re-run review.
 
-Suggested: /workflow-work {fix_tasks}
+Suggested: /mycelium-work {fix_tasks}
 ```
 
 #### CONDITIONAL PASS
@@ -708,7 +708,7 @@ For each P1 issue (and optionally P2/P3):
 
 ### Execute Fixes
 
-**Option 1:** Use `/workflow-work`
+**Option 1:** Use `/mycelium-work`
 - Add fix tasks to plan
 - Execute systematically with TDD
 
@@ -806,11 +806,11 @@ Before completing review:
 ## Next Steps After Review
 
 **If approved:**
-- Suggest `/workflow-capture` to extract learnings
+- Suggest `/mycelium-capture` to extract learnings
 - Or merge changes if ready
 
 **If fixes needed:**
-- Suggest `/workflow-work` with fix tasks
+- Suggest `/mycelium-work` with fix tasks
 - Or fix immediately if trivial
 
 **If rejected:**

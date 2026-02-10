@@ -279,7 +279,7 @@ git clone https://github.com/jason-hchsieh/mycelium ~/.claude/plugins/mycelium
 ### 1. Initialize a Project
 
 ```bash
-/workflow-setup
+/mycelium-setup
 ```
 
 This creates the `.workflow/` directory structure:
@@ -307,7 +307,7 @@ This creates the `.workflow/` directory structure:
 ### 2. Create an Implementation Plan
 
 ```bash
-/workflow-plan "Add user authentication"
+/mycelium-plan "Add user authentication"
 ```
 
 Creates a detailed plan with:
@@ -320,7 +320,7 @@ Creates a detailed plan with:
 ### 3. Execute the Plan
 
 ```bash
-/workflow-work
+/mycelium-work
 ```
 
 Executes tasks with:
@@ -332,7 +332,7 @@ Executes tasks with:
 ### 4. Review Implementation
 
 ```bash
-/workflow-review
+/mycelium-review
 ```
 
 Two-stage review:
@@ -342,7 +342,7 @@ Two-stage review:
 ### 5. Capture Knowledge
 
 ```bash
-/workflow-capture
+/mycelium-capture
 ```
 
 Captures:
@@ -358,40 +358,40 @@ Captures:
 
 | Skill | Description | Interaction |
 |-------|-------------|-------------|
-| **`/workflow-go [task] [--interactive]`** | **Full autonomous workflow** (plan → work → review → capture) | Minimal (autonomous) or phase approvals (interactive) |
-| `/workflow-setup [--resume]` | Bootstrap project with mycelium structure | Interactive setup questions |
-| `/workflow-plan [description]` | Create implementation plan with TDD task breakdown | Clarifying questions |
-| `/workflow-work [task_id\|all]` | Execute tasks with strict TDD enforcement | Autonomous with progress updates |
-| `/workflow-review [--stage=1\|2\|all]` | Two-stage review (spec compliance + quality) | Report with decision point |
-| `/workflow-capture [track_id]` | Extract learnings and grow knowledge layer | Autonomous knowledge capture |
+| **`/mycelium-go [task] [--interactive]`** | **Full autonomous workflow** (plan → work → review → capture) | Minimal (autonomous) or phase approvals (interactive) |
+| `/mycelium-setup [--resume]` | Bootstrap project with mycelium structure | Interactive setup questions |
+| `/mycelium-plan [description]` | Create implementation plan with TDD task breakdown | Clarifying questions |
+| `/mycelium-work [task_id\|all]` | Execute tasks with strict TDD enforcement | Autonomous with progress updates |
+| `/mycelium-review [--stage=1\|2\|all]` | Two-stage review (spec compliance + quality) | Report with decision point |
+| `/mycelium-capture [track_id]` | Extract learnings and grow knowledge layer | Autonomous knowledge capture |
 
 ### Utility Skills
 
 | Skill | Description |
 |-------|-------------|
-| `/workflow-status [--verbose]` | Display current progress and state |
-| `/workflow-continue [--full]` | Resume interrupted work from checkpoint |
+| `/mycelium-status [--verbose]` | Display current progress and state |
+| `/mycelium-continue [--full]` | Resume interrupted work from checkpoint |
 
 ### Usage Patterns
 
 **🚀 Quick Start (Autonomous)**
 ```bash
-/workflow-go "Add user authentication with JWT"
+/mycelium-go "Add user authentication with JWT"
 # Runs full workflow with minimal interaction
 ```
 
 **🎯 Controlled (Interactive)**
 ```bash
-/workflow-go "Add user login" --interactive
+/mycelium-go "Add user login" --interactive
 # Asks for approval after each phase
 ```
 
 **🔧 Manual (Step-by-Step)**
 ```bash
-/workflow-plan "Add user login"
-/workflow-work all
-/workflow-review
-/workflow-capture
+/mycelium-plan "Add user login"
+/mycelium-work all
+/mycelium-review
+/mycelium-capture
 # Full control over each phase
 ```
 
@@ -420,13 +420,13 @@ All plugin functionality is implemented as skills (following the [Agent Skills s
 
 | Skill | Purpose | Used By |
 |-------|---------|---------|
-| **setup** | Project initialization (greenfield/brownfield detection, interactive config) | `workflow-setup` |
-| **planning** | Requirements clarification, smart research gate, task breakdown | `workflow-plan` |
-| **tdd** | Iron Law TDD - RED → GREEN → REFACTOR enforcement | `workflow-work`, `workflow-go` |
-| **verification** | Evidence-based validation (show actual test output) | `workflow-work`, `workflow-go` |
-| **review** | Two-stage review (spec compliance + parallel quality assessment) | `workflow-review`, `workflow-go` |
-| **solution-capture** | Knowledge extraction, pattern detection, learning documentation | `workflow-capture`, `workflow-go` |
-| **orchestration** | Autonomous workflow execution with decision gates | `workflow-go`, `workflow-continue` |
+| **setup** | Project initialization (greenfield/brownfield detection, interactive config) | `mycelium-setup` |
+| **planning** | Requirements clarification, smart research gate, task breakdown | `mycelium-plan` |
+| **tdd** | Iron Law TDD - RED → GREEN → REFACTOR enforcement | `mycelium-work`, `mycelium-go` |
+| **verification** | Evidence-based validation (show actual test output) | `mycelium-work`, `mycelium-go` |
+| **review** | Two-stage review (spec compliance + parallel quality assessment) | `mycelium-review`, `mycelium-go` |
+| **solution-capture** | Knowledge extraction, pattern detection, learning documentation | `mycelium-capture`, `mycelium-go` |
+| **orchestration** | Autonomous workflow execution with decision gates | `mycelium-go`, `mycelium-continue` |
 | **context** | Project context loading and management | All skills |
 | **recovery** | Handle blockers and stuck states | As needed |
 
@@ -545,14 +545,14 @@ mycelium/
 │   │   └── code-quality.md
 │   └── learning-agent.md
 ├── skills/
-│   ├── workflow-go/          # User-facing: full autonomous workflow
-│   ├── workflow-plan/        # User-facing: create implementation plan
-│   ├── workflow-work/        # User-facing: execute tasks with TDD
-│   ├── workflow-review/      # User-facing: two-stage code review
-│   ├── workflow-capture/     # User-facing: extract learnings
-│   ├── workflow-continue/    # User-facing: resume interrupted workflow
-│   ├── workflow-status/      # User-facing: display progress
-│   ├── workflow-setup/       # User-facing: bootstrap project
+│   ├── mycelium-go/          # User-facing: full autonomous workflow
+│   ├── mycelium-plan/        # User-facing: create implementation plan
+│   ├── mycelium-work/        # User-facing: execute tasks with TDD
+│   ├── mycelium-review/      # User-facing: two-stage code review
+│   ├── mycelium-capture/     # User-facing: extract learnings
+│   ├── mycelium-continue/    # User-facing: resume interrupted workflow
+│   ├── mycelium-status/      # User-facing: display progress
+│   ├── mycelium-setup/       # User-facing: bootstrap project
 │   ├── workflow/
 │   │   ├── orchestration/    # Internal: autonomous execution engine
 │   │   ├── planning/         # Internal: task breakdown guidance
@@ -625,7 +625,7 @@ Tests first, implementation second. No exceptions.
 Every non-trivial fix should be captured in `.workflow/solutions/`.
 
 ### 3. Plan Before Implementing
-Use `/workflow-plan` to break down work systematically.
+Use `/mycelium-plan` to break down work systematically.
 
 ### 4. Leverage Parallelism
 Design tasks with minimal dependencies for maximum parallelism.
@@ -637,12 +637,12 @@ Update plans when requirements change, log reasons in deviations section.
 Use two-stage review: spec compliance first, code quality second.
 
 ### 7. Capture Knowledge
-Run `/workflow-capture` after completing work to build institutional knowledge.
+Run `/mycelium-capture` after completing work to build institutional knowledge.
 
 ## Troubleshooting
 
 ### "No .workflow directory found"
-Run `/workflow-setup` to initialize the project.
+Run `/mycelium-setup` to initialize the project.
 
 ### "Cannot create worktree"
 Ensure you're in a git repository and the branch doesn't already have a worktree.
@@ -673,7 +673,7 @@ npm run coverage
 1. Fork the repository
 2. Create a feature branch
 3. Follow the Iron Law TDD
-4. Run `/workflow-review` before submitting
+4. Run `/mycelium-review` before submitting
 5. Document solutions in PR description
 6. Submit pull request
 
