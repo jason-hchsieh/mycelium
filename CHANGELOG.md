@@ -32,12 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Phase 5: Two-stage review (spec compliance + code quality)
 - Phase 6: Knowledge capture with feedback loops
 
-#### Commands (15 total)
-- **Workflow orchestration**: setup, plan, work, review, compound, status, resume
-- **Context management**: context-sync, metrics
-- **Learning feedback**: create-skill, list-skills
-- **Git worktrees**: worktree-create, worktree-merge, worktree-cleanup
-- **Pull requests**: pr-create, pr-review
+#### Commands (8 total)
+- **Workflow orchestration**: setup, go, plan, work, review, capture, continue, status
 
 #### Skills (6 total)
 - Iron Law TDD - Test-first development enforcement

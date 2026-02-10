@@ -402,7 +402,7 @@ All commands have been simplified to **thin wrappers** (~20-60 lines each) that 
 - **After**: ~57 lines average (orchestration only)
 - **Reduction**: 80% fewer lines per command
 
-Other operations (worktrees, PR creation, context sync) are now **handled automatically** by the plugin when needed.
+Other operations (worktrees, PR creation, context sync) are **handled automatically** by skills when needed — no separate commands required.
 
 ## Skills
 
@@ -620,13 +620,10 @@ Design tasks with minimal dependencies for maximum parallelism.
 ### 5. Track Deviations
 Update plans when requirements change, log reasons in deviations section.
 
-### 6. Context Sync Regularly
-Run `/workflow:context-sync` in long sessions to prevent context overload.
-
-### 7. Review Comprehensively
+### 6. Review Comprehensively
 Use two-stage review: spec compliance first, code quality second.
 
-### 8. Capture Knowledge
+### 7. Capture Knowledge
 Run `/workflow:compound` after completing work to build institutional knowledge.
 
 ## Troubleshooting
@@ -642,9 +639,6 @@ Check test paths in your project configuration and ensure test framework is inst
 
 ### "Pattern detection not working"
 Ensure solution files have proper YAML frontmatter with tags. Patterns detected at 3+ occurrences.
-
-### "Context window exceeded"
-Run `/workflow:context-sync` to compress context or spawn fresh agent.
 
 ## Development
 
