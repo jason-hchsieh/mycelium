@@ -21,26 +21,32 @@ Transform user request into structured, executable plan with TDD task breakdown.
 
 ### Create Plan
 
-1. **Update session state** - Write `invocation_mode: "single"` to `.mycelium/state/session_state.json`
+1. **Ensure `.mycelium/` exists** - If the [`.mycelium/` directory][mycelium-dir] does not exist, create the minimum bootstrap structure:
+   ```
+   .mycelium/
+   ├── plans/
+   └── state/
+       └── session_state.json
+   ```
+   Initialize `session_state.json` per the [session state docs][session-state-docs]. Also add `.mycelium/` to `.gitignore` if not already present.
 
-2. **Load the planning skill** - Use Skill tool to load `planning`
+2. **Update session state** - Write `invocation_mode: "single"` to [session_state.json][session-state-docs]
 
 3. **Parse input**:
    - If user provided task description: Use it
    - If empty: Ask user for task description
 
 4. **Provide context**:
-   - Read `.mycelium/state/session_state.json`
-   - Read `.mycelium/context/*.md` (product, tech-stack, workflow)
+   - Read [session_state.json][session-state-docs]
+   - Read `.mycelium/context/*.md` if exists (product, tech-stack, workflow)
    - Read `CLAUDE.md` if exists
 
-5. **Execute planning workflow** - Follow the loaded `planning` skill which handles:
-   - Requirements clarification (Phase 1) using AskUserQuestion
-   - Smart research gate (Phase 1.5) - grep codebase before web search
-   - Capability discovery (Phase 2) - check available skills/agents
-   - Task breakdown and plan creation (Phase 3) - TDD-driven tasks with dependencies
+5. **Analyze the task**:
+   - Clarify requirements if ambiguous (use AskUserQuestion)
+   - Search codebase for relevant files (`grep`, `glob`)
+   - Break down into tasks with dependencies
 
-6. **Save plan** to `.mycelium/plans/YYYY-MM-DD-{track-id}.md`
+6. **Save plan** to `.mycelium/plans/YYYY-MM-DD-{track-id}.md` using the [plan template][plan-template]. The frontmatter must conform to the [plan frontmatter schema][plan-schema].
 
 7. **Register plan in session state**:
    - Read `session_state.json`
@@ -94,12 +100,6 @@ Switch the active plan to `<track_id>`:
 
 ---
 
-## Skills Used
-
-- **planning**: Core planning workflow (clarify → research → discover → plan)
-- **context**: For loading project knowledge
-- **tdd**: Referenced during task breakdown
-
 ## Quick Example
 
 ```bash
@@ -124,3 +124,17 @@ Switch the active plan to `<track_id>`:
 - Default to parallel execution - minimize dependencies
 - **Creating a new plan auto-pauses the previous active plan** - no plans are lost
 - **Backward compatible** - works when `plans[]` doesn't exist (falls back to globbing `.mycelium/plans/`)
+
+## References
+
+- [`.mycelium/` directory structure][mycelium-dir]
+- [Session state docs][session-state-docs]
+- [Session state schema][session-state-schema]
+- [Plan template][plan-template]
+- [Plan frontmatter schema][plan-schema]
+
+[mycelium-dir]: ../../docs/mycelium-directory.md
+[session-state-docs]: ../../docs/session-state.md
+[session-state-schema]: ../../schemas/session-state.schema.json
+[plan-template]: ../../templates/plans/plan.md.template
+[plan-schema]: ../../schemas/plan-frontmatter.schema.json
