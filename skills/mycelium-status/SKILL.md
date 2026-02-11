@@ -13,7 +13,8 @@ Display current workflow state and progress dashboard.
 
 1. **Load current state**:
    - Read `.mycelium/state/session_state.json`
-   - Read active plan from `.mycelium/plans/`
+   - Read `plans[]` registry from session state
+   - Read the active plan file (from `current_track.plan_file`) to get task breakdown
    - Get git status and recent commits
 
 2. **Discover capabilities** (scan plugin cache filesystem - do NOT hardcode or guess):
@@ -37,12 +38,19 @@ Display current workflow state and progress dashboard.
 
    Plans: {total} total ({active} active, {paused} paused, {completed} completed)
      Active: {track_id} ({completed}/{total} tasks)
+     {other plans listed with status if any}
 
-   Tasks:
+   Active Plan Tasks:
    - ✅ Completed: {count} ({percentage}%)
    - 🔄 In Progress: {count}
    - ⏳ Pending: {count}
    - 🚫 Blocked: {count}
+
+   Task Summary (from active plan file):
+   - [x] 1.1: {task title}
+   - [~] 1.2: {task title} (in progress)
+   - [ ] 1.3: {task title}
+   - ...
 
    Available Skills: {count} skills discovered
    Available Agents: {count} agents discovered
