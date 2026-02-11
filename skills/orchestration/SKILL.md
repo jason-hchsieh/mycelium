@@ -12,9 +12,10 @@ This skill guides autonomous execution of the complete mycelium workflow: plan â
 ## When to Use This Skill
 
 - When executing `/mycelium-go [task]`
-- For end-to-end autonomous development
+- For end-to-end autonomous development, debugging, or investigation
 - When user wants minimal interaction
 - For routine/clear tasks with established patterns
+- For debugging issues or answering technical questions
 - When resuming via `/mycelium-continue` in full mode
 
 ## Continue Mode

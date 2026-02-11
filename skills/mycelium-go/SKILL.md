@@ -1,18 +1,18 @@
 ---
 name: mycelium-go
-description: Execute full workflow autonomously (plan → work → review → capture)
-argument-hint: "[task description] [--interactive]"
+description: Execute full workflow autonomously - build features, debug issues, answer questions, or investigate problems (plan → work → review → capture)
+argument-hint: "[task/question/issue description] [--interactive]"
 allowed-tools: ["Skill", "Read", "Write", "Edit", "Bash", "Glob", "Grep", "Task", "AskUserQuestion"]
 ---
 
 # Workflow Go
 
-Execute the complete mycelium workflow autonomously from planning to knowledge capture.
+Execute the complete mycelium workflow autonomously from planning to knowledge capture. Handles feature development, bug debugging, technical questions, investigation, and optimization.
 
 ## Your Task
 
 1. **Parse arguments**:
-   - `task description`: What to build/fix/optimize
+   - `task description`: What to build, fix, debug, investigate, or answer
    - `--interactive`: Enable human approval at each phase (default: autonomous)
 
 2. **Update session state** - Write `invocation_mode: "full"` to `.workflow/state/session_state.json`
@@ -58,10 +58,16 @@ Execute the complete mycelium workflow autonomously from planning to knowledge c
 ## Quick Examples
 
 ```bash
-# Autonomous mode (minimal interaction)
+# Feature development
 /mycelium-go "Add user authentication"
 
-# Interactive mode (approval at each phase)
+# Debugging
+/mycelium-go "Fix memory leak in session handler"
+
+# Investigation / Question
+/mycelium-go "Why does the API return 500 on concurrent requests?"
+
+# Optimization
 /mycelium-go "Optimize database queries" --interactive
 
 # Detailed description
