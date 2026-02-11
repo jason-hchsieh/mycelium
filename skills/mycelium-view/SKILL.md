@@ -1,7 +1,7 @@
 ---
 name: mycelium-view
 description: Preview workflow plan without execution (dry-run mode)
-argument-hint: "[task description]"
+argument-hint: "[task description] | [track_id]"
 allowed-tools: ["Skill", "Read", "Write", "Bash", "Glob", "Grep"]
 ---
 
@@ -21,20 +21,42 @@ This skill provides a "dry-run" mode that:
 ## Your Task
 
 1. **Parse arguments**:
-   - `task description`: The feature/fix/optimization to preview
+   - `task description`: The feature/fix/optimization to preview (generates a new plan)
+   - `track_id`: An existing plan's track ID to view (e.g., `auth_20260211`)
+   - To distinguish: if the argument matches a `track_id` in `session_state.plans[]` or a plan file in `.mycelium/plans/`, treat it as an existing plan view. Otherwise, treat it as a new task description.
 
-2. **Update session state** - Write `invocation_mode: "view"` to `.mycelium/state/session_state.json`
+2. **Route by argument type**:
 
-3. **Load the planning skill** - Use Skill tool to load `planning`
+### View Existing Plan
 
-4. **Generate plan** - Follow the planning workflow:
+If `track_id` was provided:
+
+1. Find the plan file: check `session_state.plans[]` for the `plan_file`, or glob `.mycelium/plans/*{track_id}*.md`
+2. Read the plan file and parse its frontmatter and content
+3. Display the plan (same format as step 5 below, but from the existing file)
+4. Show plan status from `plans[]` registry (in_progress, paused, completed, etc.)
+5. Suggest next action based on status:
+   - `paused` → `/mycelium-plan --switch {track_id}` to resume
+   - `in_progress` → `/mycelium-work` to continue implementation
+   - `completed` → `/mycelium-capture {track_id}` to capture learnings
+   - `preview` → `/mycelium-go "{description}"` to execute
+
+### Generate New Preview
+
+If `task description` was provided:
+
+1. **Update session state** - Write `invocation_mode: "view"` to `.mycelium/state/session_state.json`
+
+2. **Load the planning skill** - Use Skill tool to load `planning`
+
+3. **Generate plan** - Follow the planning workflow:
    - Clarify requirements if ambiguous
    - Discover available capabilities
    - Create detailed task breakdown
    - Define test strategy
    - Identify dependencies
 
-5. **Display preview** - Show the complete plan with:
+4. **Display preview** - Show the complete plan with:
    ```markdown
    ## Workflow Preview: [Feature Name]
 
@@ -88,8 +110,11 @@ This skill provides a "dry-run" mode that:
 ## Quick Examples
 
 ```bash
-# Preview a feature workflow
+# Preview a feature workflow (generates new plan)
 /mycelium-view "Add user authentication with JWT"
+
+# View an existing plan by track_id
+/mycelium-view auth_20260211
 
 # Preview a bug fix workflow
 /mycelium-view "Fix memory leak in session handler"
