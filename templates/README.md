@@ -168,7 +168,7 @@ Pre-configured `.gitignore` templates for different languages:
 
 All gitignore templates include:
 - `.worktrees/` - Parallel agent workspaces
-- `.mycelium/state/` - Session state
+- `.mycelium/state.json` - Session state
 - Environment files (`.env*`)
 - Language-specific build artifacts and dependencies
 

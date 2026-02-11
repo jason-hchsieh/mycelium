@@ -122,11 +122,11 @@ import {
 } from './lib/state-manager.js';
 
 // Read state (returns default if missing)
-const state = await readState('.mycelium/state/session_state.json');
+const state = await readState('.mycelium/state.json');
 
 // Update nested field using dot notation
 await updateStateField(
-  '.mycelium/state/session_state.json',
+  '.mycelium/state.json',
   'discovered_capabilities.skills',
   [{ name: 'skill-1' }]
 );
@@ -138,7 +138,7 @@ const skills = getStateField(state, 'discovered_capabilities.skills', []);
 const merged = await mergeState(baseState, updates);
 
 // Write with backup
-await writeState('.mycelium/state/session_state.json', newState, {
+await writeState('.mycelium/state.json', newState, {
   createDirs: true
 });
 ```
@@ -452,7 +452,7 @@ import {
   isCacheValid
 } from './lib/discovery/cache-manager.js';
 
-const statePath = '.mycelium/state/session_state.json';
+const statePath = '.mycelium/state.json';
 
 // Refresh cache (re-scan all)
 await refreshCapabilityCache(statePath);

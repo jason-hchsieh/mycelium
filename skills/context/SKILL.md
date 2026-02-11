@@ -55,7 +55,7 @@ Monitor context usage and take action:
 
 ## Progress File Format
 
-Maintain `.mycelium/state/progress.md` for context bridging:
+Maintain `.mycelium/progress.md` for context bridging:
 
 ### Structure
 
@@ -262,7 +262,7 @@ Target: ≤2000 tokens total
 
 ### 2. Write to Progress File
 
-Save handoff package to `.mycelium/state/progress.md`
+Save handoff package to `.mycelium/progress.md`
 
 ### 3. Spawn Fresh Agent
 
@@ -322,7 +322,7 @@ Create checkpoints at phase boundaries:
   "task": "2.3",
   "timestamp": "2026-02-03T14:30:00Z",
   "git_sha": "abc1234",
-  "progress_file": ".mycelium/state/progress.md",
+  "progress_file": ".mycelium/progress.md",
   "session_summary": "Completed auth foundation tasks 1.1-2.2",
   "next_phase": "Implementation continues with tasks 2.3-2.5",
   "context_usage_estimate": 65
@@ -330,10 +330,10 @@ Create checkpoints at phase boundaries:
 ```
 
 ### Checkpoint Storage
-Save to `.mycelium/state/checkpoints/`:
+Save to `.mycelium/checkpoints/`:
 - `checkpoint_20260203_143000.json`
 - Link from progress.md
-- Reference in session_state.json
+- Reference in state.json
 
 ## Context-Aware Task Assignment
 
@@ -368,11 +368,11 @@ Each worktree maintains separate context:
 ```
 .worktrees/
 ├── task-1-1/
-│   └── .mycelium/state/progress.md  # Task 1.1 context
+│   └── .mycelium/progress.md  # Task 1.1 context
 ├── task-1-2/
-│   └── .mycelium/state/progress.md  # Task 1.2 context
+│   └── .mycelium/progress.md  # Task 1.2 context
 └── task-2-1/
-    └── .mycelium/state/progress.md  # Task 2.1 context
+    └── .mycelium/progress.md  # Task 2.1 context
 ```
 
 ### Context Isolation Benefits
@@ -428,7 +428,7 @@ If context is lost or corrupted:
 1. Read progress.md for recent state
 2. Check plan file for task status
 3. Review git log for recent commits
-4. Examine session_state.json
+4. Examine state.json
 5. Reconstruct context from evidence
 
 ### Prevention

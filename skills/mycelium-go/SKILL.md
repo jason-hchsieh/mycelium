@@ -15,7 +15,7 @@ Execute the complete mycelium workflow autonomously from planning to knowledge c
    - `task description`: What to build, fix, debug, investigate, or answer
    - `--interactive`: Enable human approval at each phase (default: autonomous)
 
-2. **Update session state** - Write `invocation_mode: "full"` to `.mycelium/state/session_state.json`
+2. **Update session state** - Write `invocation_mode: "full"` to `.mycelium/state.json`
 
 3. **Load the orchestration skill** - Use Skill tool to load `orchestration`
 

@@ -174,7 +174,7 @@ describe('schema-validator', () => {
   describe('validateState', () => {
     test('validates valid state object', async () => {
       const state = JSON.parse(
-        readFileSync(join(fixturesDir, 'states/sample_session_state.json'), 'utf-8')
+        readFileSync(join(fixturesDir, 'states/sample_state.json'), 'utf-8')
       );
 
       const result = await validateState(state, { schemaDir: join(fixturesDir, 'schemas') });

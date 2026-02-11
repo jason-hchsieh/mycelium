@@ -2,15 +2,29 @@
 
 The `.mycelium/` directory stores all workflow state, plans, and knowledge for a project.
 
-## Directory Layout
+## Minimum Structure
+
+A single file is all that's needed to start:
 
 ```
 .mycelium/
+└── state.json          # Session state + inline plans
+```
+
+`state.json` contains the session state and can embed plans directly in the `plans[]` array. No other files or directories are required.
+
+## Full Structure
+
+The complete structure enables knowledge compounding across sessions:
+
+```
+.mycelium/
+├── state.json                  # Session state (see docs/session-state.md)
 ├── context/                    # Project information
 │   ├── product.md              # Product vision, goals, users
 │   ├── tech-stack.md           # Languages, frameworks, tools
 │   └── workflow.md             # Development practices, maturity mode
-├── plans/                      # Implementation plans (living documents)
+├── plans/                      # Implementation plans as separate files
 │   ├── 2026-02-11-auth_20260211.md
 │   └── 2026-02-10-bugfix_20260210.md
 ├── solutions/                  # Documented solutions & patterns
@@ -22,25 +36,19 @@ The `.mycelium/` directory stores all workflow state, plans, and knowledge for a
 │   ├── preferences.yaml        # User preferences learned from corrections
 │   ├── anti-patterns/          # Mistakes to avoid
 │   └── effective-prompts/      # Approaches that worked
-└── state/                      # Session state
-    ├── session_state.json      # Current session state (see docs/session-state.md)
-    ├── progress.md             # Human-readable progress summary
-    ├── review_stage1_report.md # Spec compliance review output
-    └── review_stage2_report.md # Quality review output
+├── progress.md                 # Human-readable progress summary
+├── review_stage1_report.md     # Spec compliance review output
+└── review_stage2_report.md     # Quality review output
 ```
 
-## Minimum Structure
+### Plans: Inline vs Separate Files
 
-The minimum viable structure for workflow operations (planning, status):
+Plans can live in two places:
 
-```
-.mycelium/
-├── plans/
-└── state/
-    └── session_state.json
-```
+- **Inline** (minimum) — Stored directly in `state.json` within the `plans[]` array. Good for quick tasks.
+- **Separate files** (full) — Written to `.mycelium/plans/` as markdown with YAML frontmatter. Better for complex plans that benefit from human-readable format. Referenced from `state.json` via `plan_file`.
 
-The full structure (with `context/`, `solutions/`, `learned/`) is needed for knowledge compounding.
+Both modes can coexist. A plan entry in `state.json` either contains `content` (inline) or `plan_file` (reference to `.mycelium/plans/`).
 
 ## `.gitignore`
 
@@ -53,10 +61,10 @@ Add `.mycelium/` to your project's `.gitignore`:
 
 ## Related
 
-- [Plan template][plan-template] - Template for plan files
-- [Session state schema][session-state-schema] - JSON schema for session_state.json
-- [Session state docs][session-state-docs] - Human-readable session state reference
+- [Session state docs][session-state-docs] - Human-readable `state.json` reference
+- [Session state schema][session-state-schema] - JSON schema for `state.json`
+- [Plan template][plan-template] - Template for separate plan files
 
-[plan-template]: ../templates/plans/plan.md.template
-[session-state-schema]: ../schemas/session-state.schema.json
 [session-state-docs]: ./session-state.md
+[session-state-schema]: ../schemas/session-state.schema.json
+[plan-template]: ../templates/plans/plan.md.template

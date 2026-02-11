@@ -45,7 +45,7 @@ If `track_id` was provided:
 
 If `task description` was provided:
 
-1. **Update session state** - Write `invocation_mode: "view"` to `.mycelium/state/session_state.json`
+1. **Update session state** - Write `invocation_mode: "view"` to `.mycelium/state.json`
 
 2. **Load the planning skill** - Use Skill tool to load `planning`
 
@@ -151,7 +151,7 @@ If `task description` was provided:
 
 ## Important
 
-- **Read-only mode** - No code changes, commits, or state mutations (except session_state.json and preview plan file)
+- **Read-only mode** - No code changes, commits, or state mutations (except state.json and preview plan file)
 - **Clarification allowed** - Will ask questions if requirements are ambiguous
 - **Fast execution** - Only planning phase runs (~30-60 seconds)
 - **Repeatable** - Safe to run multiple times with different descriptions

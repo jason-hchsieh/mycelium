@@ -11,7 +11,7 @@ Extract and preserve learnings from completed work to grow the mycelium knowledg
 
 ## Your Task
 
-1. **Update session state** - Write `invocation_mode: "single"` to `.mycelium/state/session_state.json`
+1. **Update session state** - Write `invocation_mode: "single"` to `.mycelium/state.json`
 
 2. **Load the solution-capture skill** - Use Skill tool to load `solution-capture`
 

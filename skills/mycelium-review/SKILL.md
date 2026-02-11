@@ -11,7 +11,7 @@ Comprehensive two-stage code review: spec compliance (blocking) → quality asse
 
 ## Your Task
 
-1. **Update session state** - Write `invocation_mode: "single"` to `.mycelium/state/session_state.json`
+1. **Update session state** - Write `invocation_mode: "single"` to `.mycelium/state.json`
 
 2. **Parse arguments**:
    - `--stage=1`: Spec compliance only (blocking gate)
@@ -26,8 +26,8 @@ Comprehensive two-stage code review: spec compliance (blocking) → quality asse
 4. **Execute review** - Follow the stages below
 
 5. **Generate reports**:
-   - `.mycelium/state/review_stage1_report.md`
-   - `.mycelium/state/review_stage2_report.md`
+   - `.mycelium/review_stage1_report.md`
+   - `.mycelium/review_stage2_report.md`
 
 6. **Next step**:
    - If approved: Suggest `/mycelium-capture`
@@ -205,7 +205,7 @@ grep -r "edge case\|boundary\|null\|undefined\|error" tests/
 
 ### Step 3: Generate Spec Compliance Report
 
-Create `.mycelium/state/review_stage1_report.md`:
+Create `.mycelium/review_stage1_report.md`:
 
 ```markdown
 # Spec Compliance Review
@@ -487,7 +487,7 @@ Wait for all parallel agents to complete.
 
 ### Step 4: Generate Consolidated Report
 
-Create `.mycelium/state/review_stage2_report.md`:
+Create `.mycelium/review_stage2_report.md`:
 
 ```markdown
 # Code Quality Review
@@ -626,7 +626,7 @@ git diff
 **NEVER flag issues in these directories:**
 - `.mycelium/plans/` - Living plan documents
 - `.mycelium/solutions/` - Captured learnings
-- `.mycelium/state/` - Session state
+- `.mycelium/state.json` - Session state
 - `.mycelium/context/` - Project context
 
 These are workflow artifacts, not production code.

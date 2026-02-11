@@ -1,6 +1,6 @@
-# Session State (`session_state.json`)
+# Session State (`state.json`)
 
-The session state file at `.mycelium/state/session_state.json` tracks all workflow progress, plans, and capabilities for the current session.
+The session state file at `.mycelium/state.json` tracks all workflow progress, plans, and capabilities for the current session.
 
 ## Schema
 

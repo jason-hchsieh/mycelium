@@ -16,7 +16,7 @@ Resume interrupted work with context-aware scope detection.
    - `--track <track_id>`: Switch to and resume a specific plan (pauses the current active plan)
 
 2. **Load session state**:
-   - Read `.mycelium/state/session_state.json`
+   - Read `.mycelium/state.json`
    - Identify `current_phase`, checkpoints, and `invocation_mode`
    - If no state found → error: "No workflow state found. Start with `/mycelium-go` or `/mycelium-plan`."
 
@@ -28,7 +28,7 @@ Resume interrupted work with context-aware scope detection.
    - Re-read the target plan to determine its `current_phase` and checkpoints
 
 4. **Restore mid-phase context**:
-   - Read `.mycelium/state/progress.md` for completed work summary
+   - Read `.mycelium/progress.md` for completed work summary
    - Check for uncommitted work (`git status`) or stashes (`git stash list`)
    - Show what was completed, what's in progress, and known blockers
 

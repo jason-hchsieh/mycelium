@@ -12,7 +12,7 @@ Display current workflow state and progress dashboard.
 ## Your Task
 
 1. **Load current state**:
-   - Read `.mycelium/state/session_state.json`
+   - Read `.mycelium/state.json`
    - Read `plans[]` registry from session state
    - Read the active plan file (from `current_track.plan_file`) to get task breakdown
    - Get git status and recent commits
@@ -62,7 +62,7 @@ Display current workflow state and progress dashboard.
    Next Action: {suggested_command}
    ```
 
-   Read `plans[]` from `session_state.json` for the plan summary. If `plans[]` is missing, fall back to listing `.mycelium/plans/*.md` files.
+   Read `plans[]` from `state.json` for the plan summary. If `plans[]` is missing, fall back to listing `.mycelium/plans/*.md` files.
 
 4. **Suggest next action** based on state:
    - No plan → `/mycelium-plan`

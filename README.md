@@ -48,7 +48,7 @@ flowchart TD
     Research -->|Yes| Phase15[1.5: Research]
     Research -->|No| Phase2
     Phase15 --> Phase2[2: Planning & Assignment]
-    Phase2 --> LoadCachedCaps[Load Cached Capabilities<br/>from session_state.json<br/>discovered in Phase 0E]
+    Phase2 --> LoadCachedCaps[Load Cached Capabilities<br/>from state.json<br/>discovered in Phase 0E]
     LoadCachedCaps --> DecomposeRequest[Decompose User Request<br/>into Features]
     DecomposeRequest --> DecomposeFeatures[Decompose Each Feature<br/>into 2-5 min Tasks]
     DecomposeFeatures --> DefineGitStrategy[Define Git Strategy:<br/>• Feature = git branch<br/>• Multiple features = worktrees]
@@ -299,9 +299,8 @@ This creates the `.mycelium/` directory structure:
 │   ├── preferences.yaml
 │   ├── anti-patterns/
 │   └── effective-prompts/
-└── state/             # Session state
-    ├── session_state.json
-    └── progress.md
+├── state.json         # Session state
+└── progress.md        # Human-readable progress
 ```
 
 ### 2. Create an Implementation Plan
@@ -459,7 +458,7 @@ User-facing skills are **thin wrappers** that delegate to internal skills:
 **tech-stack.md** - Technical stack details
 **workflow.md** - Development practices
 
-### Session State (`.mycelium/state/session_state.json`)
+### Session State (`.mycelium/state.json`)
 
 Tracks:
 - Current session ID and timestamps

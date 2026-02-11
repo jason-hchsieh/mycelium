@@ -29,7 +29,7 @@ Central definition of all enumeration types used across schemas. Reference this 
 - `VerificationMethod` - unit_test, integration_test, e2e_test, etc.
 
 ### session-state.schema.json
-Schema for `.mycelium/state/session_state.json` - tracks current workflow session state.
+Schema for `.mycelium/state.json` - tracks current workflow session state.
 
 **Key Properties:**
 - `status` - Current session status
@@ -49,7 +49,7 @@ Schema for `.mycelium/state/session_state.json` - tracks current workflow sessio
 **Required Fields:** `status`, `started_at`, `last_updated`
 
 ### setup-state.schema.json
-Schema for `.mycelium/state/setup_state.json` - tracks bootstrap process (Phase -1).
+Schema for `.mycelium/setup_state.json` - tracks bootstrap process (Phase -1).
 
 **Key Properties:**
 - `status` - Setup progress status
@@ -100,7 +100,7 @@ Schema for YAML frontmatter in `.mycelium/plans/*.md` files.
 - `parallel_enabled` - Whether parallel execution enabled
 
 ### progress-state.schema.json
-Schema for progress checkpoint structure used in `.mycelium/state/progress.md`.
+Schema for progress checkpoint structure used in `.mycelium/progress.md`.
 
 **Required Fields:**
 - `track_id` - Current track
@@ -179,7 +179,7 @@ This allows:
 ## Usage
 
 Schemas are used to:
-1. Validate JSON state files (session_state.json, setup_state.json)
+1. Validate JSON state files (state.json, setup_state.json)
 2. Validate YAML frontmatter in markdown files
 3. Provide IDE autocomplete and validation
 4. Document expected data structures
@@ -192,11 +192,11 @@ Validate files against schemas using:
 ```bash
 # Using ajv-cli
 npm install -g ajv-cli
-ajv validate -s session-state.schema.json -d session_state.json
+ajv validate -s session-state.schema.json -d state.json
 
 # Using Python jsonschema
 pip install jsonschema
-python -c "import jsonschema, json; jsonschema.validate(json.load(open('session_state.json')), json.load(open('session-state.schema.json')))"
+python -c "import jsonschema, json; jsonschema.validate(json.load(open('state.json')), json.load(open('session-state.schema.json')))"
 ```
 
 ## IDE Integration
@@ -208,7 +208,7 @@ Configure your IDE to use these schemas for validation:
 {
   "json.schemas": [
     {
-      "fileMatch": ["**/session_state.json"],
+      "fileMatch": ["**/state.json"],
       "url": "./schemas/session-state.schema.json"
     },
     {

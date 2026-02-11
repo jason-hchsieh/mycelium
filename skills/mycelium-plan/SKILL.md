@@ -24,20 +24,18 @@ Transform user request into structured, executable plan with TDD task breakdown.
 1. **Ensure `.mycelium/` exists** - If the [`.mycelium/` directory][mycelium-dir] does not exist, create the minimum bootstrap structure:
    ```
    .mycelium/
-   ├── plans/
-   └── state/
-       └── session_state.json
+   └── state.json
    ```
-   Initialize `session_state.json` per the [session state docs][session-state-docs]. Also add `.mycelium/` to `.gitignore` if not already present.
+   Initialize `state.json` per the [session state docs][session-state-docs]. Also add `.mycelium/` to `.gitignore` if not already present.
 
-2. **Update session state** - Write `invocation_mode: "single"` to [session_state.json][session-state-docs]
+2. **Update session state** - Write `invocation_mode: "single"` to [state.json][session-state-docs]
 
 3. **Parse input**:
    - If user provided task description: Use it
    - If empty: Ask user for task description
 
 4. **Provide context**:
-   - Read [session_state.json][session-state-docs]
+   - Read [state.json][session-state-docs]
    - Read `.mycelium/context/*.md` if exists (product, tech-stack, workflow)
    - Read `CLAUDE.md` if exists
 
@@ -49,7 +47,7 @@ Transform user request into structured, executable plan with TDD task breakdown.
 6. **Save plan** to `.mycelium/plans/YYYY-MM-DD-{track-id}.md` using the [plan template][plan-template]. The frontmatter must conform to the [plan frontmatter schema][plan-schema].
 
 7. **Register plan in session state**:
-   - Read `session_state.json`
+   - Read `state.json`
    - If a plan in `plans[]` has `status: "in_progress"`, set it to `"paused"` (both in `plans[]` AND in that plan file's YAML frontmatter `status` field)
    - Append new plan entry to `plans[]`:
      ```json
@@ -70,7 +68,7 @@ Transform user request into structured, executable plan with TDD task breakdown.
 
 ### List Plans
 
-Display all plans from `session_state.plans[]` (fall back to globbing `.mycelium/plans/*.md` and reading frontmatter if `plans[]` is missing or empty).
+Display all plans from `state.json` `plans[]` (fall back to globbing `.mycelium/plans/*.md` and reading frontmatter if `plans[]` is missing or empty).
 
 **Output format:**
 ```
@@ -90,7 +88,7 @@ Plans:
 
 Switch the active plan to `<track_id>`:
 
-1. Read `session_state.json`
+1. Read `state.json`
 2. Find `<track_id>` in `plans[]`. If not found, check `.mycelium/plans/` for a matching file and register it first. If still not found, error: "Plan `<track_id>` not found."
 3. Set the current active plan (the one with `status: "in_progress"`) to `"paused"` in both `plans[]` and its plan file frontmatter
 4. Set the target plan to `"in_progress"` in both `plans[]` and its plan file frontmatter

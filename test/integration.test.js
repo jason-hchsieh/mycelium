@@ -29,7 +29,7 @@ describe('Integration Tests', () => {
   describe('Workflow Setup Flow', () => {
     test('should initialize state, render templates, and validate', async () => {
       // 1. Initialize state
-      const statePath = join(testDir, 'session_state.json');
+      const statePath = join(testDir, 'state.json');
       await stateManager.initializeState(statePath);
 
       // 2. Read initialized state

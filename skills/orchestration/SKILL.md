@@ -24,7 +24,7 @@ When invoked from `/mycelium-continue`, the orchestration skill resumes from a s
 
 ### Phase Mapping
 
-Map `current_phase` in `session_state.json` to named phases:
+Map `current_phase` in `state.json` to named phases:
 
 | `current_phase` value | Phase name | Phase number |
 |-----------------------|------------|-------------|
@@ -35,14 +35,14 @@ Map `current_phase` in `session_state.json` to named phases:
 
 ### Start-From Logic
 
-1. Read `current_phase` and `checkpoints` from `session_state.json`
+1. Read `current_phase` and `checkpoints` from `state.json`
 2. Skip any phase already marked complete in checkpoints (e.g., `planning_complete` timestamp exists → skip Plan)
 3. Begin at the current phase, resuming from its checkpoint (e.g., `last_task_completed: "1.2"` → start at task 1.3)
 4. Chain through all remaining phases to completion
 
 ### Mid-Phase Resumption
 
-- Read `.mycelium/state/progress.md` for completed work summary
+- Read `.mycelium/progress.md` for completed work summary
 - Check plan markers (`[x]` = done, `[~]` = in progress, `[ ]` = pending)
 - Resume the `[~]` or next `[ ]` task within the current phase
 - Verify test baseline passes before continuing work
@@ -122,7 +122,7 @@ cat .mycelium/solutions/patterns/critical-patterns.md
 ls .mycelium/solutions/
 
 # Session state
-cat .mycelium/state/session_state.json
+cat .mycelium/state.json
 ```
 
 ### Discover Capabilities
@@ -145,7 +145,7 @@ cat .mycelium/state/session_state.json
 
 5. **Check for MCP tools** - These are NOT in the plugin cache. Check the system prompt for any MCP server tools listed as additional tools.
 
-6. **Cache discovered capabilities** in `.mycelium/state/session_state.json`:
+6. **Cache discovered capabilities** in `.mycelium/state.json`:
 ```json
 {
   "discovered_capabilities": {
@@ -202,7 +202,7 @@ Example:
 
 **Output**:
 - Plan saved to `.mycelium/plans/YYYY-MM-DD-{track_id}.md`
-- Track ID stored in session_state.json
+- Track ID stored in state.json
 - Plan registered in `session_state.plans[]` (auto-pauses any previously active plan)
 
 **Error handling**:
@@ -537,7 +537,7 @@ If P1 issues or user chooses to fix:
 
 4. **Update capabilities**:
    ```json
-   // session_state.json
+   // state.json
    {
      "discovered_capabilities": {
        "patterns": [
@@ -621,7 +621,7 @@ Next: Deploy or continue with next feature?
 
 ## Orchestration State Management
 
-Throughout execution, maintain state in `session_state.json`:
+Throughout execution, maintain state in `state.json`:
 
 ```json
 {

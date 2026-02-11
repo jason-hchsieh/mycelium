@@ -11,7 +11,7 @@ Execute implementation tasks following strict TDD methodology.
 
 ## Your Task
 
-1. **Update session state** - Write `invocation_mode: "single"` to `.mycelium/state/session_state.json`
+1. **Update session state** - Write `invocation_mode: "single"` to `.mycelium/state.json`
 
 2. **Load execution skills**:
    - Use Skill tool to load `tdd` (mandatory)
@@ -23,9 +23,9 @@ Execute implementation tasks following strict TDD methodology.
    - Default: Next available task
 
 4. **Load active plan**:
-   - Read `current_track.plan_file` from `session_state.json` to locate the active plan
+   - Read `current_track.plan_file` from `state.json` to locate the active plan
    - Fall back to latest plan in `.mycelium/plans/` if `current_track` is null (backward compat)
-   - Read `session_state.json` for progress
+   - Read `state.json` for progress
 
 5. **Execute tasks** - Follow TDD and verification skills which handle:
    - **TDD cycle**: RED → GREEN → REFACTOR (mandatory)

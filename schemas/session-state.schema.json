@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://adaptive-workflow.local/schemas/session-state.schema.json",
   "title": "Session State Schema",
-  "description": "Schema for .mycelium/state/session_state.json",
+  "description": "Schema for .mycelium/state.json",
   "type": "object",
   "required": ["status", "started_at", "last_updated"],
   "properties": {

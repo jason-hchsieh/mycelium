@@ -135,7 +135,7 @@ Why: Context corruption or overload causing errors.
 
 **Action:**
 Creating checkpoint and spawning fresh agent.
-Progress file: .mycelium/state/progress.md
+Progress file: .mycelium/progress.md
 Resume at: Task 2.3 (password hashing)
 ```
 

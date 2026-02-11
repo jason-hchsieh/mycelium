@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://adaptive-workflow.local/schemas/setup-state.schema.json",
   "title": "Setup State Schema",
-  "description": "Schema for .mycelium/state/setup_state.json - tracks bootstrap progress",
+  "description": "Schema for .mycelium/setup_state.json - tracks bootstrap progress",
   "type": "object",
   "required": ["status", "project_type", "started_at", "last_updated"],
   "properties": {

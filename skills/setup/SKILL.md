@@ -25,11 +25,11 @@ The setup workflow detects project type, gathers configuration through interacti
 
 ### Step 1: Check for Existing Setup
 
-First, check if `.mycelium/state/setup_state.json` exists:
+First, check if `.mycelium/setup_state.json` exists:
 
 ```bash
 # Check for existing setup
-ls .mycelium/state/setup_state.json
+ls .mycelium/setup_state.json
 ```
 
 **If exists and status is "completed"**:
@@ -85,7 +85,7 @@ Analyze the current directory to determine if this is a new or existing project.
 
 ### Step 3: Interactive Setup
 
-Ask questions ONE AT A TIME in sections. Save state after EACH answer to `.mycelium/state/setup_state.json`.
+Ask questions ONE AT A TIME in sections. Save state after EACH answer to `.mycelium/setup_state.json`.
 
 #### PRODUCT Section (what & why)
 
@@ -239,9 +239,8 @@ project/
 │   │   ├── integration-issues/
 │   │   └── patterns/
 │   │       └── critical-patterns.md
-│   └── state/                   # Session state
-│       ├── setup_state.json
-│       └── session_state.json
+│   ├── state.json               # Session state
+│   └── setup_state.json         # Setup progress
 └── docs/                        # User documentation (if not exists)
 ```
 
@@ -406,7 +405,7 @@ git branch --show-current || git checkout -b main
 .worktrees/
 
 # Session state (local only)
-.mycelium/state/session_state.json
+.mycelium/state.json
 
 # Language/framework specific
 node_modules/
@@ -494,7 +493,7 @@ If project uses linters/formatters:
 }
 ```
 
-**Initialize session_state.json**:
+**Initialize state.json**:
 ```json
 {
   "project_name": "{name}",

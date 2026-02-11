@@ -11,10 +11,9 @@ if [ ! -d ".mycelium" ]; then
 fi
 
 # Load session state or create new
-if [ ! -f ".mycelium/state/session_state.json" ]; then
+if [ ! -f ".mycelium/state.json" ]; then
   echo "📋 Initializing new session..." >&2
-  mkdir -p .mycelium/state
-  cat > .mycelium/state/session_state.json <<EOF
+  cat > .mycelium/state.json <<EOF
 {
   "session_id": "$(uuidgen 2>/dev/null || echo "session-$(date +%s)")",
   "started_at": "$(date -Iseconds 2>/dev/null || date -u +%Y-%m-%dT%H:%M:%SZ)",
@@ -61,7 +60,7 @@ if [ -d ".worktrees" ]; then
 fi
 
 # Check for in-progress work
-if [ -f ".mycelium/state/progress.md" ]; then
+if [ -f ".mycelium/progress.md" ]; then
   echo "📝 Progress state found - resumable session" >&2
 fi
 
