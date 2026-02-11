@@ -1,6 +1,6 @@
 # `.mycelium/` Directory Structure
 
-The `.mycelium/` directory stores all workflow state, plans, and knowledge for a project. It is created by `/mycelium-setup` or automatically by `/mycelium-plan` when it doesn't exist.
+The `.mycelium/` directory stores all workflow state, plans, and knowledge for a project.
 
 ## Directory Layout
 
@@ -29,9 +29,9 @@ The `.mycelium/` directory stores all workflow state, plans, and knowledge for a
     └── review_stage2_report.md # Quality review output
 ```
 
-## Minimum Bootstrap
+## Minimum Structure
 
-When `/mycelium-plan` is invoked without a full setup, it creates the minimum structure:
+The minimum viable structure for workflow operations (planning, status):
 
 ```
 .mycelium/
@@ -40,7 +40,7 @@ When `/mycelium-plan` is invoked without a full setup, it creates the minimum st
     └── session_state.json
 ```
 
-Run `/mycelium-setup` for the full interactive setup including `context/`, `solutions/`, and `learned/` directories.
+The full structure (with `context/`, `solutions/`, `learned/`) is needed for knowledge compounding.
 
 ## `.gitignore`
 
