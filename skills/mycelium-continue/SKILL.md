@@ -36,16 +36,16 @@ Resume interrupted work with context-aware scope detection.
 5. **Load appropriate skill and execute**:
 
    **Full mode** (orchestration):
-   - Load `workflow/orchestration` skill
+   - Load `orchestration` skill
    - Resume from current phase checkpoint
    - Chain through remaining phases: plan → work → review → capture
 
    **Single mode** (phase-specific):
    - Map `current_phase` to skill:
-     - `planning` → Load `workflow/planning` skill
-     - `implementation` → Load `workflow/tdd` + `workflow/verification` skills
-     - `review` → Load `workflow/review` skill
-     - `capture` → Load `workflow/solution-capture` skill
+     - `planning` → Load `planning` skill
+     - `implementation` → Load `tdd` + `verification` skills
+     - `review` → Load `review` skill
+     - `capture` → Load `solution-capture` skill
    - Resume from checkpoint within that phase
    - Stop after phase completion
 

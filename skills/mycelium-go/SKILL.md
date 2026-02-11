@@ -17,7 +17,7 @@ Execute the complete mycelium workflow autonomously from planning to knowledge c
 
 2. **Update session state** - Write `invocation_mode: "full"` to `.workflow/state/session_state.json`
 
-3. **Load the orchestration skill** - Use Skill tool to load `workflow/orchestration`
+3. **Load the orchestration skill** - Use Skill tool to load `orchestration`
 
 4. **Execute full workflow** - Follow orchestration skill which handles:
 

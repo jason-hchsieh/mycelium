@@ -11,7 +11,7 @@ Bootstrap a new or existing project with the mycelium workflow structure.
 
 ## Your Task
 
-1. **Load the setup skill** - Use Skill tool to load `workflow/setup`
+1. **Load the setup skill** - Use Skill tool to load `setup`
 
 2. **Parse arguments**:
    - `--resume`: Continue interrupted setup from last checkpoint

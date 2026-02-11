@@ -14,8 +14,8 @@ Execute implementation tasks following strict TDD methodology.
 1. **Update session state** - Write `invocation_mode: "single"` to `.workflow/state/session_state.json`
 
 2. **Load execution skills**:
-   - Use Skill tool to load `workflow/tdd` (mandatory)
-   - Use Skill tool to load `workflow/verification` (mandatory)
+   - Use Skill tool to load `tdd` (mandatory)
+   - Use Skill tool to load `verification` (mandatory)
 
 3. **Parse arguments**:
    - `task_id`: Specific task (e.g., "1.1")

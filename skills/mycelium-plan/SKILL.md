@@ -13,7 +13,7 @@ Transform user request into structured, executable plan with TDD task breakdown.
 
 1. **Update session state** - Write `invocation_mode: "single"` to `.workflow/state/session_state.json`
 
-2. **Load the planning skill** - Use Skill tool to load `workflow/planning`
+2. **Load the planning skill** - Use Skill tool to load `planning`
 
 3. **Parse input**:
    - If user provided task description: Use it

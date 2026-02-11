@@ -13,7 +13,7 @@ Comprehensive two-stage code review: spec compliance → quality assessment.
 
 1. **Update session state** - Write `invocation_mode: "single"` to `.workflow/state/session_state.json`
 
-2. **Load the review skill** - Use Skill tool to load `workflow/review`
+2. **Load the review skill** - Use Skill tool to load `review`
 
 3. **Parse arguments**:
    - `--stage=1`: Spec compliance only (blocking gate)

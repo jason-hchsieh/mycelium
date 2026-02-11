@@ -13,7 +13,7 @@ Extract and preserve learnings from completed work to grow the mycelium knowledg
 
 1. **Update session state** - Write `invocation_mode: "single"` to `.workflow/state/session_state.json`
 
-2. **Load the solution-capture skill** - Use Skill tool to load `workflow/solution-capture`
+2. **Load the solution-capture skill** - Use Skill tool to load `solution-capture`
 
 3. **Parse arguments**:
    - `track_id`: Specific completed track

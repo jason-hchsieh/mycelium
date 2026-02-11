@@ -126,7 +126,7 @@ cat .workflow/state/session_state.json
 
 ### Invoke Planning Skill
 
-**Load**: `workflow/planning` skill
+**Load**: `planning` skill
 
 **Execute planning workflow**:
 1. Clarify requirements (Phase 1)
@@ -198,8 +198,8 @@ git status --porcelain
 ### Invoke TDD and Verification Skills
 
 **Load**:
-- `workflow/tdd` (mandatory)
-- `workflow/verification` (mandatory)
+- `tdd` (mandatory)
+- `verification` (mandatory)
 
 **Execute implementation**:
 
@@ -361,7 +361,7 @@ Please provide API key and resume.
 
 ### Invoke Review Skill
 
-**Load**: `workflow/review` skill
+**Load**: `review` skill
 
 **Execute two-stage review**:
 
@@ -456,7 +456,7 @@ If P1 issues or user chooses to fix:
 
 ### Invoke Solution Capture Skill
 
-**Load**: `workflow/solution-capture` skill
+**Load**: `solution-capture` skill
 
 **Execute knowledge extraction**:
 
