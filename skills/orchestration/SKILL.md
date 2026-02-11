@@ -125,6 +125,37 @@ ls .workflow/solutions/
 cat .workflow/state/session_state.json
 ```
 
+### Discover Capabilities
+
+**Extract available skills and agents from the current session:**
+
+1. **Skills**: Read the system prompt's skill listing (the system-reminder block that starts with "The following skills are available for use with the Skill tool"). Extract each skill name and description.
+
+2. **Agents**: Read the Task tool description (the section listing "Available agent types and the tools they have access to"). Extract each agent type and its capabilities.
+
+3. **MCP Tools**: Check for any MCP server tools available in the current session. MCP (Model Context Protocol) servers provide additional tools beyond the built-in set. Look for MCP-provided tools in the tool list or system prompt.
+
+4. **Cache discovered capabilities** in `.workflow/state/session_state.json`:
+```json
+{
+  "discovered_capabilities": {
+    "skills": [
+      { "name": "mycelium:planning", "description": "..." },
+      { "name": "mycelium:tdd", "description": "..." }
+    ],
+    "agents": [
+      { "name": "general-purpose", "tools": ["*"], "best_for": "..." },
+      { "name": "Bash", "tools": ["Bash"], "best_for": "..." }
+    ],
+    "mcp_tools": [
+      { "name": "tool-name", "server": "mcp-server-name", "description": "..." }
+    ]
+  }
+}
+```
+
+5. **Use cached capabilities** when assigning agents/skills to tasks in the plan. Only assign capabilities that exist in the discovered list.
+
 ### Invoke Planning Skill
 
 **Load**: `planning` skill
@@ -132,7 +163,7 @@ cat .workflow/state/session_state.json
 **Execute planning workflow**:
 1. Clarify requirements (Phase 1)
 2. Smart research gate (Phase 1.5)
-3. Discover capabilities (Phase 2)
+3. Discover capabilities (Phase 2) - use cached capabilities from above
 4. Create plan (Phase 3)
 
 **Decision gate** (Autonomous):

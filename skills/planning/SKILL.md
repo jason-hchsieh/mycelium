@@ -355,8 +355,12 @@ Acceptance Criteria:
 - Define success criteria
 
 **Phase 3: Capability Discovery**
-- Identify available agents/skills/MCPs for assigned capabilities
-- Verify chosen capabilities exist
+- Discover available skills by reading the system prompt's skill listing (the system-reminder block that starts with "The following skills are available for use with the Skill tool")
+- Discover available agents by reading the Task tool description (the section listing "Available agent types and the tools they have access to")
+- Discover available MCP tools by checking for MCP server tools in the tool list or system prompt (MCP servers provide additional tools beyond the built-in set)
+- Store discovered capabilities in `.workflow/state/session_state.json` under `discovered_capabilities.skills`, `discovered_capabilities.agents`, and `discovered_capabilities.mcp_tools`
+- Verify that capabilities assigned to tasks in the plan actually exist in the discovered list
+- If a capability doesn't exist, reassign to the closest available match
 
 **Phase 4: Implementation**
 - Execute tasks in parallel where possible
