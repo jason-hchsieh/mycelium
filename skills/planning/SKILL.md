@@ -355,12 +355,13 @@ Acceptance Criteria:
 - Define success criteria
 
 **Phase 3: Capability Discovery**
-- Discover available skills: read the system-reminder skill listing AND check for any skills not injected into the prompt (the system-reminder may omit some due to context optimization)
-- Discover available agents: read the Task tool description COMPLETELY - extract EVERY agent type including commonly missed built-in agents (claude-code-guide, statusline-setup)
-- Discover available MCP tools: check for MCP server tools in the tool list or system prompt
-- Store discovered capabilities in `.workflow/state/session_state.json` under `discovered_capabilities.skills`, `discovered_capabilities.agents`, and `discovered_capabilities.mcp_tools`
-- Verify that capabilities assigned to tasks in the plan actually exist in the discovered list
-- If a capability doesn't exist, reassign to the closest available match
+- Scan plugin cache: read `~/.claude/plugins/installed_plugins.json`, extract `pluginName` (before `@`) and `installPath` for each plugin
+- Discover skills: glob `{installPath}/skills/*/SKILL.md` per plugin, read YAML frontmatter `name`/`description`, fully-qualify as `{pluginName}:{name}`
+- Discover plugin agents: glob `{installPath}/agents/**/*.md` per plugin, read YAML frontmatter, fully-qualify as `{pluginName}:{name}`
+- Add built-in agents (not in cache): read Task tool description for Bash, general-purpose, Explore, Plan, claude-code-guide, statusline-setup
+- Check for MCP tools (not in cache): scan system prompt for MCP server tools
+- Store all discovered capabilities in `.workflow/state/session_state.json` under `discovered_capabilities`
+- Verify capabilities assigned to tasks actually exist; reassign if not
 
 **Phase 4: Implementation**
 - Execute tasks in parallel where possible

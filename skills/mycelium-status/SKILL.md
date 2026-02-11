@@ -16,19 +16,17 @@ Display current workflow state and progress dashboard.
    - Read active plan from `.workflow/plans/`
    - Get git status and recent commits
 
-2. **Discover capabilities** (extract from current session context - do NOT hardcode or guess):
+2. **Discover capabilities** (scan plugin cache filesystem - do NOT hardcode or guess):
 
-   **Skills** - Check ALL of these sources and merge (deduplicate by name):
-   - Primary: The system-reminder block listing skills available for the Skill tool. Extract every `plugin:skill-name` entry.
-   - Secondary: The Skill tool's own description or metadata if it lists available skills.
-   - Note: The system-reminder may NOT list all registered skills due to context optimization. Some plugin skills (e.g., git:commit-and-push) may be registered but not injected into the prompt. Acknowledge any known gaps.
+   **Skills & Agents from plugins** - Read `~/.claude/plugins/installed_plugins.json`. For each plugin:
+   - `pluginName` = part before `@` in key (e.g., `mycelium` from `mycelium@jasonhch-plugins`)
+   - `installPath` = first array element's `installPath`
+   - Skills: glob `{installPath}/skills/*/SKILL.md`, read YAML frontmatter for `name`/`description`. Fully-qualified: `{pluginName}:{name}`
+   - Agents: glob `{installPath}/agents/**/*.md`, read YAML frontmatter for `name`/`description`. Fully-qualified: `{pluginName}:{name}`
 
-   **Agents** - Read the Task tool description COMPLETELY. Extract EVERY agent listed under "Available agent types and the tools they have access to". This includes:
-   - Built-in agents (Bash, general-purpose, Explore, Plan, claude-code-guide, statusline-setup, etc.)
-   - Plugin agents (e.g., code-simplifier:*, mycelium:*, etc.)
-   - IMPORTANT: Do not skip any agent. Read the FULL list carefully. Common missed agents: `claude-code-guide`, `statusline-setup`.
+   **Built-in agents** (NOT in plugin cache) - Read Task tool description for: Bash, general-purpose, Explore, Plan, claude-code-guide, statusline-setup.
 
-   **MCP Tools** - Check for any MCP server tools available in the current session (listed as additional tools from MCP servers in the system prompt or tool list).
+   **MCP Tools** (NOT in plugin cache) - Check system prompt for any MCP server tools.
 
 3. **Display dashboard**:
    ```

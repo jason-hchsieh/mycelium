@@ -127,30 +127,35 @@ cat .workflow/state/session_state.json
 
 ### Discover Capabilities
 
-**Extract available skills and agents from the current session:**
+**Scan the plugin cache filesystem to discover ALL available skills and agents:**
 
-1. **Skills** - Check ALL sources and merge (deduplicate by name):
-   - Primary: The system-reminder block listing skills for the Skill tool. Extract every `plugin:skill-name` entry.
-   - Note: The system-reminder may NOT list all registered skills due to context optimization. Some plugin skills may be registered but not injected. Acknowledge any known gaps.
+1. **Read plugin registry** - Read `~/.claude/plugins/installed_plugins.json`. For each entry:
+   - Extract `pluginName` = part before `@` in the key (e.g., `mycelium` from `mycelium@jasonhch-plugins`)
+   - Extract `installPath` from the first array element
 
-2. **Agents** - Read the Task tool description COMPLETELY. Extract EVERY agent under "Available agent types and the tools they have access to":
-   - Built-in agents (Bash, general-purpose, Explore, Plan, claude-code-guide, statusline-setup, etc.)
-   - Plugin agents (e.g., code-simplifier:*, mycelium:*, etc.)
-   - IMPORTANT: Do not skip any. Read the FULL list. Commonly missed: `claude-code-guide`, `statusline-setup`.
+2. **Scan for skills** - For each plugin, glob `{installPath}/skills/*/SKILL.md`. For each match:
+   - Read the YAML frontmatter to extract `name` and `description`
+   - Fully-qualified name: `{pluginName}:{name}` (e.g., `git:commit-and-push`)
 
-3. **MCP Tools** - Check for any MCP server tools in the current session. MCP servers provide additional tools beyond the built-in set. Look for MCP-provided tools in the tool list or system prompt.
+3. **Scan for agents** - For each plugin, glob `{installPath}/agents/**/*.md`. For each match:
+   - Read the YAML frontmatter to extract `name` and `description`
+   - Fully-qualified name: `{pluginName}:{name}` (e.g., `mycelium:learning-agent`)
 
-4. **Cache discovered capabilities** in `.workflow/state/session_state.json`:
+4. **Add built-in agents** - These are NOT in the plugin cache. Read the Task tool description and extract the built-in agent types: Bash, general-purpose, Explore, Plan, claude-code-guide, statusline-setup.
+
+5. **Check for MCP tools** - These are NOT in the plugin cache. Check the system prompt for any MCP server tools listed as additional tools.
+
+6. **Cache discovered capabilities** in `.workflow/state/session_state.json`:
 ```json
 {
   "discovered_capabilities": {
     "skills": [
       { "name": "mycelium:planning", "description": "..." },
-      { "name": "mycelium:tdd", "description": "..." }
+      { "name": "git:commit-and-push", "description": "..." }
     ],
     "agents": [
-      { "name": "general-purpose", "tools": ["*"], "best_for": "..." },
-      { "name": "Bash", "tools": ["Bash"], "best_for": "..." }
+      { "name": "general-purpose", "source": "built-in", "description": "..." },
+      { "name": "mycelium:learning-agent", "source": "plugin", "description": "..." }
     ],
     "mcp_tools": [
       { "name": "tool-name", "server": "mcp-server-name", "description": "..." }
@@ -159,7 +164,7 @@ cat .workflow/state/session_state.json
 }
 ```
 
-5. **Use cached capabilities** when assigning agents/skills to tasks in the plan. Only assign capabilities that exist in the discovered list.
+7. **Use cached capabilities** when assigning agents/skills to tasks in the plan. Only assign capabilities that exist in the discovered list.
 
 ### Invoke Planning Skill
 
