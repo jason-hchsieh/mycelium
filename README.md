@@ -424,7 +424,6 @@ All plugin functionality is implemented as skills (following the [Agent Skills s
 | **planning** | Requirements clarification, smart research gate, task breakdown | `mycelium-plan` |
 | **tdd** | Iron Law TDD - RED → GREEN → REFACTOR enforcement | `mycelium-work`, `mycelium-go` |
 | **verification** | Evidence-based validation (show actual test output) | `mycelium-work`, `mycelium-go` |
-| **review** | Two-stage review (spec compliance + parallel quality assessment) | `mycelium-review`, `mycelium-go` |
 | **solution-capture** | Knowledge extraction, pattern detection, learning documentation | `mycelium-capture`, `mycelium-go` |
 | **orchestration** | Autonomous workflow execution with decision gates | `mycelium-go`, `mycelium-continue` |
 | **context** | Project context loading and management | All skills |

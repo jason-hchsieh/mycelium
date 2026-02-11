@@ -52,7 +52,7 @@ Resume interrupted work with context-aware scope detection.
    - Map `current_phase` to skill:
      - `planning` → Load `planning` skill
      - `implementation` → Load `tdd` + `verification` skills
-     - `review` → Load `review` skill
+     - `review` → Load `mycelium-review` skill
      - `capture` → Load `solution-capture` skill
    - Resume from checkpoint within that phase
    - Stop after phase completion

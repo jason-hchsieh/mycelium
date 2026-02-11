@@ -404,7 +404,7 @@ Please provide API key and resume.
 
 ### Invoke Review Skill
 
-**Load**: `review` skill
+**Load**: `mycelium-review` skill
 
 **Execute two-stage review**:
 
