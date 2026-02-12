@@ -368,8 +368,9 @@ Captures:
 
 | Skill | Description |
 |-------|-------------|
+| `/mycelium-view [task\|track_id] [--verbose]` | Preview workflow plan without execution (dry-run mode with optional workflow diagram) |
 | `/mycelium-status [--verbose]` | Display current progress and state |
-| `/mycelium-continue [--full]` | Resume interrupted work from checkpoint |
+| `/mycelium-continue [--full] [--track <id>]` | Resume interrupted work from checkpoint |
 
 ### Usage Patterns
 
@@ -411,7 +412,8 @@ All plugin functionality is implemented as skills (following the [Agent Skills s
 | **work** | Execute tasks with strict TDD enforcement |
 | **review** | Two-stage review (spec compliance + quality) |
 | **capture** | Extract learnings and grow knowledge layer |
-| **continue** | Resume interrupted workflow from checkpoint |
+| **view** | Preview workflow plan without execution (supports `--verbose` for diagram) |
+| **continue** | Resume interrupted workflow from checkpoint (supports `--track` to switch plans) |
 | **status** | Display current progress and state |
 | **setup** | Bootstrap project with mycelium structure |
 
