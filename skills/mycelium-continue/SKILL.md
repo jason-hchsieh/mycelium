@@ -36,15 +36,15 @@ Resume interrupted work with context-aware scope detection.
 
    | Condition | Behavior |
    |-----------|----------|
-   | `--full` flag provided | Load orchestration skill, resume current phase, chain through ALL remaining phases to end |
-   | `invocation_mode == "full"` (started via `/mycelium-go`) | Load orchestration skill, resume current phase, chain through ALL remaining phases to end |
+   | `--full` flag provided | Follow `mycelium-go` workflow, resume current phase, chain through ALL remaining phases to end |
+   | `invocation_mode == "full"` (started via `/mycelium-go`) | Follow `mycelium-go` workflow, resume current phase, chain through ALL remaining phases to end |
    | `invocation_mode == "single"` (started via `/workflow-[phase]`) | Load appropriate phase skill, finish current phase ONLY |
    | No `invocation_mode` in state | Treat as `"single"` — finish current phase only |
 
 6. **Load appropriate skill and execute**:
 
-   **Full mode** (orchestration):
-   - Load `orchestration` skill
+   **Full mode** (mycelium-go):
+   - Load `mycelium-go` skill (contains full workflow logic)
    - Resume from current phase checkpoint
    - Chain through remaining phases: plan → work → review → capture
 
@@ -64,7 +64,7 @@ Resume interrupted work with context-aware scope detection.
 Varies based on continuation scope:
 
 **Full mode**:
-- **orchestration**: Phase management, chaining through remaining phases
+- **mycelium-go**: Phase management, chaining through remaining phases
 
 **Single mode** (one of):
 - **planning**: If interrupted during plan phase
@@ -103,7 +103,7 @@ Varies based on continuation scope:
 ## Important
 
 - **Context-aware** - Automatically detects whether to resume single phase or full workflow
-- **`--full` override** - Forces full orchestration mode regardless of original invocation
+- **`--full` override** - Forces full workflow mode regardless of original invocation
 - **`--track` switch** - Switch to and resume a different plan (auto-pauses current plan)
 - **Verifies test baseline** - Runs tests before continuing (must pass)
 - **Handles uncommitted work** - Shows uncommitted changes, offers to stash or keep

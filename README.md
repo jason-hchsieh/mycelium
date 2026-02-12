@@ -424,16 +424,15 @@ All plugin functionality is implemented as skills (following the [Agent Skills s
 | **tdd** | Iron Law TDD - RED → GREEN → REFACTOR enforcement | `mycelium-work`, `mycelium-go` |
 | **verification** | Evidence-based validation (show actual test output) | `mycelium-work`, `mycelium-go` |
 | **solution-capture** | Knowledge extraction, pattern detection, learning documentation | `mycelium-capture`, `mycelium-go` |
-| **orchestration** | Autonomous workflow execution with decision gates | `mycelium-go`, `mycelium-continue` |
 | **context** | Project context loading and management | All skills |
 | **recovery** | Handle blockers and stuck states | As needed |
 
 ### Skill Architecture
 
-User-facing skills are **thin wrappers** that delegate to internal skills:
-- **User-facing skills** (~20-60 lines): Parse args, load internal skills, provide context
-- **Internal skills** (detailed guides): Contain all workflow logic and best practices
-- **Benefit**: Update workflow once (in internal skill), affects all user-facing skills using it
+User-facing skills contain full workflow logic directly:
+- **`mycelium-go`** contains the complete autonomous orchestration engine (plan → work → review → capture)
+- **Internal skills** (planning, tdd, verification, etc.): Contain domain-specific logic and best practices
+- **Benefit**: Each user-facing skill is self-contained; internal skills provide reusable domain expertise
 
 ## Agents
 
@@ -552,7 +551,6 @@ mycelium/
 │   ├── mycelium-status/      # User-facing: display progress
 │   ├── mycelium-setup/       # User-facing: bootstrap project
 │   ├── workflow/
-│   │   ├── orchestration/    # Internal: autonomous execution engine
 │   │   ├── planning/         # Internal: task breakdown guidance
 │   │   ├── tdd/              # Internal: TDD enforcement
 │   │   ├── verification/     # Internal: evidence-based validation
