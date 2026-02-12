@@ -141,7 +141,7 @@ flowchart TD
 
     class Bootstrap,Interactive,CreateStructure,GitInit bootstrap
     class Phase0,LoadContext,LoadKnowledge,DiscoverCaps context
-    class Phase1,Analyze,Phase15,Phase2,LoadCachedCaps,DecomposeRequest,DecomposeFeatures,DefineGitStrategy,CreatePlan,AssignCaps,VerifyAssign planning
+    class Phase1,Phase15,Phase2,LoadCachedCaps,DecomposeRequest,DecomposeFeatures,DefineGitStrategy,AssignCaps,VerifyAssign planning
     class ParallelFeatures,CreateWorktrees,SpawnFeatureAgents,FeatureTasks,SingleFeature,CreateBranch,ExecuteTasks implementation
     class Phase45,EvidenceCheck,RunTests,Coverage,Lint,Build,Phase45B,Summarize,UpdateProgress,SpawnFresh verification
     class Phase5,Stage1,Stage2,Security,Performance,Architecture,CombineReview,FixSpec,FixIssues review
