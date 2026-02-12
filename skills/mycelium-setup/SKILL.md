@@ -27,7 +27,7 @@ This workflow guides you through bootstrapping a project with the mycelium workf
 
 ### Step 1: Check for Existing Setup
 
-First, check if `.mycelium/setup_state.json` exists:
+First, check if [setup_state.json][setup-state-schema] exists:
 
 ```bash
 # Check for existing setup
@@ -40,7 +40,7 @@ ls .mycelium/setup_state.json
 - EXIT
 
 **If exists and status is "in_progress"**:
-- Load setup_state.json
+- Load [setup_state.json][setup-state-schema]
 - Show what's been completed
 - Offer to resume from checkpoint
 - Continue from current_section and current_question
@@ -87,7 +87,7 @@ Analyze the current directory to determine if this is a new or existing project.
 
 ### Step 3: Interactive Setup
 
-Ask questions ONE AT A TIME in sections. Save state after EACH answer to `.mycelium/setup_state.json`.
+Ask questions ONE AT A TIME in sections. Save state after EACH answer to [setup_state.json][setup-state-schema].
 
 #### PRODUCT Section (what & why)
 
@@ -99,7 +99,7 @@ Provide: name and one-line description
 Example: "TaskFlow - A workflow automation tool for development teams"
 ```
 
-Save to setup_state.json:
+Save to [setup_state.json][setup-state-schema]:
 ```json
 {
   "answers": {
@@ -478,7 +478,7 @@ If project uses linters/formatters:
 
 ### Step 7: Finalize Setup
 
-**Update setup_state.json**:
+**Update [setup_state.json][setup-state-schema]**:
 ```json
 {
   "status": "completed",
@@ -541,7 +541,7 @@ Next steps:
 
 ## State Management
 
-The `setup_state.json` enables resume functionality:
+The [setup_state.json][setup-state-schema] enables resume functionality:
 
 ```json
 {
@@ -570,7 +570,7 @@ The `setup_state.json` enables resume functionality:
 
 When resuming (state shows "in_progress"):
 
-1. Automatically detect in-progress setup from setup_state.json
+1. Automatically detect in-progress setup from [setup_state.json][setup-state-schema]
 2. Show progress:
    ```
    Resuming setup...
@@ -607,7 +607,7 @@ When resuming (state shows "in_progress"):
 - Provide examples of good answers
 
 **Interrupted**:
-- State is saved after each answer in setup_state.json
+- State is saved after each answer in [setup_state.json][setup-state-schema]
 - Running `/mycelium-setup` again automatically resumes from checkpoint
 - No data loss
 
