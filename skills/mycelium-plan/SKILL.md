@@ -551,3 +551,51 @@ Major deviations require replanning:
 [plan-template]: ../../templates/plans/plan.md.template
 [plan-schema]: ../../schemas/plan-frontmatter.schema.json
 [enums]: ../../schemas/enums.json
+
+## Examples
+
+### Example 1: Feature Planning
+**User request:** "plan user authentication"
+
+**Workflow:**
+1. Clarifies: Which auth method? → JWT
+2. Breaks down: 8 tasks across 3 phases
+3. Assigns: TDD to each task, proper dependencies
+4. Saves: Plan to `.mycelium/plans/2026-02-12-auth_20260212.md`
+
+**Result:** Structured plan ready for `/mycelium-work`
+
+### Example 2: List All Plans
+**User request:** `/mycelium-plan --list`
+
+**Output:**
+```
+Plans:
+ * auth_20260212        in_progress  5/8 tasks   (active)
+   bugfix_20260211      completed    3/3 tasks
+   optimize_20260210    paused       2/7 tasks
+```
+
+### Example 3: Switch Plans
+**User request:** `/mycelium-plan --switch optimize_20260210`
+
+**Workflow:**
+1. Pauses current plan (auth_20260212)
+2. Activates optimize_20260210
+3. Updates current_track in state.json
+
+**Result:** Now working on optimization plan, can resume auth later
+
+## Troubleshooting
+
+**Error:** "Plan `xyz` not found"
+**Cause:** Invalid track_id provided to --switch
+**Solution:** Run `/mycelium-plan --list` to see available plans
+
+**Issue:** "Task dependencies create cycle"
+**Cause:** blockedBy/blocks fields create circular dependency
+**Solution:** Review dependency graph, remove circular reference
+
+**Issue:** "All tasks marked as blocked"
+**Cause:** Dependency chain not properly initialized
+**Solution:** Ensure at least one task has `blockedBy: []` to start execution

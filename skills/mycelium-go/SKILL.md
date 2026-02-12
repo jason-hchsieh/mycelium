@@ -854,3 +854,63 @@ Workflow is successful when:
 [progress-schema]: ../../schemas/progress-state.schema.json
 [metrics-schema]: ../../schemas/metrics.schema.json
 [enums]: ../../schemas/enums.json
+
+## Examples
+
+### Example 1: Building a New Feature
+**User request:** "build user authentication with JWT"
+
+**Workflow:**
+1. **Planning** - Clarifies: OAuth vs JWT (user chose JWT), registration included, password requirements
+2. **Creates plan** - 8 tasks across 3 phases with TDD breakdown
+3. **Implementation** - Executes tasks with RED→GREEN→REFACTOR cycle
+4. **Review** - Two-stage review finds 0 P1, 2 P2 issues (noted for later)
+5. **Capture** - Extracts JWT pattern, saves to solutions library
+
+**Result:** Feature implemented, tested (85% coverage), reviewed, and knowledge captured in 45 minutes.
+
+### Example 2: Debugging an Issue
+**User request:** "fix memory leak in session handler"
+
+**Workflow:**
+1. **Investigation** - Profiles memory usage, identifies leak source
+2. **Planning** - Creates focused plan: reproduce, fix, verify, prevent
+3. **Implementation** - Adds test reproducing leak, fixes issue, verifies
+4. **Review** - Confirms fix, checks for similar patterns
+5. **Capture** - Documents leak pattern and prevention in anti-patterns
+
+**Result:** Memory leak fixed, test added, pattern documented for future prevention.
+
+### Example 3: Technical Question
+**User request:** "Why does the API return 500 on concurrent requests?"
+
+**Workflow:**
+1. **Investigation** - Analyzes logs, identifies race condition
+2. **Explanation** - Provides root cause analysis  
+3. **Solution plan** - Proposes locking strategy
+4. **Implementation** - User approves, implements fix
+5. **Capture** - Documents concurrency pattern
+
+**Result:** Question answered with actionable solution and implementation completed.
+
+## Troubleshooting
+
+**Error:** "Planning failed: Requirements unclear"
+**Cause:** Ambiguous request with multiple valid interpretations
+**Solution:** mycelium-go stops to ask clarifying questions. Answer them to proceed.
+
+**Error:** "Tests failing after 3 attempts"
+**Cause:** Implementation approach has fundamental issue
+**Solution:** Check error logs in progress.md. Consider simplifying approach or using `/recovery` for systematic debugging.
+
+**Error:** "Review FAILED: 2 critical (P1) issues"
+**Cause:** Security vulnerabilities or critical bugs found
+**Solution:** P1 issues must be fixed before merge. Review findings, implement fixes, re-run review.
+
+**Error:** "No .mycelium directory found"
+**Cause:** Project not initialized
+**Solution:** Run `/mycelium-setup` first to bootstrap project structure.
+
+**Blocked:** "Task 2.3 blocked: Waiting for API key"
+**Cause:** External dependency missing
+**Solution:** Provide required information, then run `/mycelium-continue` to resume.

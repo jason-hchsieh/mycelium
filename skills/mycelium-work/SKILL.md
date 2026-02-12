@@ -84,3 +84,43 @@ When executing "all" tasks:
 [session-state-docs]: ../../docs/session-state.md
 [session-state-schema]: ../../schemas/session-state.schema.json
 [plan-schema]: ../../schemas/plan-frontmatter.schema.json
+
+## Examples
+
+### Example 1: Execute Specific Task
+**Command:** `/mycelium-work 1.1`
+
+**Workflow:**
+1. Marks task 1.1 as `[~]` in progress
+2. Loads TDD skill - enforces test-first
+3. Executes: Write test → Verify RED → Implement → Verify GREEN
+4. Commits with evidence
+5. Marks task as `[x]` complete
+
+**Result:** Task 1.1 done with passing tests
+
+### Example 2: Execute All Tasks  
+**Command:** `/mycelium-work all`
+
+**Workflow:**
+1. Identifies unblocked tasks (blockedBy: [])
+2. Creates worktrees for parallel execution
+3. Spawns agents per task
+4. Each agent follows TDD cycle
+5. Merges on completion, runs full test suite
+
+**Result:** All independent tasks complete in parallel
+
+## Troubleshooting
+
+**Error:** "Baseline tests failing"
+**Cause:** Existing tests broken before new work
+**Solution:** Fix existing tests first, then proceed with new work
+
+**Error:** "Tests still failing after 3 attempts"
+**Cause:** Implementation approach or test is incorrect
+**Solution:** Use `/recovery` skill for systematic debugging
+
+**Issue:** "Cannot create worktree"
+**Cause:** Branch already has a worktree or git repository issue
+**Solution:** Check `git worktree list`, remove stale worktrees with `git worktree remove`
