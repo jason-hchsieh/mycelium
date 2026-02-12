@@ -1,8 +1,15 @@
 ---
 name: mycelium-view
-description: Preview workflow plan without execution (dry-run mode)
+description: Previews complete workflow plan without execution (dry-run mode). Use when user says "show me the plan", "what would this look like", "preview [task]", "dry run", or wants to see task breakdown before committing. Supports --verbose to display workflow diagram. No implementation, tests, or reviews executed.
+license: MIT
+version: 0.9.0
 argument-hint: "[task description] | [track_id] [--verbose]"
 allowed-tools: ["Skill", "Read", "Write", "Bash", "Glob", "Grep"]
+metadata:
+  author: Jason Hsieh
+  category: planning
+  tags: [preview, dry-run, planning]
+  documentation: https://github.com/jason-hchsieh/mycelium
 ---
 
 # Mycelium View (Dry-Run Preview)

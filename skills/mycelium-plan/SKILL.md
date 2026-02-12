@@ -1,8 +1,15 @@
 ---
 name: mycelium-plan
-description: Create implementation plan with task breakdown
+description: Creates structured implementation plans with TDD task breakdown and dependency management. Use when user says "plan this", "create a plan for [task]", "break down [feature]", "how should we implement [x]", "list all plans", or "switch to [plan]". Supports multi-plan management with parallel execution strategy and systematic task decomposition.
+license: MIT
+version: 0.9.0
 argument-hint: "[task description] | --list | --switch <track_id>"
 allowed-tools: ["Skill", "Read", "Write", "Edit", "Glob", "Grep", "AskUserQuestion"]
+metadata:
+  author: Jason Hsieh
+  category: planning
+  tags: [planning, tdd, task-decomposition, parallel-execution]
+  documentation: https://github.com/jason-hchsieh/mycelium
 ---
 
 # Workflow Plan

@@ -1,8 +1,14 @@
 ---
 name: Evidence-Based Verification
-description: This skill should be used during Phase 4.5 (Verification) when the user requests "verify this", "check if it works", "run tests", or after implementation completion. Enforces evidence-based validation - no "should work" claims, requires actual test execution and proof of correctness.
+description: This skill should be used during Phase 4.5 (Verification) when the user requests "verify this", "check if it works", "run tests", "prove it works", or after implementation completion. Enforces evidence-based validation - no "should work" claims allowed, requires actual test execution with output shown and proof of correctness.
 user-invocable: false
-version: 0.1.0
+license: MIT
+version: 0.9.0
+metadata:
+  author: Jason Hsieh
+  category: testing
+  tags: [evidence-based, testing, verification, quality-assurance]
+  documentation: https://github.com/jason-hchsieh/mycelium
 ---
 
 # Evidence-Based Verification

@@ -1,8 +1,14 @@
 ---
 name: Recovery and Escalation Protocols
-description: This skill should be used when encountering blockers, repeated failures, stuck states, or error conditions during any workflow phase. Provides systematic recovery procedures, escalation paths, and rollback protocols to handle failures gracefully.
+description: This skill should be used when encountering blockers, repeated failures (tests failing 3+ times), stuck states, error conditions, or degraded performance during any workflow phase. Provides systematic recovery procedures, escalation paths, rollback protocols, and debugging guidance to handle failures gracefully without compounding problems.
 user-invocable: false
-version: 0.1.0
+license: MIT
+version: 0.9.0
+metadata:
+  author: Jason Hsieh
+  category: recovery
+  tags: [error-handling, recovery, debugging, escalation]
+  documentation: https://github.com/jason-hchsieh/mycelium
 ---
 
 # Recovery and Escalation Protocols

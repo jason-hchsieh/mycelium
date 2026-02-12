@@ -1,8 +1,15 @@
 ---
 name: mycelium-work
-description: Execute implementation tasks with TDD enforcement
+description: Executes implementation tasks following strict TDD methodology with evidence-based verification. Use when user says "implement this", "work on [task]", "execute the plan", "build task [id]", or "run all tasks". Enforces RED→GREEN→REFACTOR cycle, shows actual test output, supports parallel execution via worktrees.
+license: MIT
+version: 0.9.0
 argument-hint: "[task_id or 'all']"
 allowed-tools: ["Skill", "Read", "Write", "Edit", "Bash", "Glob", "Grep", "Task"]
+metadata:
+  author: Jason Hsieh
+  category: implementation
+  tags: [tdd, evidence-based, parallel-execution, git-worktrees]
+  documentation: https://github.com/jason-hchsieh/mycelium
 ---
 
 # Workflow Work

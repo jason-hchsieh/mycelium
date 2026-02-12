@@ -1,8 +1,15 @@
 ---
 name: mycelium-setup
-description: Initialize project with mycelium structure
+description: Bootstraps new or existing projects with .mycelium/ workflow structure. Use when user says "setup mycelium", "initialize project", "create mycelium structure", "bootstrap workflow", or when starting a new project. Creates context files, plans directory, solutions library, and learning store. Supports --resume for interrupted setups.
+license: MIT
+version: 0.9.0
 argument-hint: "[--resume]"
 allowed-tools: ["Skill", "Read", "Write", "Edit", "Bash", "Glob", "Grep", "AskUserQuestion"]
+metadata:
+  author: Jason Hsieh
+  category: workflow
+  tags: [setup, initialization, project-bootstrap]
+  documentation: https://github.com/jason-hchsieh/mycelium
 ---
 
 # Workflow Setup

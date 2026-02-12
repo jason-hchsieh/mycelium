@@ -1,8 +1,15 @@
 ---
 name: mycelium-continue
-description: Resume interrupted workflow from last checkpoint
+description: Resumes interrupted workflow from last checkpoint with context-aware scope detection. Use when user says "continue", "resume work", "keep going", "finish this", or after interruption. Supports --full to run all remaining phases (plan→work→review→capture) and --track to switch between multiple plans. Auto-detects whether to finish current phase or run full workflow.
+license: MIT
+version: 0.9.0
 argument-hint: "[--full] [--track <track_id>]"
 allowed-tools: ["Skill", "Read", "Write", "Edit", "Bash", "Glob", "Grep", "Task", "AskUserQuestion"]
+metadata:
+  author: Jason Hsieh
+  category: workflow
+  tags: [resume, checkpoint, context-management]
+  documentation: https://github.com/jason-hchsieh/mycelium
 ---
 
 # Workflow Continue

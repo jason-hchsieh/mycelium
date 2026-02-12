@@ -1,8 +1,14 @@
 ---
 name: Context Window Management
-description: This skill should be used during Phase 4.5B (Context Sync) when context window usage exceeds 50%, after each task completion in long sessions, or when spawning fresh agents. Manages context window efficiently to prevent information loss and enable seamless handoffs between agent instances.
+description: This skill should be used during Phase 4.5B (Context Sync) when context window usage exceeds 50% (auto-triggers at 80%), after each task completion in long sessions, or when spawning fresh agents. Manages context window efficiently to prevent information loss, enables seamless handoffs between agent instances, and maintains coherence across long-running work.
 user-invocable: false
-version: 0.1.0
+license: MIT
+version: 0.9.0
+metadata:
+  author: Jason Hsieh
+  category: context
+  tags: [context-management, agent-handoff, long-sessions]
+  documentation: https://github.com/jason-hchsieh/mycelium
 ---
 
 # Context Window Management

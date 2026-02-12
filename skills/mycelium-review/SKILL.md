@@ -1,8 +1,15 @@
 ---
 name: mycelium-review
-description: Two-stage review (spec compliance + quality)
+description: Performs comprehensive two-stage code review - spec compliance (blocking gate) followed by parallel quality assessment (security, performance, architecture). Use when user says "review this", "check the code", "is this ready", "review my changes", or after completing implementation. Stage 1 must pass before Stage 2 runs.
+license: MIT
+version: 0.9.0
 argument-hint: "[--stage=1|2|all]"
 allowed-tools: ["Skill", "Read", "Write", "Bash", "Task"]
+metadata:
+  author: Jason Hsieh
+  category: review
+  tags: [code-review, quality-assurance, security, performance]
+  documentation: https://github.com/jason-hchsieh/mycelium
 ---
 
 # Two-Stage Code Review Workflow

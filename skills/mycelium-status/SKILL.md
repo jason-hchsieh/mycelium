@@ -1,8 +1,15 @@
 ---
 name: mycelium-status
-description: Display current workflow progress and state
+description: Displays current workflow state, progress dashboard, and active plans. Use when user says "show status", "what's the progress", "where are we", "list tasks", "show current state", or needs overview of work in progress. Supports --verbose for detailed output including metrics and checkpoints.
+license: MIT
+version: 0.9.0
 argument-hint: "[--verbose]"
 allowed-tools: ["Read", "Bash", "Glob"]
+metadata:
+  author: Jason Hsieh
+  category: workflow
+  tags: [status, progress, dashboard]
+  documentation: https://github.com/jason-hchsieh/mycelium
 ---
 
 # Workflow Status

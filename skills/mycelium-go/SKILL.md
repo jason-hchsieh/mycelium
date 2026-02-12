@@ -1,8 +1,15 @@
 ---
 name: mycelium-go
-description: Execute full workflow autonomously - build features, debug issues, answer questions, or investigate problems (plan → work → review → capture)
+description: Executes complete autonomous development workflow from planning to knowledge capture. Use when user says "build [feature]", "implement [functionality]", "fix [bug]", "debug [issue]", "investigate [problem]", "optimize [component]", or asks technical questions requiring systematic solution. Handles feature development, debugging, investigation, and optimization with full plan → work → review → capture cycle.
+license: MIT
+version: 0.9.0
 argument-hint: "[task/question/issue description] [--interactive]"
 allowed-tools: ["Skill", "Read", "Write", "Edit", "Bash", "Glob", "Grep", "Task", "AskUserQuestion"]
+metadata:
+  author: Jason Hsieh
+  category: workflow
+  tags: [workflow-orchestration, tdd, systematic-development, compound-engineering]
+  documentation: https://github.com/jason-hchsieh/mycelium
 ---
 
 # Workflow Go

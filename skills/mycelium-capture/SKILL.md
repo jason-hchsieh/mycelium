@@ -1,8 +1,15 @@
 ---
 name: mycelium-capture
-description: Capture learnings and patterns from completed work
+description: Extracts and preserves learnings from completed work to grow the knowledge layer. Use when user says "capture this", "document learnings", "save what we learned", "extract patterns", or after completing features. Detects 3+ pattern occurrences, promotes to critical-patterns.md, and recommends skill generation for recurring patterns.
+license: MIT
+version: 0.9.0
 argument-hint: "[track_id]"
 allowed-tools: ["Skill", "Read", "Write", "Edit", "Glob", "Grep"]
+metadata:
+  author: Jason Hsieh
+  category: documentation
+  tags: [knowledge-management, pattern-detection, compound-engineering, learning]
+  documentation: https://github.com/jason-hchsieh/mycelium
 ---
 
 # Workflow Capture
