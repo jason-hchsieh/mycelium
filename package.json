@@ -1,6 +1,6 @@
 {
   "name": "mycelium",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "Mycelium - The intelligent substrate for Claude Code development with compounding knowledge",
   "main": "index.js",
   "type": "module",
