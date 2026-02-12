@@ -439,7 +439,7 @@ Acceptance Criteria:
 
 When creating plans, discover available capabilities:
 
-**Phase 2: Capability Discovery**
+**Phase 3: Capability Discovery**
 - Scan plugin cache: read `~/.claude/plugins/installed_plugins.json`, extract `pluginName` (before `@`) and `installPath` for each plugin
 - Discover skills: glob `{installPath}/skills/*/SKILL.md` per plugin, read YAML frontmatter `name`/`description`, fully-qualify as `{pluginName}:{name}`
 - Discover plugin agents: glob `{installPath}/agents/**/*.md` per plugin, read YAML frontmatter, fully-qualify as `{pluginName}:{name}`

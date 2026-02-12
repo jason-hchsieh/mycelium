@@ -176,9 +176,9 @@ cat .mycelium/state.json
 
 **Execute planning workflow** (see mycelium-plan):
 1. Clarify requirements (Phase 1)
-2. Smart research gate (Phase 1.5)
-3. Discover capabilities (Phase 2) - use cached capabilities from above
-4. Create plan (Phase 3)
+2. Smart research gate (Phase 2)
+3. Discover capabilities (Phase 3) - use cached capabilities from above
+4. Create plan (Phase 4)
 
 **Decision gate** (Autonomous):
 ```
