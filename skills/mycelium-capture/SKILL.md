@@ -1,30 +1,32 @@
 ---
 name: mycelium-capture
-description: Extracts and preserves learnings from completed work to grow the knowledge layer. Use when user says "capture this", "document learnings", "save what we learned", "extract patterns", or after completing features. Detects 3+ pattern occurrences, promotes to critical-patterns.md, and recommends skill generation for recurring patterns.
+description: Captures learnings from completed work to grow the knowledge layer. Use when user says "capture this", "document learnings", "save what we learned", or after finalizing work. Stores solutions, decisions, conventions, preferences, anti-patterns, and effective prompts. Does NOT handle commits, PRs, or pattern detection (see mycelium-finalize and mycelium-patterns).
 license: MIT
 version: 0.9.0
 argument-hint: "[track_id]"
-allowed-tools: ["Skill", "Read", "Write", "Edit", "Glob", "Grep"]
+allowed-tools: ["Read", "Write", "Edit", "Glob", "Grep"]
 metadata:
   author: Jason Hsieh
   category: documentation
-  tags: [knowledge-management, pattern-detection, compound-engineering, learning]
+  tags: [knowledge-management, compound-engineering, learning, phase-6f]
   documentation: https://github.com/jason-hchsieh/mycelium
 ---
 
-# Workflow Capture
+# Store Learned Knowledge
 
-Extract and preserve learnings from completed work to grow the mycelium knowledge layer.
+Capture and preserve learnings from completed work to grow the mycelium knowledge layer.
 
 ## Core Principle
 
 **Every problem solved is knowledge gained. Capture it systematically so future work builds on past learnings.**
 
-This skill enforces structured solution documentation because undocumented solutions are lost knowledge. Compound engineering requires that each problem solved makes subsequent problems easier through institutional memory.
+This skill implements Phase 6F (Store Learned Knowledge) of the mycelium workflow. It enforces structured solution documentation because undocumented solutions are lost knowledge. Compound engineering requires that each problem solved makes subsequent problems easier through institutional memory.
+
+**Note:** This skill handles ONLY knowledge storage. Pattern detection is handled by `mycelium-patterns` (Phase 6E), and finalization (commits/PRs) is handled by `mycelium-finalize` (Phase 6).
 
 ## Your Task
 
-1. **Update session state** - Write `invocation_mode: "single"` to `.mycelium/state.json`
+1. **Update session state** - Write `invocation_mode: "single"` to [state.json][session-state-schema]
 
 2. **Parse arguments**:
    - `track_id`: Specific completed track
@@ -37,10 +39,8 @@ This skill enforces structured solution documentation because undocumented solut
 
 4. **Execute knowledge capture** following the process below:
    - Problem categorization (solutions/decisions/conventions/preferences/anti-patterns)
-   - Pattern extraction and documentation
    - Solution documentation with YAML validation
-   - Critical pattern updates (if 3+ similar solutions found)
-   - Knowledge structuring and promotion
+   - Knowledge structuring and storage
 
 5. **Save learnings** to appropriate locations:
    - `.mycelium/solutions/{category}/` - Problem solutions
@@ -48,9 +48,12 @@ This skill enforces structured solution documentation because undocumented solut
    - `.mycelium/learned/conventions/` - Code conventions
    - `.mycelium/learned/preferences.yaml` - User preferences
    - `.mycelium/learned/anti-patterns/` - What not to do
-   - `.mycelium/solutions/patterns/critical-patterns.md` - Recurring patterns
+   - `.mycelium/learned/effective-prompts/` - Prompts that worked well
 
-6. **Update session capabilities** with new patterns discovered
+6. **Mark workflow complete:**
+   - Update `current_phase: "completed"` in state.json
+   - Set `workflow_complete: true`
+   - No further phase chaining (workflow ends here)
 
 ---
 
@@ -250,62 +253,6 @@ Save to `.mycelium/solutions/{category}/`:
 `{descriptive-name}-{YYYYMMDD}.md`
 
 Example: `n-plus-one-brief-20260203.md`
-
-### Step 6: Pattern Detection
-
-Check for repeated patterns:
-
-**When 3+ similar issues exist:**
-1. Identify common theme
-2. Extract general pattern
-3. Promote to `critical-patterns.md`
-4. Link from individual solutions
-5. Show pattern in all future sessions
-
-**Critical Pattern Structure:**
-```yaml
-pattern_id: PAT-001
-name: N+1 Query Prevention
-severity: critical
-occurrences: 5
-promoted_from:
-  - .mycelium/solutions/performance-issues/n-plus-one-brief.md
-  - .mycelium/solutions/performance-issues/n-plus-one-users.md
-problem_type: performance_issue
-root_cause: missing_include
-tags: [n-plus-one, database, performance]
-```
-
----
-
-## Knowledge Promotion Options
-
-After capturing solution, offer choices:
-
-### 1. Continue Workflow
-- Solution stored, continue with next task
-- Most common choice
-- Knowledge available for future lookups
-
-### 2. Add to Required Reading
-- Promote to critical-patterns.md
-- Shown at start of every session
-- Use for critical/repeated patterns
-
-### 3. Link Related Issues
-- Connect to similar past solutions
-- Build knowledge graph
-- Easier to find related fixes
-
-### 4. Add to Existing Skill
-- Enhance existing skill with new example
-- Update best practices
-- Strengthen skill guidance
-
-### 5. Create New Project Skill
-- Generate dedicated skill for this pattern
-- Use when pattern is project-specific
-- Enables auto-application in future work
 
 ---
 
@@ -679,6 +626,40 @@ Added mutex around cache read-write:
 
 ---
 
+## Workflow Completion
+
+After capturing all learnings, mark the workflow as complete:
+
+**Update state.json:**
+
+```json
+{
+  "current_phase": "completed",
+  "checkpoints": {
+    "finalization_complete": "2026-02-13T11:35:00Z",
+    "pattern_detection_complete": "2026-02-13T11:40:00Z",
+    "knowledge_capture_complete": "2026-02-13T11:45:00Z"
+  },
+  "workflow_complete": true
+}
+```
+
+**No further chaining:**
+
+```javascript
+// Workflow ends here - no next phase
+output("✅ Knowledge captured. Workflow complete!")
+output("")
+output("Captured:")
+output("  • {count} solutions")
+output("  • {count} decisions")
+output("  • {count} conventions")
+output("")
+output("Knowledge available for future sessions.")
+```
+
+---
+
 ## Quick Example
 
 ```bash
@@ -689,8 +670,8 @@ Added mutex around cache read-write:
 ## Important
 
 - **YAML validation is mandatory** - All frontmatter must use valid enum values
-- **Pattern detection is automatic** - 3+ similar solutions trigger critical pattern
 - **Knowledge compounds** - Each capture makes future work easier
+- **Phase 6F only** - Does NOT handle pattern detection (see `/mycelium-patterns`) or finalization (see `/mycelium-finalize`)
 - Solution capture is not overhead - it's the mechanism that makes each unit of work accelerate subsequent work
 
 ## Summary
@@ -699,11 +680,10 @@ Added mutex around cache read-write:
 - Capture solutions systematically, not ad-hoc
 - Validate YAML frontmatter (blocking requirement)
 - Categorize for future discovery
-- Detect and promote patterns
 - Go beyond problems: capture decisions, conventions, preferences
 - Make knowledge searchable and reusable
-- Generate project skills from repeated patterns
 - Every solved problem compounds future capability
+- Mark workflow complete (end of Phase 6F)
 
 ## Skills Used
 
