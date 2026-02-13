@@ -1,6 +1,6 @@
 ---
 name: mycelium-plan
-description: Creates structured implementation plans with TDD task breakdown and dependency management. Use when user says "plan this", "create a plan for [task]", "break down [feature]", "how should we implement [x]", "list all plans", or "switch to [plan]". Supports multi-plan management with parallel execution strategy and systematic task decomposition.
+description: Creates structured implementation plans with TDD task breakdown, dependency management, and capability assignment. Use when user says "plan this", "create a plan for [task]", "break down [feature]", "how should we implement [x]", "list all plans", or "switch to [plan]". Assigns best-fit agent, relevant skills, and model tier to each task using cached capabilities from context loading phase (Phase 0).
 license: MIT
 version: 0.9.0
 argument-hint: "[task description] | --list | --switch <track_id>"
@@ -8,7 +8,7 @@ allowed-tools: ["Skill", "Read", "Write", "Edit", "Glob", "Grep", "AskUserQuesti
 metadata:
   author: Jason Hsieh
   category: planning
-  tags: [planning, tdd, task-decomposition, parallel-execution]
+  tags: [planning, tdd, task-decomposition, parallel-execution, capability-assignment, phase-2]
   documentation: https://github.com/jason-hchsieh/mycelium
 ---
 
@@ -46,19 +46,29 @@ Transform user request into structured, executable plan with TDD task breakdown.
    - Read `.mycelium/context/*.md` if exists (product, tech-stack, workflow)
    - Read `CLAUDE.md` if exists
 
-5. **Analyze the task**:
+5. **Load cached capabilities**:
+   - Read `discovered_capabilities` from state.json
+   - If missing: error and suggest running `/mycelium-context-load` first
+   - Available capabilities cached from Phase 0 (Context Loading):
+     - Skills (with fully-qualified names like `mycelium:mycelium-work`)
+     - Agents (built-in and plugin agents)
+     - MCP tools (if configured)
+
+6. **Analyze the task**:
    - Clarify requirements if ambiguous (use AskUserQuestion)
    - Search codebase for relevant files (`grep`, `glob`)
    - Break down into tasks with dependencies
 
-6. **Create detailed plan** following the guidance below:
+7. **Create detailed plan** following the guidance below:
    - Transform high-level requirements into actionable, parallel-executable tasks
    - Apply proper task decomposition and dependency management
+   - **Assign capabilities to each task** (agent, skills, model)
+   - **Verify assignments** against cached capabilities
    - Create plans that enable compound engineering where each task builds knowledge
 
-7. **Save plan** to `.mycelium/plans/YYYY-MM-DD-{track-id}.md` using the [plan template][plan-template]. The frontmatter must conform to the [plan frontmatter schema][plan-schema].
+8. **Save plan** to `.mycelium/plans/YYYY-MM-DD-{track-id}.md` using the [plan template][plan-template]. The frontmatter must conform to the [plan frontmatter schema][plan-schema].
 
-8. **Register plan in session state**:
+9. **Register plan in session state**:
    - Read `state.json`
    - If a plan in `plans[]` has `status: "in_progress"`, set it to `"paused"` (both in `plans[]` AND in that plan file's YAML frontmatter `status` field)
    - Append new plan entry to `plans[]`:
@@ -74,7 +84,10 @@ Transform user request into structured, executable plan with TDD task breakdown.
      ```
    - Set `current_track` to the new plan's `{ "id": "{track_id}", "type": "{type}", "plan_file": "..." }`
 
-9. **Next step**: Suggest `/mycelium-work` to execute the plan
+10. **Hand off to next phase:**
+   - Update `current_phase: "implementation"` in state.json
+   - If `invocation_mode == "full"`: Invoke `mycelium-work`
+   - If `invocation_mode == "single"`: Suggest `/mycelium-work`
 
 ---
 
@@ -435,18 +448,89 @@ Acceptance Criteria:
 - [ ] Performance benchmark < 10ms for 1000 items
 ```
 
-### Capability Discovery
+### Capability Assignment Implementation
 
-When creating plans, discover available capabilities:
+When creating plans, use cached capabilities to assign agent/skills/model to each task:
 
-**Phase 3: Capability Discovery**
-- Scan plugin cache: read `~/.claude/plugins/installed_plugins.json`, extract `pluginName` (before `@`) and `installPath` for each plugin
-- Discover skills: glob `{installPath}/skills/*/SKILL.md` per plugin, read YAML frontmatter `name`/`description`, fully-qualify as `{pluginName}:{name}`
-- Discover plugin agents: glob `{installPath}/agents/**/*.md` per plugin, read YAML frontmatter, fully-qualify as `{pluginName}:{name}`
-- Add built-in agents (not in cache): read Task tool description for Bash, general-purpose, Explore, Plan, claude-code-guide, statusline-setup
-- Check for MCP tools (not in cache): scan system prompt for MCP server tools
-- Store all discovered capabilities in `.mycelium/state.json` under `discovered_capabilities`
-- Verify capabilities assigned to tasks actually exist; reassign if not
+**Step 1: Load Cached Capabilities**
+
+```javascript
+// Read from state.json (cached by Phase 0: Context Loading)
+const state = read(".mycelium/state.json")
+const capabilities = state.discovered_capabilities
+
+if (!capabilities || !capabilities.skills) {
+  error("❌ Capabilities not cached. Run /mycelium-context-load first.")
+  return
+}
+
+// Available capabilities:
+// - capabilities.skills: Array of {name, description, source, plugin}
+// - capabilities.agents: Array of {name, description, source}
+// - capabilities.mcp_tools: Array of {name, server, description}
+```
+
+**Step 2: Assign to Each Task**
+
+For each task in the plan:
+
+```yaml
+### Task 1.1: Setup auth module
+**agent:** general-purpose      # Best-fit from cached agents
+**skills:** [tdd, verification] # Relevant from cached skills
+**model:** sonnet               # haiku/sonnet/opus based on complexity
+```
+
+**Assignment Logic:**
+
+```javascript
+function assignCapabilities(task) {
+  // 1. Agent Assignment
+  // Default: general-purpose for most tasks
+  // Explore: for research/read-only tasks
+  // Bash: for git/command tasks
+  task.agent = selectAgent(task.description, capabilities.agents)
+
+  // 2. Skills Assignment
+  // Always include tdd for implementation tasks
+  // Add verification for validation tasks
+  // Add relevant plugin skills based on task type
+  task.skills = selectSkills(task.description, task.agent, capabilities.skills)
+
+  // 3. Model Assignment
+  // Haiku: trivial tasks (T complexity)
+  // Sonnet: most tasks (S/M complexity) - DEFAULT
+  // Opus: complex/critical tasks (L complexity, security, architecture)
+  task.model = selectModel(task.complexity, task.description)
+}
+```
+
+**Step 3: Verify Assignments**
+
+```javascript
+// Validate all assignments exist in cached capabilities
+for (task of tasks) {
+  // Check agent exists
+  if (!capabilities.agents.some(a => a.name === task.agent)) {
+    error(`Agent not found: ${task.agent}`)
+    // Fallback to general-purpose
+    task.agent = "general-purpose"
+  }
+
+  // Check skills exist
+  for (skill of task.skills) {
+    if (!capabilities.skills.some(s => s.name === skill)) {
+      error(`Skill not found: ${skill}`)
+      // Remove invalid skill
+      task.skills = task.skills.filter(s => s !== skill)
+    }
+  }
+
+  // Model doesn't need validation (haiku/sonnet/opus are always available)
+}
+```
+
+**Important:** Capabilities are discovered in Phase 0 (Context Loading) and cached in state.json. This phase LOADS and USES the cache, it does NOT discover capabilities.
 
 ### Common Pitfalls
 
